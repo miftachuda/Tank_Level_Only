@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="script-src * data: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval';">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style.css" rel="stylesheet">
+    <link href="./anima.css" rel="stylesheet">
+    <link href="./shift.css" rel="stylesheet">
+
+    <script src="./shift_tab.js"></script>
+    <script src="./fa.js" crossorigin="anonymous"></script>
+    <title>TankLevel v1.1.0</title>
+</head>
+
+<body>
+
+
+    <div class="mainwindow">
+        <div class="connection">
+            <div class="statusbox">
+                <div class="desc">Intranet</div>
+                <span id="intranet" class="status"></span>
+            </div>
+            <div class="statusbox">
+                <div class="desc">226</div>
+                <span id="host1" class="status"></span>
+            </div>
+            <div class="statusbox">
+                <div class="desc">227</div>
+                <span id="host2" class="status"></span>
+            </div>
+            <div class="statusbox">
+                <div class="desc">231</div>
+                <span id="host3" class="status"></span>
+            </div>
+            <div class="statusbox">
+                <div class="desc">213</div>
+                <span id="host4" class="status"></span>
+            </div>
+            <div class="clockbox">
+                <div id="clock"></div>
+            </div>
+            <div class="shift">
+                <div class="block" id="sekarang">
+                    <div class="child_block" id="masuk_apa1"></div>
+                    <div class="shiftblock" id="shiftblock1">
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="child_block" id="masuk_apa2"></div>
+                    <div class="shiftblock" id="shiftblock2">
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="child_block" id="masuk_apa3"></div>
+                    <div class="shiftblock" id="shiftblock3">
+                    </div>
+                </div>
+
+            </div>
+
+            <button id="record">Record</button>
+            <button id="mmortpd">mm/j or TPD</button>
+
+
+        </div>
+        <div class="level">
+            <div class="loc2">
+                <div class="firstrow">
+                    <div class="tankbox" id="t101" tank="041T-101">
+                        <div id="1" class="tankname">41T-101</div>
+                        <div id="041T-101" class="tanklevel"></div>
+                        <div id="041T-101-t" class="tanktemp"></div>
+                        <div class="tankservice">HVI-95</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="./img/red.svg" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t102" tank="041T-102">
+                        <div id="2" class="tankname">41T-102</div>
+                        <div id="041T-102" class="tanklevel"></div>
+                        <div id="041T-102-t" class="tanktemp"></div>
+                        <div class="tankservice">HVI-95</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t103" tank="041T-103">
+                        <div id="3" class="tankname">41T-103</div>
+                        <div id="041T-103" class="tanklevel"></div>
+                        <div id="041T-103-t" class="tanktemp"></div>
+                        <div class="tankservice">HVI-160S</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t104" tank="041T-104">
+                        <div id="4" class="tankname">41T-104</div>
+                        <div id="041T-104" class="tanklevel"></div>
+                        <div id="041T-104-t" class="tanktemp"></div>
+                        <div class="tankservice">HVI-95 </div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+                    <div class="tankbox" id="t105" tank="041T-105">
+                        <div id="5" class="tankname">41T-105</div>
+                        <div id="041T-105" class="tanklevel"></div>
+                        <div id="041T-105-t" class="tanktemp"></div>
+                        <div class="tankservice">HVI-650</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t106" tank="041T-106">
+                        <div id="6" class="tankname">41T-106</div>
+                        <div id="041T-106" class="tanklevel"></div>
+                        <div id="041T-106-t" class="tanktemp"></div>
+                        <div class="tankservice">HVI-650</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t107" tank="041T-107">
+                        <div id="7" class="tankname">41T-107</div>
+                        <div id="041T-107" class="tanklevel"></div>
+                        <div id="041T-107-t" class="tanktemp"></div>
+                        <div class="tankservice">HVI-160S</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t108" tank="041T-108">
+                        <div id="8" class="tankname">41T-108</div>
+                        <div id="041T-108" class="tanklevel"></div>
+                        <div id="041T-108-t" class="tanktemp"></div>
+                        <div class="tankservice">HVI-160S</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t109" tank="041T-109">
+                        <div id="9" class="tankname">41T-109</div>
+                        <div id="041T-109" class="tanklevel"></div>
+                        <div id="041T-109-t" class="tanktemp"></div>
+                        <div class="tankservice">HVI-650</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t110" tank="041T-110">
+                        <div id="10" class="tankname">41T-110</div>
+                        <div id="041T-110" class="tanklevel"></div>
+                        <div id="041T-110-t" class="tanktemp"></div>
+                        <div class="tankservice">HVI-650</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t111" tank="041T-111">
+                        <div id="11" class="tankname">41T-111</div>
+                        <div id="041T-111" class="tanklevel"></div>
+                        <div id="041T-111-t" class="tanktemp"></div>
+                        <div class="tankservice">LMO Raff</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="firstrow">
+                    <div class="tankbox" id="t112" tank="041T-112">
+                        <div id="12" class="tankname">41T-112</div>
+                        <div id="041T-112" class="tanklevel"></div>
+                        <div id="041T-112-t" class="tanktemp"></div>
+                        <div class="tankservice">LMO Raff</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t113" tank="041T-113">
+                        <div id="13" class="tankname">41T-113</div>
+                        <div id="041T-113" class="tanklevel"></div>
+                        <div id="041T-113-t" class="tanktemp"></div>
+                        <div class="tankservice">MMO Raff</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t114" tank="041T-114">
+                        <div id="14" class="tankname">41T-114</div>
+                        <div id="041T-114" class="tanklevel"></div>
+                        <div id="041T-114-t" class="tanktemp"></div>
+                        <div class="tankservice">DAO Raff</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t115" tank="041T-115">
+                        <div id="15" class="tankname">41T-115</div>
+                        <div id="041T-115" class="tanklevel"></div>
+                        <div id="041T-115-t" class="tanktemp"></div>
+                        <div class="tankservice">SPO Dist</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t116" tank="041T-116">
+                        <div id="26" class="tankname">41T-116</div>
+                        <div id="041T-116" class="tanklevel"></div>
+                        <div id="041T-116-t" class="tanktemp"></div>
+                        <div class="tankservice">LMO Dist</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t117" tank="041T-117">
+                        <div id="17" class="tankname">41T-117</div>
+                        <div id="041T-117" class="tanklevel"></div>
+                        <div id="041T-117-t" class="tanktemp"></div>
+                        <div class="tankservice">MMO Dist</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t118" tank="041T-118">
+                        <div id="18" class="tankname">41T-118</div>
+                        <div id="041T-118" class="tanklevel"></div>
+                        <div id="041T-118-t" class="tanktemp"></div>
+                        <div class="tankservice">DAO</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t119" tank="041T-119">
+                        <div id="19" class="tankname">41T-119</div>
+                        <div id="041T-119" class="tanklevel"></div>
+                        <div id="041T-119-t" class="tanktemp"></div>
+                        <div class="tankservice">Minarex H</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t120" tank="041T-120">
+                        <div id="20" class="tankname">41T-120</div>
+                        <div id="041T-120" class="tanklevel"></div>
+                        <div id="041T-120-t" class="tanktemp"></div>
+                        <div class="tankservice">Slops</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t121" tank="041T-121">
+                        <div id="21" class="tankname">41T-121</div>
+                        <div id="041T-121" class="tanklevel"></div>
+                        <div id="041T-121-t" class="tanktemp"></div>
+                        <div class="tankservice">Short Res</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t122" tank="041T-122">
+                        <div id="22" class="tankname">41T-122</div>
+                        <div id="041T-122" class="tanklevel"></div>
+                        <div id="041T-122-t" class="tanktemp"></div>
+                        <div class="tankservice">RFO</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="loc3">
+                <div class="firstrow">
+                    <div class="tankbox" id="t301" tank="041T-301">
+                        <div id="23" class="tankname">41T-301</div>
+                        <div id="041T-301" class="tanklevel"></div>
+                        <div id="041T-301-t" class="tanktemp"></div>
+                        <div class="tankservice">LMO Dist</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t302" tank="041T-302">
+                        <div id="24" class="tankname">41T-302</div>
+                        <div id="041T-302" class="tanklevel"></div>
+                        <div id="041T-302-t" class="tanktemp"></div>
+                        <div class="tankservice">MMO Dist</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t303" tank="041T-303">
+                        <div id="25" class="tankname">41T-303</div>
+                        <div id="041T-303" class="tanklevel"></div>
+                        <div id="041T-303-t" class="tanktemp"></div>
+                        <div class="tankservice">DAO</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t304" tank="041T-304">
+                        <div id="26" class="tankname">41T-304</div>
+                        <div id="041T-304" class="tanklevel"></div>
+                        <div id="041T-304-t" class="tanktemp"></div>
+                        <div class="tankservice">LMO HDT</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t305" tank="041T-305">
+                        <div id="27" class="tankname">41T-305</div>
+                        <div id="041T-305" class="tanklevel"></div>
+                        <div id="041T-305-t" class="tanktemp"></div>
+                        <div class="tankservice">LMO HDT</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t306" tank="041T-306">
+                        <div id="28" class="tankname">41T-306</div>
+                        <div id="041T-306" class="tanklevel"></div>
+                        <div id="041T-306-t" class="tanktemp"></div>
+                        <div class="tankservice">MMO HDT</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t307" tank="041T-307">
+                        <div id="29" class="tankname">41T-307</div>
+                        <div id="041T-307" class="tanklevel"></div>
+                        <div id="041T-307-t" class="tanktemp"></div>
+                        <div class="tankservice">MMO HDT</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t308" tank="041T-308">
+                        <div id="30" class="tankname">41T-308</div>
+                        <div id="041T-308" class="tanklevel"></div>
+                        <div id="041T-308-t" class="tanktemp"></div>
+                        <div class="tankservice">DAO HDT</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t309" tank="041T-309">
+                        <div id="31" class="tankname">41T-309</div>
+                        <div id="041T-309" class="tanklevel"></div>
+                        <div id="041T-309-t" class="tanktemp"></div>
+                        <div class="tankservice">DAO HDT</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t310" tank="041T-310">
+                        <div id="32" class="tankname">41T-310</div>
+                        <div id="041T-310" class="tanklevel"></div>
+                        <div id="041T-310-t" class="tanktemp"></div>
+                        <div class="tankservice">Short Res</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t311" tank="041T-311">
+                        <div id="33" class="tankname">41T-311</div>
+                        <div id="041T-311" class="tanklevel"></div>
+                        <div id="041T-311-t" class="tanktemp"></div>
+                        <div class="tankservice">Short Res</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="firstrow">
+                    <div class="tankbox" id="t312" tank="041T-312">
+                        <div id="34" class="tankname">41T-312</div>
+                        <div id="041T-312" class="tanklevel"></div>
+                        <div id="041T-312-t" class="tanktemp"></div>
+                        <div class="tankservice">Asphalt</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t313" tank="041T-313">
+                        <div id="35" class="tankname">41T-313</div>
+                        <div id="041T-313" class="tanklevel"></div>
+                        <div id="041T-313-t" class="tanktemp"></div>
+                        <div class="tankservice">Short Res</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t314" tank="041T-314">
+                        <div id="36" class="tankname">41T-314</div>
+                        <div id="041T-314" class="tanklevel"></div>
+                        <div id="041T-314-t" class="tanktemp"></div>
+                        <div class="tankservice">Asphalt</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t315" tank="041T-315">
+                        <div id="37" class="tankname">41T-315</div>
+                        <div id="041T-315" class="tanklevel"></div>
+                        <div id="041T-315-t" class="tanktemp"></div>
+                        <div class="tankservice">MMO Raff</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t316" tank="041T-316">
+                        <div id="38" class="tankname">41T-316</div>
+                        <div id="041T-316" class="tanklevel"></div>
+                        <div id="041T-316-t" class="tanktemp"></div>
+                        <div class="tankservice">DAO Raff</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t317" tank="041T-317">
+                        <div id="39" class="tankname">41T-317</div>
+                        <div id="041T-317" class="tanklevel"></div>
+                        <div id="041T-317-t" class="tanktemp"></div>
+                        <div class="tankservice">Slops</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="tankbox" id="t319" tank="035T-2">
+                        <div id="41" class="tankname">35T-002</div>
+                        <div id="035T-2" class="tanklevel"></div>
+                        <div id="035T-2-t" class="tanktemp"></div>
+                        <div class="tankservice">Long Res</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t320" tank="035T-4">
+                        <div id="41" class="tankname">35T-004</div>
+                        <div id="035T-4" class="tanklevel"></div>
+                        <div id="035T-4-t" class="tanktemp"></div>
+                        <div class="tankservice">RFO</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="tankbox" id="t321" tank="041T-26">
+                        <div id="41" class="tankname">41T-026</div>
+                        <div id="041T-26" class="tanklevel"></div>
+                        <div id="041T-26-t" class="tanktemp"></div>
+                        <div class="tankservice">Slack Wax LMO</div>
+                        <div class="rate"></div>
+                        <div move="none">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+
+
+    <!-- Home Button -->
+    <button id="back">
+        <div class="fas fa-arrow-left" />
+        </div> Home
+    </button>
+
+    <!-- Reload and footer -->
+    <div id="footer" class="footer">
+        <button id="reload" class="reload">Reload</button>
+        <div id="log"></div>
+    </div>
+
+
+    <script id="applicationScript" type="text/javascript" src="titlebar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+node_modules/
+database.db
+comparing/
+tankapp-win32-x64/
+dist/
+plnstg/
+getdata/
+vibrator/
+debug/

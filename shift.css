@@ -1,0 +1,26 @@
+.block {
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 6px;
+
+
+    padding: 6px;
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: aliceblue;
+
+    background-color: rgba(0, 0, 0, 0.25);
+
+}
+
+
+
+.child_block {
+    font-size: medium;
+}
+
+#sekarang {
+    background-image: linear-gradient(to right top, #00d1e4, #00dbd9, #00e3be, #00e895, #12eb60);
+}

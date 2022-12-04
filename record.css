@@ -1,0 +1,60 @@
+body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: smaller;
+        overflow-x: hidden;
+    }
+::-webkit-scrollbar {   
+         display: none;     
+} 
+[period="0"] ,[period="1"],[period="2"],[period="3"],[period="4"] {
+       color: rgb(11, 5, 65);
+       margin-bottom: 1px;
+       background-color: aquamarine;
+       width: 170px;
+       
+}  
+
+.namatank{
+   display: inline-block;
+   margin-left: 10px;
+   width: 60px;
+}
+.leveltank{
+   display: inline-block;
+   margin-left: 12px;
+   color: rgb(33, 6, 83);
+   width: 40px;
+}
+.temptank{
+   display: inline-block;
+   margin-left: 12px;
+   color: rgb(119, 6, 59);
+}
+.waktu{
+   width: 120px;
+   height: 30px;
+   background-color:rgb(13, 146, 255);
+   margin: 5px;
+   margin-top: 2px;
+   text-align:center;
+   padding: 10px;
+   border-radius: 12px;
+}
+.waktu-parent{
+   display: flex;
+   flex-direction: row;
+}
+.data-parent{
+   display: flex;
+   flex-direction: row;
+}
+#timestamp{
+   margin: 0 auto;
+}
+#\30, #\31, #\32,#\33, #\34{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   margin-left: 20px;
+}

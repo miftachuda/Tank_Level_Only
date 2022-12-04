@@ -1,0 +1,51 @@
+{
+  "name": "tanklevelapp",
+  "version": "1.0.0",
+  "description": "SMART - Sistem Monitoring And Reporting Terpadu",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "make": "electron-packager ./ tankapp --platform=win32 --overwrite",
+    "rebuild": "electron-rebuild -f -w",
+    "export": "electron-builder --win=portable"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "build": {
+    "appId": "com.tanklevelapp.example",
+    "compression": "maximum",
+    "win": {
+      "icon": "./img/ico.png"
+    },
+    "extraFiles": [
+      "./stsrph.json"
+    ]
+  },
+  "author": "Miftchul Huda",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^12.2.3",
+    "electron-rebuild": "^3.2.7",
+    "electron-reloader": "^1.2.1"
+  },
+  "dependencies": {
+    "better-sqlite3": "^7.5.0",
+    "bluebird": "^3.7.2",
+    "custom-electron-titlebar": "^3.2.7",
+    "electron-tabs": "^1.0.1",
+    "express": "^4.18.1",
+    "i": "^0.3.7",
+    "is-port-reachable": "^4.0.0",
+    "knex": "^1.0.3",
+    "moment": "^2.29.1",
+    "node-cron": "^3.0.0",
+    "npm": "^8.17.0",
+    "xml2js": "^0.4.23"
+  }
+}
