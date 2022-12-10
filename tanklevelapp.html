@@ -10,6 +10,8 @@
     <link href="./style.css" rel="stylesheet">
     <link href="./anima.css" rel="stylesheet">
     <link href="./shift.css" rel="stylesheet">
+    <link href="./button.css" rel="stylesheet">
+
 
     <script src="./shift_tab.js"></script>
     <script src="./fa.js" crossorigin="anonymous"></script>
@@ -41,6 +43,23 @@
                 <div class="desc">213</div>
                 <span id="host4" class="status"></span>
             </div>
+            <div class="statusbox">
+                <div class="desc">223</div>
+                <span id="host5" class="status"></span>
+            </div>
+            <div class="statusbox">
+                <div class="desc">228</div>
+                <span id="host6" class="status"></span>
+            </div>
+            <div class="statusbox">
+                <div class="desc">234</div>
+                <span id="host7" class="status"></span>
+            </div>
+            <div class="statusbox">
+                <div class="desc">235</div>
+                <span id="host8" class="status"></span>
+            </div>
+
             <div class="clockbox">
                 <div id="clock"></div>
             </div>
@@ -64,8 +83,13 @@
             </div>
 
             <button id="record">Record</button>
-            <button id="mmortpd">mm/j or TPD</button>
-
+            <select id="ratespeed">
+                <option value="0">mm/hr</option>
+                <option value="1">m³/hr</option>
+                <option value="2">ton/day</option>
+                <option value="3">mm/day</option>
+                <option value="4">mm/8hr</option>
+            </select>
 
         </div>
         <div class="level">
@@ -78,7 +102,7 @@
                         <div class="tankservice">HVI-95</div>
                         <div class="rate"></div>
                         <div move="none">
-                            <img src="./img/red.svg" alt="move" width="15" height="30" class="unvisible">
+                            <img src="" alt="move" width="15" height="30" class="unvisible">
                             <span></span>
                             <span></span>
                             <span></span>

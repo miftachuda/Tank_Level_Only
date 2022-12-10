@@ -2,16 +2,15 @@ const MessageBuffer = require('./messagebuffer');
 const parseString = require('xml2js').parseString;
 const Net = require('net');
 const { checkInternet, checkConnection, checkVPN } = require("./check_internet");
-const { tanklist1, tanklist2, tanklist3, tanklist4, tanklist5, all_tank } = require("./tanklist")
+const { tanklist1, tanklist2, tanklist3, tanklist4, tanklist5, tanklist6, tanklist7, tanklist8, all_tank } = require("./tanklist")
 //const knexInstance = require("./knexdb")
-let vpnmode = true;
+let vpnmode = false;
 const moment = require("moment")
 const cron = require('node-cron');
 const path = require('path');
 const recordArray = Array.from({ length: 12 }, (x, i) => 1);
 const { ipcRenderer } = require("electron"); var tankdoc = document
 const datasg = require("./datasg.json");
-const e = require('express');
 
 // checkVPN("10.54.127.226", 4444).then(() => {
 //     vpnmode = false;
@@ -27,13 +26,17 @@ if (vpnmode) {
     host3 = host1;
     host4 = host1;
     host5 = host1;
-    host5 = host1;
+    host6 = host1;
+    host7 = host1;
+    host8 = host1;
     port1 = 6000;
     port2 = 6001;
     port3 = 6002;
     port4 = 6003;
     port5 = 6004;
     port6 = 6005;
+    port7 = 6006;
+    port8 = 6007;
 } else {
     host1 = '10.54.127.226';
     host2 = '10.54.127.227';
@@ -41,8 +44,17 @@ if (vpnmode) {
     host4 = '10.54.127.213';
     host5 = '10.54.127.223';
     host6 = '10.54.127.228';
+    host7 = '10.54.127.234';
+    host8 = '10.54.127.235';
     port1 = 4444;
-    port2, port3, port4, port4, port5, port6 = port1;
+    port2 = 4444;
+    port3 = 4444;
+    port4 = 4444;
+    port5 = 4444;
+    port6 = 4444;
+    port7 = 4444;
+    port8 = 4444;
+
 }
 
 function startTime() {
@@ -95,7 +107,7 @@ function updateDisplay(level, temp, name, x, levelcollect) {
 
         }
 
-        var currentdate = new Date()
+
         levelcollect[x] = (
             {
                 level: level,
@@ -132,6 +144,11 @@ function updateDisplay(level, temp, name, x, levelcollect) {
 // }
 
 window.addEventListener('DOMContentLoaded', async () => {
+    const select = tankdoc.getElementById("ratespeed")
+    let select_button = "0";
+    select.addEventListener('change', function (x) {
+        select_button = x.srcElement.value;
+    });
     const button = tankdoc.getElementById('record');
     button.addEventListener('click', () => {
         console.log("load record windows")
@@ -200,6 +217,9 @@ window.addEventListener('DOMContentLoaded', async () => {
                     footer.setAttribute("class", "footer footergreen");
                     if (result != null) {
                         if (typeof result.TANK != "undefined") {
+                            if (host == "10.54.127.234") {
+                                console.log(result)
+                            }
                             var level = `${result.TANK.PARAM[0].$.VALUE.replace(/'/, '').replace(/[+]/, '')}`;
                             var temp = `${result.TANK.PARAM[2].$.VALUE.replace(/[+]/, '')}`
                             var name = result.TANK.$.NAME
@@ -233,22 +253,32 @@ window.addEventListener('DOMContentLoaded', async () => {
     const indhost2 = tankdoc.getElementById('host2')
     const indhost3 = tankdoc.getElementById('host3')
     const indhost4 = tankdoc.getElementById('host4')
-    const payload1 = '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>8</GROUPID></FG4TG>';
-    const payload3 = '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>146</GROUPID></FG4TG>';
+    const indhost5 = tankdoc.getElementById('host5')
+    const indhost6 = tankdoc.getElementById('host6')
+    const indhost7 = tankdoc.getElementById('host7')
+    const indhost8 = tankdoc.getElementById('host8')
+    const payload1 = '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>8</GROUPID></FG4TG>';//234,226,227,223
+    const payload2 = '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>146</GROUPID></FG4TG>';//231
+    const payload3 = '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>74</GROUPID></FG4TG>';//228
+    const payload4 = '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>216</GROUPID></FG4TG>'; //235
     let client1;
     let client2;
     let client3;
     let client4;
     let client5;
     let client6;
+    let client7;
+    let client8;
+
     function loadit() {
         client1 = fetching(host1, port1, tanklist1, payload1, updatelog)
         client2 = fetching(host2, port2, tanklist2, payload1, updatelog)
-        client3 = fetching(host3, port3, tanklist3, payload3, updatelog)
-        client4 = fetching(host4, port4, tanklist4, payload1, updatelog)
+        client3 = fetching(host3, port3, tanklist3, payload2, updatelog)
+        // client4 = fetching(host4, port4, tanklist4, payload1, updatelog)
         client5 = fetching(host5, port5, tanklist5, payload1, updatelog)
-        // client6 = fetching(host6, port6, tanklist6, payload1, updatelog)
-
+        client6 = fetching(host6, port6, tanklist6, payload3, updatelog)
+        client7 = fetching(host7, port7, tanklist7, payload1, updatelog)
+        client8 = fetching(host8, port8, tanklist8, payload4, updatelog)
     }
     loadit()
 
@@ -270,6 +300,11 @@ window.addEventListener('DOMContentLoaded', async () => {
         checkConnection(host2, port2, indhost2, 3000);
         checkConnection(host3, port3, indhost3, 3000);
         checkConnection(host4, port4, indhost4, 3000);
+        checkConnection(host5, port5, indhost5, 3000);
+        checkConnection(host6, port6, indhost6, 3000);
+        checkConnection(host7, port7, indhost7, 3000);
+        checkConnection(host8, port8, indhost8, 3000);
+
     }, 3000)
     let levelArray = Array.from({ length: 181 }, (x, i) => 1);
     function logging() {
@@ -286,22 +321,25 @@ window.addEventListener('DOMContentLoaded', async () => {
         // }
 
     }
-    let mmortpd = true
-    tankdoc.getElementById("mmortpd").addEventListener("click", () => {
-        mmortpd = !mmortpd
-    })
+
     setInterval(() => {
         logging()
     }, 5000);
     let record = []
     async function updateMove() {
         function calc(level, levelPast, time, timePast, tank) {
-            let sg = datasg[tank]
+            let sg = datasg[1][tank]
+            let diameter = datasg[0][tank]
             let selisih = level - levelPast
+            // console.log(selisih)
             let selisiht = (time - timePast) / 1000
-            speed = ((selisih / selisiht) * 60 * 60).toFixed(1)
-            tpd = speed * 24 * sg
-            return { tpd, speed }
+            mm_per_hour = ((selisih / selisiht) * 60 * 60).toFixed(1)
+            // console.log(mm_per_hour)
+            mm_per_8hour = ((selisih / selisiht) * 60 * 60 * 8).toFixed(1)
+            mm_per_day = ((selisih / selisiht) * 60 * 60 * 24).toFixed(1)
+            meter_cubic_hour = (mm_per_hour * ((22 / 7) * ((diameter / 2) ** 2) / 1000000000)).toFixed(1)
+            ton_per_day = ((mm_per_hour * ((22 / 7) * ((diameter / 2) ** 2) / 1000000000)) * sg * 24).toFixed(1)
+            return { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day }
         }
         // get data from sqlitedb
         // let data = await knexInstance.select().table('tank').orderBy('timestamp', 'desc').limit(301)
@@ -327,15 +365,41 @@ window.addEventListener('DOMContentLoaded', async () => {
                     JSON.parse(dataPasts.level)[tank]
                 ) {
                     // data frmo sqlite is string need to parse
-                    let level = parseInt(JSON.parse(datas.level)[tank].level)
-                    let timestamp = parseInt(JSON.parse(datas.level)[tank].time)
-                    let levelPast = parseInt(JSON.parse(dataPasts.level)[tank].level)
-                    let timestampPast = parseInt(JSON.parse(dataPasts.level)[tank].time)
-                    let { tpd, speed } = calc(level, levelPast, timestamp, timestampPast, tank)
-                    if (mmortpd) {
-                        rate.innerHTML = speed
+                    let level = parseInt(JSON.parse(datas.level)[tank].level) ?? 0
+                    let timestamp = parseInt(JSON.parse(datas.level)[tank].time) ?? 1
+                    let levelPast = parseInt(JSON.parse(dataPasts.level)[tank].level) ?? 0
+                    let timestampPast = parseInt(JSON.parse(dataPasts.level)[tank].time) ?? 0
+                    let { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day } = calc(level, levelPast, timestamp, timestampPast, tank)
+                    // if (mmortpd) {
+                    //     rate.innerHTML = `${speed} mm/hr`
+                    // } else {
+                    //     rate.innerHTML = `${kubik} m³/hr`
+                    // }
+                    if (mm_per_hour > 0) {
+                        rate.className = "rate rateup"
+                    } else if (mm_per_hour < 0) {
+                        rate.className = "rate ratedown"
                     } else {
-                        rate.innerHTML = tpd
+                        rate.className = "rate"
+                    }
+                    switch (select_button) {
+                        case "0":
+                            rate.innerHTML = `${mm_per_hour} mm/hr`
+                            break;
+                        case "1":
+                            rate.innerHTML = `${meter_cubic_hour} m³/hr`
+                            break;
+                        case "2":
+                            rate.innerHTML = `${ton_per_day} ton/day`
+                            break;
+                        case "3":
+                            rate.innerHTML = `${mm_per_day} mm/day`
+                            break;
+                        case "4":
+                            rate.innerHTML = `${mm_per_8hour} mm/8hr`
+                            break;
+                        default:
+                            break;
                     }
                     if ((level - levelPast) < -delta) {
                         if (record[tank] != "down") {
@@ -356,15 +420,34 @@ window.addEventListener('DOMContentLoaded', async () => {
                     } else {
                         if (dataPastsExtend != 1) {
                             if (JSON.parse(dataPastsExtend.level)[tank]) {
-                                let level = parseInt(JSON.parse(datas.level)[tank].level)
-                                let levelPastExtend = parseInt(JSON.parse(dataPastsExtend.level)[tank].level)
-                                let timestamp = parseInt(JSON.parse(datas.level)[tank].time)
-                                let timestampPast = parseInt(JSON.parse(dataPastsExtend.level)[tank].time)
-                                let { tpd, speed } = calc(level, levelPast, timestamp, timestampPast, tank)
-                                if (mmortpd) {
-                                    rate.innerHTML = speed
-                                } else {
-                                    rate.innerHTML = tpd
+                                let level = parseInt(JSON.parse(datas.level)[tank].level) ?? 0
+                                let levelPastExtend = parseInt(JSON.parse(dataPastsExtend.level)[tank].level) ?? 0
+                                let timestamp = parseInt(JSON.parse(datas.level)[tank].time) ?? 1
+                                let timestampPast = parseInt(JSON.parse(dataPastsExtend.level)[tank].time) ?? 0
+                                let { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day } = calc(level, levelPast, timestamp, timestampPast, tank)
+                                // if (mmortpd) {
+                                //     rate.innerHTML = `${speed} mm/hr`
+                                // } else {
+                                //     rate.innerHTML = `${kubik} m³/hr`
+                                // }
+                                switch (select_button) {
+                                    case "0":
+                                        rate.innerHTML = `${mm_per_hour} mm/hr`
+                                        break;
+                                    case "1":
+                                        rate.innerHTML = `${meter_cubic_hour} m³/hr`
+                                        break;
+                                    case "2":
+                                        rate.innerHTML = `${ton_per_day} ton/day`
+                                        break;
+                                    case "3":
+                                        rate.innerHTML = `${mm_per_day} mm/day`
+                                        break;
+                                    case "4":
+                                        rate.innerHTML = `${mm_per_8hour} mm/8hr`
+                                        break;
+                                    default:
+                                        break;
                                 }
                                 if ((level - levelPastExtend) < -deltaExtend) {
                                     if (record[tank] != "down") {
@@ -394,6 +477,15 @@ window.addEventListener('DOMContentLoaded', async () => {
                                     record[tank] = "stable"
 
                                 }
+
+                            } else {
+                                if (record[tank] != "stable") {
+                                    border.setAttribute("tank", `0${tank} borderidle`);
+                                    // komponen.id = "idle"
+                                    komponen.setAttribute("class", "unvisible")
+                                    komponen.src = ""
+                                } else { }
+                                record[tank] = "stable"
 
                             }
 
@@ -428,9 +520,12 @@ window.addEventListener('DOMContentLoaded', async () => {
         client1.destroy()
         client2.destroy()
         client3.destroy()
-        client4.destroy()
+        //client4.destroy()
         client5.destroy()
         client6.destroy()
+        client7.destroy()
+        client8.destroy()
+
         loadit()
     })
 
