@@ -1,7 +1,7 @@
 {
   "name": "tanklevelapp",
-  "version": "1.0.0",
-  "description": "SMART - Sistem Monitoring And Reporting Terpadu",
+  "version": "1.1.0",
+  "description": "Tanklevel v1.1.0",
   "main": "main.js",
   "scripts": {
     "start": "electron .",

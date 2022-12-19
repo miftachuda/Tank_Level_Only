@@ -59,7 +59,7 @@ if (vpnmode) {
 
 function startTime() {
 
-    time = moment().format("HH:mm:ss, DD MMM yyyy")
+    time = moment().format("HH:mm:ss[</br>]DD MMM yyyy")
     tankdoc.getElementById('clock').innerHTML = time
 
 }
@@ -144,6 +144,13 @@ function updateDisplay(level, temp, name, x, levelcollect) {
 // }
 
 window.addEventListener('DOMContentLoaded', async () => {
+    var tooltip = tankdoc.getElementsByClassName("tooltiptext")
+    var arr_tooltip = Array.from(tooltip)
+    arr_tooltip.forEach((el, i) => {
+        el.innerHTML = eval(`tanklist${i + 1}`).join("<br />")
+
+    })
+
     const select = tankdoc.getElementById("ratespeed")
     let select_button = "0";
     select.addEventListener('change', function (x) {
