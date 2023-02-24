@@ -11,6 +11,7 @@ const path = require('path');
 const recordArray = Array.from({ length: 12 }, (x, i) => 1);
 const { ipcRenderer } = require("electron"); var tankdoc = document
 const datasg = require("./img/datasg.json");
+var pjson = require('./package.json');
 
 // checkVPN("10.54.127.226", 4444).then(() => {
 //     vpnmode = false;
@@ -145,6 +146,8 @@ function updateDisplay(level, temp, name, x, levelcollect) {
 
 window.addEventListener('DOMContentLoaded', async () => {
     const updateShift = require("./shift_tab")
+    let title = document.getElementsByName("title")
+    title.innerText = `Tank Level v${pjson.version}`
     updateShift()
     setInterval(() => {
         updateShift()
