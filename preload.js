@@ -1,7 +1,7 @@
 const MessageBuffer = require('./messagebuffer');
 const parseString = require('xml2js').parseString;
 const Net = require('net');
-const { checkInternet, checkConnection, checkVPN } = require("./check_internet");
+const { checkInternet, checkConnection } = require("./check_internet");
 const { tanklist1, tanklist2, tanklist3, tanklist4, tanklist5, tanklist6, tanklist7, tanklist8, all_tank } = require("./tanklist")
 //const knexInstance = require("./knexdb")
 let vpnmode = false;

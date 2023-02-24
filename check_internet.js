@@ -1,6 +1,4 @@
 const checkInternet = (cb) => {
-
-
     require('dns').lookup('simops.pertamina.com', function (err) {
         if (err && err.code == "ENOTFOUND") {
 
@@ -12,21 +10,20 @@ const checkInternet = (cb) => {
 }
 
 var net = require('net');
-var Promise = require('bluebird');
 
-function checkConnection(host, port, indobj, timeout) {
-    return new Promise(function (resolve, reject) {
-        timeout = timeout || 10000;     // default of 10 seconds
-        var timer = setTimeout(function () {
-            reject("timeout");
-            socket.end();
+function checkConnection(host, port, indobj, timeout = 10000) {
+    return new Promise((resolve, reject) => {
+        const socket = new net.Socket();
+        const timer = setTimeout(() => {
+            socket.destroy();
+            reject(new Error('Timeout'));
         }, timeout);
-        var socket = net.createConnection(port, host, function () {
+        socket.connect(port, host, () => {
             clearTimeout(timer);
-            resolve();
             socket.end();
+            resolve(true);
         });
-        socket.on('error', function (err) {
+        socket.on('error', (err) => {
             clearTimeout(timer);
             reject(err);
         });
@@ -36,29 +33,10 @@ function checkConnection(host, port, indobj, timeout) {
         indobj.setAttribute("class", "status redcol")
     });
 }
-function checkVPN(host, port) {
-    return new Promise(function (resolve, reject) {
-        timeout = 10000;     // default of 10 seconds
-        var timer = setTimeout(function () {
-            reject("timeout");
-            socket.end();
-        }, timeout);
-        var socket = net.createConnection(port, host, function () {
-            clearTimeout(timer);
-            resolve();
-            socket.end();
-        });
-        socket.on('error', function (err) {
-            clearTimeout(timer);
-            reject(err);
-        });
-    })
-}
 
 
 
 module.exports = {
-    checkInternet: checkInternet,
-    checkConnection: checkConnection,
-    checkVPN: checkVPN
+    checkInternet,
+    checkConnection
 };
