@@ -59,7 +59,7 @@ function createRecordWindow() {
     return win
 }
 ipcMain.on("openRecord", (event, arg) => {
-    console.log("Main Process Pass Data")
+    console.log("Open Record")
     recordWin = createRecordWindow()
     recordWin.webContents.send('forWin2', arg);
 })
