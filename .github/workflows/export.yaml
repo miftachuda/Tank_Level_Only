@@ -14,9 +14,11 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 16.18.0
-    - run: npm i
-    - run: npm i -g electron-builder
-    - run: npm run export
+    - run: |
+        npm i
+        npm install electron-builder --save-dev
+    - name: Build for windows 64 bit
+      run: npx electron-builder build --windows --x64
 
     # - name: Setup Upx
     #   uses: engineerd/configurator@v0.0.9
