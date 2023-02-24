@@ -15,7 +15,8 @@ jobs:
       with:
         node-version: 16.18.0
     - name: Install Wine
-      run: sudo apt-get update && sudo apt-get install -y wine
+      run: dpkg --add-architecture i386 && apt-get update &&
+    apt-get install wine32
     - run: |
         npm i
         npm install electron-builder --save-dev
