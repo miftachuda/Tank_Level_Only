@@ -6,16 +6,12 @@
   "scripts": {
     "start": "electron .",
     "make": "electron-packager ./ tankapp --platform=win32 --overwrite",
-    "rebuild": "electron-rebuild -f -w",
     "export": "electron-builder --win=portable"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/miftachuda/Tank_Level_Only",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Tank",
+    "Level"
   ],
   "build": {
     "appId": "com.tanklevelapp.example",
@@ -31,7 +27,6 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^12.2.3",
-    "electron-rebuild": "^3.2.7",
     "electron-reloader": "^1.2.1"
   },
   "dependencies": {
