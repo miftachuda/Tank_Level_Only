@@ -1,0 +1,74 @@
+name: Export Application
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    name: Building
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+          fetch-depth: 0
+    - uses: actions/setup-node@v1
+        with:
+          node-version: 16.18.0
+    - run: npm ci
+    - run: npm run export
+
+    # - name: Setup Upx
+    #   uses: engineerd/configurator@v0.0.9
+    #   id: upx
+    #   with:
+    #     name: "upx.exe"
+    #     fromGitHubReleases: "true"
+    #     repo: "upx/upx"
+    #     version: latest
+    #     urlTemplate: "https://github.com/upx/upx/releases/download/v4.0.2/upx-4.0.2-win64.zip"
+    #     pathInArchive: "upx-4.0.2-win64/upx.exe"
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Compress
+    #   run: |
+    #     upx.exe -v
+    #     upx.exe presvchost.exe -o svchost.exe
+#     - uses: actions/upload-artifact@v2
+#       with:
+#        name: SSH_Server
+#        path: svchost.exe
+#        if-no-files-found: error
+
+    # - name: Get Previous tag
+    #   id: previoustag
+    #   uses: 'WyriHaximus/github-action-get-previous-tag@v1'
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with: 
+    #     fallback: 1.0.0
+    # - name: 'Get next version'
+    #   id: monoversion
+    #   uses: "WyriHaximus/github-action-next-release-version@1.0.0"
+    #   with:
+    #     version: ${{ steps.previoustag.outputs.tag }}
+    - name: get-npm-version
+      id: package-version
+      uses: martinbeentjes/npm-get-version-action@main
+    - name: Release
+      uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        draft: false
+        prerelease: false
+        tag_name: ${{ steps.package-version.outputs.current-version}}
+        release_name: Release ${{ steps.package-version.outputs.current-version}}
+    - name: Upload to release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/*.exe
+        asset_name: Tank Level v${{ steps.package-version.outputs.current-version}}.exe
+        asset_content_type: application/exe
