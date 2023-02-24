@@ -14,7 +14,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 16.18.0
-    - run: npm ci
+    - run: npm i
     - run: npm run export
 
     # - name: Setup Upx
