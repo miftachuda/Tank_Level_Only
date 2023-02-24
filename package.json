@@ -1,7 +1,7 @@
 {
   "name": "tanklevelapp",
-  "version": "1.1.0",
-  "description": "Tanklevel v1.1.0",
+  "version": "1.2.0",
+  "description": "Tanklevel v1.2.0",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -24,7 +24,7 @@
       "icon": "./img/ico.png"
     },
     "extraFiles": [
-      "./stsrph.json"
+      "./datasg.json"
     ]
   },
   "author": "Miftchul Huda",

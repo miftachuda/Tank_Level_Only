@@ -14,6 +14,6 @@ const menu = new remote.Menu();
 menu.append(new remote.MenuItem({
 
 }));
-MyTitleBar.updateTitle('TankLevel v1.1.0');
+MyTitleBar.updateTitle('TankLevel v1.2.0');
 MyTitleBar.updateMenu(null);
 

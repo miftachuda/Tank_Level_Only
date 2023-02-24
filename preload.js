@@ -10,7 +10,7 @@ const cron = require('node-cron');
 const path = require('path');
 const recordArray = Array.from({ length: 12 }, (x, i) => 1);
 const { ipcRenderer } = require("electron"); var tankdoc = document
-const datasg = require("./datasg.json");
+const datasg = require("./img/datasg.json");
 
 // checkVPN("10.54.127.226", 4444).then(() => {
 //     vpnmode = false;
@@ -144,6 +144,11 @@ function updateDisplay(level, temp, name, x, levelcollect) {
 // }
 
 window.addEventListener('DOMContentLoaded', async () => {
+    const updateShift = require("./shift_tab")
+    updateShift()
+    setInterval(() => {
+        updateShift()
+    }, 10000)
     var tooltip = tankdoc.getElementsByClassName("tooltiptext")
     var arr_tooltip = Array.from(tooltip)
     arr_tooltip.forEach((el, i) => {
@@ -224,9 +229,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                     footer.setAttribute("class", "footer footergreen");
                     if (result != null) {
                         if (typeof result.TANK != "undefined") {
-                            if (host == "10.54.127.234") {
-                                console.log(result)
-                            }
+
                             var level = `${result.TANK.PARAM[0].$.VALUE.replace(/'/, '').replace(/[+]/, '')}`;
                             var temp = `${result.TANK.PARAM[2].$.VALUE.replace(/[+]/, '')}`
                             var name = result.TANK.$.NAME
@@ -355,7 +358,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         // let dataPasts = data[90].data
         // // let timePast = data[90].timestamp
         // get data from memory
-        let delta = 1
+        let delta = 4
         let deltaExtend = 5
         let datas = levelArray[180]
         let dataPasts = levelArray[90]
@@ -367,21 +370,123 @@ window.addEventListener('DOMContentLoaded', async () => {
             let rate = tankdoc.querySelector(`[tank~='0${tank}'] div:nth-child(5)`)
             let red = "./img/red.svg"
             let green = "./img/green.svg"
+            //fast move
             if (dataPasts != 1) {
-                if (
-                    JSON.parse(dataPasts.level)[tank]
-                ) {
-                    // data frmo sqlite is string need to parse
+                if (JSON.parse(dataPasts.level)[tank]) {
                     let level = parseInt(JSON.parse(datas.level)[tank].level) ?? 0
-                    let timestamp = parseInt(JSON.parse(datas.level)[tank].time) ?? 1
+                    // let timestamp = parseInt(JSON.parse(datas.level)[tank].time) ?? 1
                     let levelPast = parseInt(JSON.parse(dataPasts.level)[tank].level) ?? 0
-                    let timestampPast = parseInt(JSON.parse(dataPasts.level)[tank].time) ?? 0
-                    let { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day } = calc(level, levelPast, timestamp, timestampPast, tank)
-                    // if (mmortpd) {
-                    //     rate.innerHTML = `${speed} mm/hr`
+
+                    // let timestampPast = parseInt(JSON.parse(dataPasts.level)[tank].time) ?? 0
+                    // let { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day } = calc(level, levelPast, timestamp, timestampPast, tank)
+                    // if (mm_per_hour > 0) {
+                    //     rate.className = "rate rateup"
+                    // } else if (mm_per_hour < 0) {
+                    //     rate.className = "rate ratedown"
                     // } else {
-                    //     rate.innerHTML = `${kubik} m³/hr`
+                    //     rate.className = "rate"
                     // }
+                    // switch (select_button) {
+                    //     case "0":
+                    //         rate.innerHTML = `${mm_per_hour} mm/hr`
+                    //         break;
+                    //     case "1":
+                    //         rate.innerHTML = `${meter_cubic_hour} m³/hr`
+                    //         break;
+                    //     case "2":
+                    //         rate.innerHTML = `${ton_per_day} ton/day`
+                    //         break;
+                    //     case "3":
+                    //         rate.innerHTML = `${mm_per_day} mm/day`
+                    //         break;
+                    //     case "4":
+                    //         rate.innerHTML = `${mm_per_8hour} mm/8hr`
+                    //         break;
+                    //     default:
+                    //         break;
+                    // }
+                    if ((level - levelPast) < -delta) {
+                        if (record[tank] != "down") {
+                            border.setAttribute("tank", `0${tank} borderturun`);
+                            // komponen.id = "down"
+                            komponen.setAttribute("class", "visible blink")
+                            komponen.src = red
+                        }
+                        record[tank] = "down"
+                    } else if ((level - levelPast) > delta) {
+                        if (record[tank] != "up") {
+                            border.setAttribute("tank", `0${tank} bordernaik`);
+                            // komponen.id = "up"
+                            komponen.setAttribute("class", "visible blink")
+                            komponen.src = green
+                        }
+                        record[tank] = "up"
+                    } else {
+                        if (dataPastsExtend != 1) {
+                            if (JSON.parse(dataPastsExtend.level)[tank]) {
+                                let levelPastExtend = parseInt(JSON.parse(dataPastsExtend.level)[tank].level) ?? 0
+                                if ((level - levelPastExtend) < -deltaExtend) {
+                                    if (record[tank] != "down") {
+                                        border.setAttribute("tank", `0${tank} borderturun`);
+                                        komponen.setAttribute("class", "visible blink")
+                                        komponen.src = red
+                                    }
+                                    record[tank] = "down"
+                                } else if ((level - levelPastExtend) > deltaExtend) {
+                                    if (record[tank] != "up") {
+                                        border.setAttribute("tank", `0${tank} bordernaik`);
+                                        komponen.setAttribute("class", "visible blink")
+                                        komponen.src = green
+                                    }
+                                    record[tank] = "up"
+                                }
+                                else {
+                                    if (record[tank] != "stable") {
+                                        border.setAttribute("tank", `0${tank} borderidle`);
+                                        komponen.setAttribute("class", "unvisible")
+                                        komponen.src = ""
+                                    } else { }
+                                    record[tank] = "stable"
+
+                                }
+                            } else {
+                                if (record[tank] != "stable") {
+                                    border.setAttribute("tank", `0${tank} borderidle`);
+                                    komponen.setAttribute("class", "unvisible")
+                                    komponen.src = ""
+                                } else { }
+                                record[tank] = "stable"
+
+                            }
+
+                        } else {
+                            if (record[tank] != "stable") {
+                                border.setAttribute("tank", `0${tank} borderidle`);
+                                komponen.setAttribute("class", "unvisible")
+                                komponen.src = ""
+                            } else { }
+                            record[tank] = "stable"
+                        }
+                    }
+                }
+            } else {
+                if (record[tank] != "stable") {
+                    border.setAttribute("tank", `0${tank} borderidle`);
+                    komponen.setAttribute("class", "unvisible")
+                    komponen.src = ""
+                } else {
+
+                }
+                record[tank] = "stable"
+            }
+            //rate move
+            if (dataPastsExtend != 1) {
+                if (JSON.parse(dataPastsExtend.level)[tank]) {
+                    let level = parseInt(JSON.parse(datas.level)[tank].level) ?? 0
+                    let levelPastExtend = parseInt(JSON.parse(dataPastsExtend.level)[tank].level) ?? 0
+                    let timestamp = parseInt(JSON.parse(datas.level)[tank].time) ?? 1
+                    let timestampPast = parseInt(JSON.parse(dataPastsExtend.level)[tank].time) ?? 0
+                    let { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day } = calc(level, levelPastExtend, timestamp, timestampPast, tank)
                     if (mm_per_hour > 0) {
                         rate.className = "rate rateup"
                     } else if (mm_per_hour < 0) {
@@ -408,111 +513,9 @@ window.addEventListener('DOMContentLoaded', async () => {
                         default:
                             break;
                     }
-                    if ((level - levelPast) < -delta) {
-                        if (record[tank] != "down") {
-                            border.setAttribute("tank", `0${tank} borderturun`);
-                            // komponen.id = "down"
-                            komponen.setAttribute("class", "visible blink")
-                            komponen.src = red
-                        }
-                        record[tank] = "down"
-                    } else if ((level - levelPast) > delta) {
-                        if (record[tank] != "up") {
-                            border.setAttribute("tank", `0${tank} bordernaik`);
-                            // komponen.id = "up"
-                            komponen.setAttribute("class", "visible blink")
-                            komponen.src = green
-                        }
-                        record[tank] = "up"
-                    } else {
-                        if (dataPastsExtend != 1) {
-                            if (JSON.parse(dataPastsExtend.level)[tank]) {
-                                let level = parseInt(JSON.parse(datas.level)[tank].level) ?? 0
-                                let levelPastExtend = parseInt(JSON.parse(dataPastsExtend.level)[tank].level) ?? 0
-                                let timestamp = parseInt(JSON.parse(datas.level)[tank].time) ?? 1
-                                let timestampPast = parseInt(JSON.parse(dataPastsExtend.level)[tank].time) ?? 0
-                                let { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day } = calc(level, levelPast, timestamp, timestampPast, tank)
-                                // if (mmortpd) {
-                                //     rate.innerHTML = `${speed} mm/hr`
-                                // } else {
-                                //     rate.innerHTML = `${kubik} m³/hr`
-                                // }
-                                switch (select_button) {
-                                    case "0":
-                                        rate.innerHTML = `${mm_per_hour} mm/hr`
-                                        break;
-                                    case "1":
-                                        rate.innerHTML = `${meter_cubic_hour} m³/hr`
-                                        break;
-                                    case "2":
-                                        rate.innerHTML = `${ton_per_day} ton/day`
-                                        break;
-                                    case "3":
-                                        rate.innerHTML = `${mm_per_day} mm/day`
-                                        break;
-                                    case "4":
-                                        rate.innerHTML = `${mm_per_8hour} mm/8hr`
-                                        break;
-                                    default:
-                                        break;
-                                }
-                                if ((level - levelPastExtend) < -deltaExtend) {
-                                    if (record[tank] != "down") {
-                                        border.setAttribute("tank", `0${tank} borderturun`);
-                                        // komponen.id = "down"
-                                        komponen.setAttribute("class", "visible blink")
-                                        komponen.src = red
-                                    }
-                                    record[tank] = "down"
-                                } else if ((level - levelPastExtend) > deltaExtend) {
-                                    if (record[tank] != "up") {
-                                        border.setAttribute("tank", `0${tank} bordernaik`);
-                                        // komponen.id = "up"
-                                        komponen.setAttribute("class", "visible blink")
-                                        komponen.src = green
-                                    }
-                                    record[tank] = "up"
-                                }
-
-                                else {
-                                    if (record[tank] != "stable") {
-                                        border.setAttribute("tank", `0${tank} borderidle`);
-                                        // komponen.id = "idle"
-                                        komponen.setAttribute("class", "unvisible")
-                                        komponen.src = ""
-                                    } else { }
-                                    record[tank] = "stable"
-
-                                }
-
-                            } else {
-                                if (record[tank] != "stable") {
-                                    border.setAttribute("tank", `0${tank} borderidle`);
-                                    // komponen.id = "idle"
-                                    komponen.setAttribute("class", "unvisible")
-                                    komponen.src = ""
-                                } else { }
-                                record[tank] = "stable"
-
-                            }
-
-                        }
-                        // if (record[tank] != "stable") {
-                        //     border.setAttribute("tank", `0${tank} borderidle`);
-                        //     // komponen.id = "idle"
-                        //     komponen.setAttribute("class", "unvisible")
-                        //     komponen.src = ""
-                        // } else {
-
-                        // }
-                        // record[tank] = "stable"
-
-                    }
 
                 }
-
             }
-            //slow compare
 
         })
 

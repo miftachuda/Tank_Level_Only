@@ -231,8 +231,8 @@ header {
 }
 
 .status {
-    height: 2.5vw;
-    width: 2.5vw;
+    height: 1.8vw;
+    width: 1.8vw;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
@@ -473,7 +473,7 @@ header {
 }
 
 .ratedown {
-    color: rgb(244, 79, 79);
+    color: rgb(255, 56, 238);
 }
 
 .footergreen {
@@ -491,7 +491,7 @@ header {
 }
 
 [tank~="borderturun"] {
-    border: 3px solid red;
+    border: 3px solid rgb(244, 1, 244);
 }
 
 [title~="borderidle"] {
