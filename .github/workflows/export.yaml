@@ -14,7 +14,8 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 16.18.0
-    - run: npm i --dev
+    - run: npm i
+    - run: npm i -g electron-builder
     - run: npm run export
 
     # - name: Setup Upx
