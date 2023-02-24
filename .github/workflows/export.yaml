@@ -20,7 +20,7 @@ jobs:
         npm i
         npm install electron-builder --save-dev
     - name: Build for windows 64 bit
-      run: npx electron-builder build --windows --x64
+      run: npx electron-builder build --windows --x64 --publish=never
 
     # - name: Setup Upx
     #   uses: engineerd/configurator@v0.0.9
