@@ -169,25 +169,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.log("load record windows")
         ipcRenderer.send('openRecord', recordArray);
     });
-    function createBrowserWindow() {
-        const remote = require('electron').remote;
-        const BrowserWindow = remote.BrowserWindow;
-        const win = new BrowserWindow({
-            height: 1000,
-            width: 980,
-            frame: false,
-            darkTheme: true,
-            webPreferences: {
-                preload: path.join(__dirname, 'record.js'),
-                enableRemoteModule: true,
-                nodeIntegration: true,
-                contextIsolation: false
-            },
-        });
-        win.setResizable(false)
-        win.setMenuBarVisibility(false)
-        win.loadFile('record.html')
-    }
+
     const levelcollect = {};
     updatelog("Welcome to Tank App")
     // '0 0-23/2 * * *'
@@ -196,7 +178,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         recordArray.push({ data: JSON.stringify(levelcollect), timestamp: Date.now().toString() })
         recordArray.shift()
 
-        console.log(`${x} record saved`)
+        //console.log(`${x} record saved`)
         // save 2 hours record to sqlite db
         // var toSave = JSON.stringify(levelcollect)
         // if (toSave != "{}") {
@@ -344,15 +326,19 @@ window.addEventListener('DOMContentLoaded', async () => {
             let sg = datasg[1][tank]
             let diameter = datasg[0][tank]
             let selisih = level - levelPast
-            // console.log(selisih)
             let selisiht = (time - timePast) / 1000
-            mm_per_hour = ((selisih / selisiht) * 60 * 60).toFixed(1)
-            // console.log(mm_per_hour)
-            mm_per_8hour = ((selisih / selisiht) * 60 * 60 * 8).toFixed(1)
-            mm_per_day = ((selisih / selisiht) * 60 * 60 * 24).toFixed(1)
-            meter_cubic_hour = (mm_per_hour * ((22 / 7) * ((diameter / 2) ** 2) / 1000000000)).toFixed(1)
-            ton_per_day = ((mm_per_hour * ((22 / 7) * ((diameter / 2) ** 2) / 1000000000)) * sg * 24).toFixed(1)
-            return { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day }
+            if (selisih != 0 && selisiht != 0) {
+                mm_per_hour = ((selisih / selisiht) * 60 * 60).toFixed(1)
+                mm_per_8hour = ((selisih / selisiht) * 60 * 60 * 8).toFixed(1)
+                mm_per_day = ((selisih / selisiht) * 60 * 60 * 24).toFixed(1)
+                meter_cubic_hour = (mm_per_hour * ((22 / 7) * ((diameter / 2) ** 2) / 1000000000)).toFixed(1)
+                ton_per_day = ((mm_per_hour * ((22 / 7) * ((diameter / 2) ** 2) / 1000000000)) * sg * 24).toFixed(1)
+                return { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day }
+            } else {
+                mm_per_hour = mm_per_8hour = mm_per_day = meter_cubic_hour =
+                    ton_per_day = "Refresh"
+                return { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day }
+            }
         }
         // get data from sqlitedb
         // let data = await knexInstance.select().table('tank').orderBy('timestamp', 'desc').limit(301)
@@ -487,7 +473,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 if (JSON.parse(dataPastsExtend.level)[tank]) {
                     let level = parseInt(JSON.parse(datas.level)[tank].level) ?? 0
                     let levelPastExtend = parseInt(JSON.parse(dataPastsExtend.level)[tank].level) ?? 0
-                    let timestamp = parseInt(JSON.parse(datas.level)[tank].time) ?? 1
+                    let timestamp = parseInt(JSON.parse(datas.level)[tank].time) ?? 0
                     let timestampPast = parseInt(JSON.parse(dataPastsExtend.level)[tank].time) ?? 0
                     let { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day } = calc(level, levelPastExtend, timestamp, timestampPast, tank)
                     if (mm_per_hour > 0) {
