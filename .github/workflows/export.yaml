@@ -59,7 +59,10 @@ jobs:
       #     version: ${{ steps.previoustag.outputs.tag }}
       - name: Create Github Release
         uses: ncipollo/release-action@v1
+
         with:
+          tag: v1.0.0
+          commit: main
           artifacts: "./dist/tanklevelapp Setup ${{ steps.package-version.outputs.current-version}}.exe"
           replacesArtifacts: false
           token: ${{ github.token }}
