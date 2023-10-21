@@ -1,7 +1,7 @@
 const MessageBuffer = require('./messagebuffer');
 const parseString = require('xml2js').parseString;
 const Net = require('net');
-const { checkInternet, checkConnection } = require("./check_internet");
+const { checkInternet, checkConnection,checkVPN } = require("./check_internet");
 const { tanklist1, tanklist2, tanklist3, tanklist4, tanklist5, tanklist6, tanklist7, tanklist8, all_tank } = require("./tanklist")
 //const knexInstance = require("./knexdb")
 let vpnmode = false;
@@ -13,50 +13,45 @@ const { ipcRenderer } = require("electron"); var tankdoc = document
 const datasg = require("./img/datasg.json");
 var pjson = require('./package.json');
 
-// checkVPN("10.54.127.226", 4444).then(() => {
-//     vpnmode = false;
-// }, () => {
-//     vpnmode = true;
-// });
-
-
-
-if (vpnmode) {
-    host1 = '10.54.188.100';
-    host2 = host1;
-    host3 = host1;
-    host4 = host1;
-    host5 = host1;
-    host6 = host1;
-    host7 = host1;
-    host8 = host1;
-    port1 = 6000;
-    port2 = 6001;
-    port3 = 6002;
-    port4 = 6003;
-    port5 = 6004;
-    port6 = 6005;
-    port7 = 6006;
-    port8 = 6007;
-} else {
-    host1 = '10.54.127.226';
-    host2 = '10.54.127.227';
-    host3 = '10.54.127.231';
-    host4 = '10.54.127.213';
-    host5 = '10.54.127.223';
-    host6 = '10.54.127.228';
-    host7 = '10.54.127.234';
-    host8 = '10.54.127.235';
-    port1 = 4444;
-    port2 = 4444;
-    port3 = 4444;
-    port4 = 4444;
-    port5 = 4444;
-    port6 = 4444;
-    port7 = 4444;
-    port8 = 4444;
-
+function initHost(){
+    checkVPN("10.54.127.226", 4444).then(() => {
+        host1 = '10.54.127.226';
+        host2 = '10.54.127.227';
+        host3 = '10.54.127.231';
+        host4 = '10.54.127.213';
+        host5 = '10.54.127.223';
+        host6 = '10.54.127.228';
+        host7 = '10.54.127.234';
+        host8 = '10.54.127.235';
+        port1 = 4444;
+        port2 = 4444;
+        port3 = 4444;
+        port4 = 4444;
+        port5 = 4444;
+        port6 = 4444;
+        port7 = 4444;
+        port8 = 4444;
+    }, () => {
+        host1 = '10.54.188.74';
+        host2 = host1;
+        host3 = host1;
+        host4 = host1;
+        host5 = host1;
+        host6 = host1;
+        host7 = host1;
+        host8 = host1;
+        port1 = 6000;
+        port2 = 6001;
+        port3 = 6002;
+        port4 = 6003;
+        port5 = 6004;
+        port6 = 6005;
+        port7 = 6006;
+        port8 = 6007;
+    });
 }
+
+initHost()
 
 function startTime() {
 
@@ -301,6 +296,49 @@ window.addEventListener('DOMContentLoaded', async () => {
         checkConnection(host8, port8, indhost8, 3000);
 
     }, 3000)
+    setInterval(()=>{
+        checkVPN("10.54.127.226", 4444).then(() => {
+            if(port1 != 4444){
+                host1 = '10.54.127.226';
+                host2 = '10.54.127.227';
+                host3 = '10.54.127.231';
+                host4 = '10.54.127.213';
+                host5 = '10.54.127.223';
+                host6 = '10.54.127.228';
+                host7 = '10.54.127.234';
+                host8 = '10.54.127.235';
+                port1 = 4444;
+                port2 = 4444;
+                port3 = 4444;
+                port4 = 4444;
+                port5 = 4444;
+                port6 = 4444;
+                port7 = 4444;
+                port8 = 4444;
+                loadit()
+            } 
+        }, () => {
+            if(port1 != 6000){
+            host1 = '10.54.188.74';
+            host2 = host1;
+            host3 = host1;
+            host4 = host1;
+            host5 = host1;
+            host6 = host1;
+            host7 = host1;
+            host8 = host1;
+            port1 = 6000;
+            port2 = 6001;
+            port3 = 6002;
+            port4 = 6003;
+            port5 = 6004;
+            port6 = 6005;
+            port7 = 6006;
+            port8 = 6007;
+            loadit()
+            }
+        });
+    },10000)
     let levelArray = Array.from({ length: 181 }, (x, i) => 1);
     function logging() {
         // add log to memory
