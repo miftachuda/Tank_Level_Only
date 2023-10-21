@@ -57,32 +57,29 @@ jobs:
       #   uses: "WyriHaximus/github-action-next-release-version@1.0.0"
       #   with:
       #     version: ${{ steps.previoustag.outputs.tag }}
-      - name: Create Github Release
-        uses: ncipollo/release-action@v1
-
-        with:
-          tag: v1.0.0
-          commit: main
-          artifacts: "./dist/tanklevelapp Setup ${{ steps.package-version.outputs.current-version}}.exe"
-          replacesArtifacts: false
-          token: ${{ github.token }}
-          allowUpdates: true
-    # - name: Release
-    #   uses: actions/create-release@v1
-    #   id: create_release
-    #   env:
-    #     GITHUB_TOKEN: ${{ github.token }}
-    #   with:
-    #     draft: false
-    #     prerelease: false
-    #     tag_name: ${{ steps.package-version.outputs.current-version}}
-    #     release_name: Release ${{ steps.package-version.outputs.current-version}}
-    # - name: Upload to release
-    #   uses: actions/upload-release-asset@v1
-    #   env:
-    #     GITHUB_TOKEN: ${{ github.token }}
-    #   with:
-    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-    #     asset_path: ./dist/tanklevelapp Setup ${{ steps.package-version.outputs.current-version}}.exe
-    #     asset_name: Tank Level v${{ steps.package-version.outputs.current-version}}.exe
-    #     asset_content_type: application/exe
+    - name: Generate release tag
+      id: generate_release_tag
+      uses: amitsingh-007/next-release-tag@v4.0.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        tag_prefix: 'v'
+        tag_template: 'yyyy.mm.dd.i'
+    - name: Release
+      uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        draft: false
+        prerelease: false
+        tag_name: ${{ steps.package-version.outputs.current-version}} ${{ steps.generate_release_tag.outputs.next_release_tag }}
+        release_name: Release ${{ steps.package-version.outputs.current-version}} ${{ steps.generate_release_tag.outputs.next_release_tag }}
+    - name: Upload to release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/tanklevelapp Setup ${{ steps.package-version.outputs.current-version}}.exe
+        asset_name: Tank Level v${{ steps.package-version.outputs.current-version}}.exe
+        asset_content_type: application/exe
