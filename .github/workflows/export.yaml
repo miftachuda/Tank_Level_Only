@@ -62,7 +62,7 @@ jobs:
         uses: amitsingh-007/next-release-tag@v4.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag_prefix: ""
+          tag_prefix: "v"
           tag_template: "yyyy.mm.dd.i"
       - name: Release
         uses: actions/create-release@v1
