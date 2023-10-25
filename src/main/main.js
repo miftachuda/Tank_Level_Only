@@ -29,7 +29,9 @@ function createWindow() {
   });
   mainWindow.setResizable(true);
   mainWindow.setMenuBarVisibility(false);
-  mainWindow.loadFile(path.join(__dirname, "../renderer/tanklevelapp.html"));
+  mainWindow.loadFile(
+    path.join(__dirname, "../renderer/src/tanklevelapp.html")
+  );
   mainWindow.maximize();
   mainWindow.webContents.on("did-finish-load", function () {
     mainWindow.show();
@@ -51,11 +53,11 @@ function createRecordWindow() {
   });
   win.setResizable(false);
   win.setMenuBarVisibility(false);
-  win.loadFile(path.join(__dirname, "../renderer/record.html"));
+  win.loadFile(path.join(__dirname, "../renderer/src/record.html"));
   return win;
 }
 ipcMain.on("openRecord", (event, arg) => {
-  console.log("Open Record");
+  //console.log("Open Record");
   recordWin = createRecordWindow();
   recordWin.webContents.send("forWin2", arg);
 });

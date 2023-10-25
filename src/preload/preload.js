@@ -1,4 +1,4 @@
-const MessageBuffer = require("./messagebuffer");
+const MessageBuffer = require("./messagebuffer.js");
 const parseString = require("xml2js").parseString;
 const Net = require("net");
 const {
@@ -15,6 +15,7 @@ const {
   tanklist6,
   tanklist7,
   tanklist8,
+  tanklist9,
   all_tank,
   all_tank_arr,
 } = require("./tanklist");
@@ -26,9 +27,9 @@ const path = require("path");
 const recordArray = Array.from({ length: 12 }, (x, i) => 1);
 const { ipcRenderer } = require("electron");
 var tankdoc = document;
-const datasg = require("../../img/datasg.json");
+console.log(document);
+const datasg = require("../renderer/img/datasg.json");
 var pjson = require("../../package.json");
-
 function initHost() {
   checkVPN("10.54.127.226", 4444).then(
     () => {
@@ -69,8 +70,34 @@ function initHost() {
     }
   );
 }
+host1 = "10.54.127.213";
+host2 = "10.54.127.223";
+host3 = "10.54.127.226";
+host4 = "10.54.127.227";
+host5 = "10.54.127.228";
+host6 = "10.54.127.229";
+host7 = "10.54.127.231";
+host8 = "10.54.127.234";
+host9 = "10.54.127.235";
 
-initHost();
+// host1 = "10.54.127.226";
+// host2 = "10.54.127.227";
+// host3 = "10.54.127.231";
+// host4 = "10.54.127.213";
+// host5 = "10.54.127.223";
+// host6 = "10.54.127.228";
+// host7 = "10.54.127.234";
+// host8 = "10.54.127.235";
+// host9 = "10.54.127.229";
+port1 = 4444;
+port2 = 4444;
+port3 = 4444;
+port4 = 4444;
+port5 = 4444;
+port6 = 4444;
+port7 = 4444;
+port8 = 4444;
+port9 = 4444;
 
 function startTime() {
   time = moment().format("HH:mm:ss[</br>]DD MMM yyyy");
@@ -97,7 +124,10 @@ function updateDisplay(level, temp, name, x, levelcollect) {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
-  if (name == x) {
+  function text(x) {
+    return x.replace(/\s/g, "");
+  }
+  if (text(name) == x) {
     let komponen = tankdoc.querySelector(`[id~='0${x}']`);
     replaceText(`0${x}`, numberWithCommas(level));
     replaceText(`0${x}-t`, `  ${temp} °C`);
@@ -171,7 +201,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   });
   const button = tankdoc.getElementById("record");
   button.addEventListener("click", () => {
-    console.log("load record windows");
+    // console.log("load record windows");
     ipcRenderer.send("openRecord", recordArray);
   });
 
@@ -260,6 +290,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const indhost6 = tankdoc.getElementById("host6");
   const indhost7 = tankdoc.getElementById("host7");
   const indhost8 = tankdoc.getElementById("host8");
+  const indhost9 = tankdoc.getElementById("host9");
   const payload1 =
     '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>8</GROUPID></FG4TG>'; //234,226,227,223
   const payload2 =
@@ -268,6 +299,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>74</GROUPID></FG4TG>'; //228
   const payload4 =
     '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>216</GROUPID></FG4TG>'; //235
+  const payload5 =
+    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>77</GROUPID></FG4TG>'; //229
   let client1;
   let client2;
   let client3;
@@ -276,16 +309,18 @@ window.addEventListener("DOMContentLoaded", async () => {
   let client6;
   let client7;
   let client8;
+  let client9;
 
   function loadit() {
-    client1 = fetching(host1, port1, tanklist1, payload1, updatelog);
-    client2 = fetching(host2, port2, tanklist2, payload1, updatelog);
-    client3 = fetching(host3, port3, tanklist3, payload2, updatelog);
-    // client4 = fetching(host4, port4, tanklist4, payload1, updatelog)
-    client5 = fetching(host5, port5, tanklist5, payload1, updatelog);
-    client6 = fetching(host6, port6, tanklist6, payload3, updatelog);
-    client7 = fetching(host7, port7, tanklist7, payload1, updatelog);
-    client8 = fetching(host8, port8, tanklist8, payload4, updatelog);
+    // client1 = fetching(host1, port1, tanklist1, payload1, updatelog);//213
+    client2 = fetching(host2, port2, tanklist2, payload1, updatelog); //223
+    client3 = fetching(host3, port3, tanklist3, payload1, updatelog); //226
+    client4 = fetching(host4, port4, tanklist4, payload1, updatelog); //227
+    client5 = fetching(host5, port5, tanklist5, payload3, updatelog); //228
+    client6 = fetching(host6, port6, tanklist6, payload5, updatelog); //229
+    client7 = fetching(host7, port7, tanklist7, payload2, updatelog); //231
+    client8 = fetching(host8, port8, tanklist8, payload1, updatelog); //234
+    client9 = fetching(host9, port9, tanklist9, payload4, updatelog); //225
   }
   loadit();
 
@@ -311,53 +346,54 @@ window.addEventListener("DOMContentLoaded", async () => {
     checkConnection(host6, port6, indhost6, 3000);
     checkConnection(host7, port7, indhost7, 3000);
     checkConnection(host8, port8, indhost8, 3000);
+    checkConnection(host9, port9, indhost9, 3000);
   }, 3000);
-  setInterval(() => {
-    checkVPN("10.54.127.226", 4444).then(
-      () => {
-        if (port1 != 4444) {
-          host1 = "10.54.127.226";
-          host2 = "10.54.127.227";
-          host3 = "10.54.127.231";
-          host4 = "10.54.127.213";
-          host5 = "10.54.127.223";
-          host6 = "10.54.127.228";
-          host7 = "10.54.127.234";
-          host8 = "10.54.127.235";
-          port1 = 4444;
-          port2 = 4444;
-          port3 = 4444;
-          port4 = 4444;
-          port5 = 4444;
-          port6 = 4444;
-          port7 = 4444;
-          port8 = 4444;
-          loadit();
-        }
-      },
-      () => {
-        if (port1 != 6000) {
-          host1 = "10.54.188.74";
-          host2 = host1;
-          host3 = host1;
-          host4 = host1;
-          host5 = host1;
-          host6 = host1;
-          host7 = host1;
-          host8 = host1;
-          port1 = 6000;
-          port2 = 6001;
-          port3 = 6002;
-          port4 = 6003;
-          port5 = 6004;
-          port6 = 6005;
-          port7 = 6006;
-          port8 = 6007;
-          loadit();
-        }
-      }
-    );
-  }, 10000);
+  // setInterval(() => {
+  //   checkVPN("10.54.127.226", 4444).then(
+  //     () => {
+  //       if (port1 != 4444) {
+  //         host1 = "10.54.127.226";
+  //         host2 = "10.54.127.227";
+  //         host3 = "10.54.127.231";
+  //         host4 = "10.54.127.213";
+  //         host5 = "10.54.127.223";
+  //         host6 = "10.54.127.228";
+  //         host7 = "10.54.127.234";
+  //         host8 = "10.54.127.235";
+  //         port1 = 4444;
+  //         port2 = 4444;
+  //         port3 = 4444;
+  //         port4 = 4444;
+  //         port5 = 4444;
+  //         port6 = 4444;
+  //         port7 = 4444;
+  //         port8 = 4444;
+  //         loadit();
+  //       }
+  //     },
+  //     () => {
+  //       if (port1 != 6000) {
+  //         host1 = "10.54.188.74";
+  //         host2 = host1;
+  //         host3 = host1;
+  //         host4 = host1;
+  //         host5 = host1;
+  //         host6 = host1;
+  //         host7 = host1;
+  //         host8 = host1;
+  //         port1 = 6000;
+  //         port2 = 6001;
+  //         port3 = 6002;
+  //         port4 = 6003;
+  //         port5 = 6004;
+  //         port6 = 6005;
+  //         port7 = 6006;
+  //         port8 = 6007;
+  //         loadit();
+  //       }
+  //     }
+  //   );
+  // }, 10000);
   let levelArray = Array.from({ length: 181 }, (x, i) => 1);
   function logging() {
     // add log to memory
@@ -439,8 +475,8 @@ window.addEventListener("DOMContentLoaded", async () => {
       );
       let border = tankdoc.querySelector(`[tank~='0${tank}']`);
       let rate = tankdoc.querySelector(`[tank~='0${tank}'] div:nth-child(5)`);
-      let red = "../../img/red.svg";
-      let green = "../../img/green.svg";
+      let red = "../renderer/img/red.svg";
+      let green = "../renderer/img/green.svg";
       //fast move
       if (dataPasts != 1) {
         if (JSON.parse(dataPasts.level)[tank]) {

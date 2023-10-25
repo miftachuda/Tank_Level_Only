@@ -1,12 +1,11 @@
 {
   "name": "tanklevelapp",
   "version": "1.2.0",
-  "description": "Tanklevel v1.2.0",
+  "description": "Realtime Tank Level App",
   "main": "src/main/main.js",
   "scripts": {
     "start": "electron .",
     "make": "electron-packager ./ tankapp --platform=win32 --overwrite",
-    "build": "electron-vite build",
     "export": "electron-builder --win=portable",
     "build:win": "npm run build && electron-builder --win --config",
     "build:mac": "npm run build && electron-builder --mac --config",
@@ -21,10 +20,10 @@
     "appId": "com.tanklevelapp.example",
     "compression": "maximum",
     "win": {
-      "icon": "./img/ico.png"
+      "icon": "./src/renderer/img/icon.ivo"
     },
     "extraFiles": [
-      "./datasg.json"
+      "./src/renderer/img/datasg.json"
     ]
   },
   "author": "Miftchul Huda",
@@ -32,8 +31,7 @@
   "devDependencies": {
     "electron": "^12.2.3",
     "electron-builder": "^24.6.4",
-    "electron-reloader": "^1.2.1",
-    "electron-vite": "^1.0.28"
+    "electron-reloader": "^1.2.1"
   },
   "dependencies": {
     "custom-electron-titlebar": "^3.2.7",
