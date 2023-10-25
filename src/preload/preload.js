@@ -475,8 +475,8 @@ window.addEventListener("DOMContentLoaded", async () => {
       );
       let border = tankdoc.querySelector(`[tank~='0${tank}']`);
       let rate = tankdoc.querySelector(`[tank~='0${tank}'] div:nth-child(5)`);
-      let red = "../renderer/img/red.svg";
-      let green = "../renderer/img/green.svg";
+      let red = "../img/red.svg";
+      let green = "../img/green.svg";
       //fast move
       if (dataPasts != 1) {
         if (JSON.parse(dataPasts.level)[tank]) {
