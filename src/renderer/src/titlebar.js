@@ -9,7 +9,7 @@ let MyTitleBar = new customTitlebar.Titlebar({
   backgroundColor: new customTitlebar.Color(new RGBA(25, 27, 37, 0.679)),
   shadow: true,
   titleHorizontalAlignment: "left",
-  icon: url.format(path.join(__dirname, "../img/icon.ico")),
+  icon: url.format(path.join(__dirname, "../img/ico.png")),
 });
 const menu = new remote.Menu();
 menu.append(new remote.MenuItem({}));

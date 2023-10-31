@@ -1,25 +1,6 @@
-const MessageBuffer = require("./messagebuffer.js");
 const parseString = require("xml2js").parseString;
 const Net = require("net");
-const {
-  checkInternet,
-  checkConnection,
-  checkVPN,
-} = require("./check_internet");
-const {
-  tanklist1,
-  tanklist2,
-  tanklist3,
-  tanklist4,
-  tanklist5,
-  tanklist6,
-  tanklist7,
-  tanklist8,
-  tanklist9,
-  all_tank,
-  all_tank_arr,
-} = require("./tanklist");
-//const knexInstance = require("./knexdb")
+
 let vpnmode = false;
 const moment = require("moment");
 const cron = require("node-cron");
@@ -30,7 +11,165 @@ var tankdoc = document;
 console.log(document);
 const datasg = require("../renderer/img/datasg.json");
 var pjson = require("../../package.json");
-function initHost() {
+const listshift = [
+  ["A1 Malam", "B2 Pagi", "C3 Sore", "D Off-Malam"],
+  ["A2 Malam", "B3 Pagi", "D1 Sore", "C Off-Sore"],
+  ["A3 Malam", "C1 Pagi", "D2 Sore", "B Off-Pagi"],
+  ["B1 Malam", "C2 Pagi", "D3 Sore", "A Off-Malam"],
+  ["B2 Malam", "C3 Pagi", "A1 Sore", "D Off-Sore"],
+  ["B3 Malam", "D1 Pagi", "A2 Sore", "C Off-Pagi"],
+  ["C1 Malam", "D2 Pagi", "A3 Sore", "B Off-Malam"],
+  ["C2 Malam", "D3 Pagi", "B1 Sore", "A Off-Sore"],
+  ["C3 Malam", "A1 Pagi", "B2 Sore", "D Off-Pagi"],
+  ["D1 Malam", "A2 Pagi", "B3 Sore", "C Off-Malam"],
+  ["D2 Malam", "A3 Pagi", "C1 Sore", "B Off-Sore"],
+  ["D3 Malam", "B1 Pagi", "C2 Sore", "A Off-Pagi"],
+];
+function getPeriod(min) {
+  if (min < 480) {
+    return 0;
+  }
+  if (min < 960) {
+    return 1;
+  } else {
+    return 2;
+  }
+}
+function checkCurrentShift() {
+  var now = moment(new Date());
+  var end = moment("2021-12-22");
+  var duration = moment.duration(now.diff(end));
+  var day = Math.trunc(duration.asDays()) % 12;
+  var minutes = Math.trunc(duration.asMinutes()) % 1440;
+  return listshift[day][getPeriod(minutes)];
+}
+function cods(date) {
+  var now = moment(date);
+  var end = moment("2021-12-22");
+  var duration = moment.duration(now.diff(end));
+  var day = Math.trunc(duration.asDays()) % 12;
+  var minutes = Math.trunc(duration.asMinutes()) % 1440;
+  return listshift[day][getPeriod(minutes)];
+}
+function us() {
+  //console.log(document);
+  let now = Date.now();
+  let next = now + 3600000 * 8;
+  let double_next = now + 3600000 * 16;
+  document.getElementById("shiftblock1").innerHTML = cods(now).split(" ")[0];
+  document.getElementById("shiftblock2").innerHTML = `&#x2794; ${
+    cods(next).split(" ")[0]
+  }`;
+  document.getElementById("shiftblock3").innerHTML = `&#x2794; ${
+    cods(double_next).split(" ")[0]
+  }`;
+  document.getElementById("masuk_apa1").innerHTML = `Shift ${
+    cods(now).split(" ")[1]
+  }`;
+  document.getElementById("masuk_apa2").innerHTML = `Shift ${
+    cods(next).split(" ")[1]
+  }`;
+  document.getElementById("masuk_apa3").innerHTML = `Shift ${
+    cods(double_next).split(" ")[1]
+  }`;
+}
+const checkInternet = (cb) => {
+  require("dns").lookup("simops.pertamina.com", function (err) {
+    if (err && err.code == "ENOTFOUND") {
+      cb(false);
+    } else {
+      cb(true);
+    }
+  });
+};
+
+class MessageBuffer {
+  constructor(delimiter) {
+    this.delimiter = delimiter;
+    this.buffer = "";
+  }
+
+  isFinished() {
+    if (
+      this.buffer.length === 0 ||
+      this.buffer.indexOf(this.delimiter) === -1
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  push(data) {
+    this.buffer += data;
+  }
+
+  getMessage() {
+    const delimiterIndex = this.buffer.indexOf(this.delimiter);
+    if (delimiterIndex !== -1) {
+      const message = this.buffer.slice(0, delimiterIndex);
+      this.buffer = this.buffer.replace(message + this.delimiter, "");
+      return message;
+    }
+    return null;
+  }
+
+  handleData() {
+    /**
+     * Try to accumulate the buffer with messages
+     *
+     * If the server isnt sending delimiters for some reason
+     * then nothing will ever come back for these requests
+     */
+    const message = this.getMessage();
+    return message;
+  }
+}
+function checkConnection(host, port, indobj, timeout = 10000) {
+  return new Promise((resolve, reject) => {
+    const socket = new net.Socket();
+    const timer = setTimeout(() => {
+      socket.destroy();
+      reject(new Error("Timeout"));
+    }, timeout);
+    socket.connect(port, host, () => {
+      clearTimeout(timer);
+      socket.end();
+      resolve(true);
+    });
+    socket.on("error", (err) => {
+      clearTimeout(timer);
+      reject(err);
+    });
+  }).then(
+    function () {
+      indobj.setAttribute("class", "status greencol");
+    },
+    function (err) {
+      console.log(err);
+      indobj.setAttribute("class", "status redcol");
+    }
+  );
+}
+function checkVPN(host, port, timeout = 3000) {
+  return new Promise((resolve, reject) => {
+    const socket = new net.Socket();
+    const timer = setTimeout(() => {
+      socket.destroy();
+      reject(new Error("Timeout"));
+    }, timeout);
+    socket.connect(port, host, () => {
+      clearTimeout(timer);
+      socket.end();
+      resolve(true);
+    });
+    socket.on("error", (err) => {
+      clearTimeout(timer);
+      reject(err);
+    });
+  });
+}
+
+function ih() {
   checkVPN("10.54.127.226", 4444).then(
     () => {
       host1 = "10.54.127.226";
@@ -98,7 +237,91 @@ port6 = 4444;
 port7 = 4444;
 port8 = 4444;
 port9 = 4444;
-
+const tanklist1 = [
+  "41T-301",
+  "41T-302",
+  "41T-303",
+  "41T-304",
+  "41T-305",
+  "41T-306",
+  "41T-307",
+  "41T-308",
+  "41T-309",
+  "41T-310",
+  "41T-311",
+  "41T-315",
+  "41T-316",
+  "41T-317",
+]; //213
+const tanklist2 = ["35T-2", "35T-4"]; //223
+const tanklist3 = [
+  "41T-111",
+  "41T-112",
+  "41T-113",
+  "41T-114",
+  "41T-115",
+  "41T-116",
+  "41T-117",
+  "41T-118",
+  "41T-121",
+]; //226
+const tanklist4 = [
+  "41T-101",
+  "41T-102",
+  "41T-103",
+  "41T-104",
+  "41T-105",
+  "41T-106",
+  "41T-107",
+  "41T-108",
+  "41T-122",
+]; //227
+const tanklist5 = ["41T-26"]; //228
+const tanklist6 = ["41T-24"]; //229
+const tanklist7 = ["41T-109", "41T-110", "41T-119", "41T-120"]; //231
+const tanklist8 = [
+  "41T-304",
+  "41T-305",
+  "41T-306",
+  "41T-307",
+  "41T-308",
+  "41T-309",
+  "41T-315",
+  "41T-316",
+]; //234
+const tanklist9 = [
+  "41T-301",
+  "41T-302",
+  "41T-303",
+  "41T-310",
+  "41T-311",
+  "41T-312",
+  "41T-313",
+  "41T-314",
+  "41T-317",
+]; //235
+const all_tank = tanklist1.concat(
+  tanklist2,
+  tanklist3,
+  tanklist4,
+  tanklist5,
+  tanklist6,
+  tanklist7,
+  tanklist8,
+  tanklist9
+);
+const all_tank_arr = [
+  tanklist1,
+  tanklist2,
+  tanklist3,
+  tanklist4,
+  tanklist5,
+  tanklist6,
+  tanklist7,
+  tanklist8,
+  tanklist8,
+  tanklist9,
+];
 function t() {
   time = moment().format("HH:mm:ss[</br>]DD MMM yyyy");
   tankdoc.getElementById("clock").innerHTML = time;
@@ -118,27 +341,27 @@ const r = (selector, text) => {
     if (x[i]) x[i].innerText = text;
   }
 };
-function updatelog(text) {
+function ul(text) {
   const log = tankdoc.getElementById("log");
   log.innerText = text;
 }
 
-function updateDisplay(level, temp, name, x, levelcollect) {
-  function numberWithCommas(x) {
+function ud(level, temp, name, x, lc) {
+  function nwc(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
   if (y(name) == y(x)) {
     let komponen = tankdoc.querySelector(`[id~='0${x}']`);
-    s(`0${x}`, numberWithCommas(level));
+    s(`0${x}`, nwc(level));
     s(`0${x}-t`, `  ${temp} °C`);
-    if (levelcollect[x]) {
-      if (levelcollect[x].level > level) {
+    if (lc[x]) {
+      if (lc[x].level > level) {
         komponen.setAttribute("class", "tankturun");
         setTimeout(() => {
           komponen.setAttribute("class", "tanklevel");
         }, 1000);
-      } else if (levelcollect[x].level < level) {
+      } else if (lc[x].level < level) {
         komponen.setAttribute("class", "tanknaik");
         setTimeout(() => {
           komponen.setAttribute("class", "tanklevel");
@@ -148,7 +371,7 @@ function updateDisplay(level, temp, name, x, levelcollect) {
       }
     }
 
-    levelcollect[x] = {
+    lc[x] = {
       level: level,
       temp: temp,
       time: Date.now(),
@@ -157,17 +380,17 @@ function updateDisplay(level, temp, name, x, levelcollect) {
 }
 
 //update arrow not used
-// function updatestatus(prevlevel, levelcollect) {
-//     if (prevlevel != {} && levelcollect != {}) {
+// function updatestatus(prevlevel, lc) {
+//     if (prevlevel != {} && lc != {}) {
 //         all_tank.forEach((tank) => {
 //             //console.log(prevlevel)
 //             let komponen = tankdoc.querySelector(`[tank~='0${tank}'] .arrow`)
 //             //let border = tankdoc.querySelector(`[tank~='0${tank}']`)
-//             if (prevlevel[tank].level > levelcollect[tank].level) {
+//             if (prevlevel[tank].level > lc[tank].level) {
 //                 // border.setAttribute("tank", `0${tank} borderturun`);
 //                 komponen.id = "down"
 //                 komponen.setAttribute('class', "arrow visible")
-//             } else if (prevlevel[tank].level < levelcollect[tank].level) {
+//             } else if (prevlevel[tank].level < lc[tank].level) {
 //                 // border.setAttribute("tank", `0${tank} bordernaik`);
 //                 komponen.id = "up"
 //                 komponen.setAttribute('class', "arrow visible")
@@ -182,12 +405,11 @@ function updateDisplay(level, temp, name, x, levelcollect) {
 // }
 
 window.addEventListener("DOMContentLoaded", async () => {
-  const updateShift = require("./shift_tab");
   let title = document.getElementsByName("title");
   title.innerText = `Tank Level v${pjson.version}`;
-  updateShift();
+  us();
   setInterval(() => {
-    updateShift();
+    us();
   }, 10000);
   var tooltip = tankdoc.getElementsByClassName("tooltiptext");
   var arr_tooltip = Array.from(tooltip);
@@ -206,20 +428,20 @@ window.addEventListener("DOMContentLoaded", async () => {
     ipcRenderer.send("openRecord", recordArray);
   });
 
-  const levelcollect = {};
-  updatelog("Welcome to Tank App");
+  const lc = {};
+  ul("Welcome to Tank App");
   // '0 0-23/2 * * *'
   cron.schedule("0 0-23/2 * * *", (x) => {
     // save 2 hours record to memmory
     recordArray.push({
-      data: JSON.stringify(levelcollect),
+      data: JSON.stringify(lc),
       timestamp: Date.now().toString(),
     });
     recordArray.shift();
 
     //console.log(`${x} record saved`)
     // save 2 hours record to sqlite db
-    // var toSave = JSON.stringify(levelcollect)
+    // var toSave = JSON.stringify(lc)
     // if (toSave != "{}") {
     //     knexInstance("logsheet").insert({ data: toSave, timestamp: Date.now() }).then((x) => {
     //     })
@@ -227,22 +449,22 @@ window.addEventListener("DOMContentLoaded", async () => {
   });
   setInterval(() => {
     t();
-    //updatestatus(prevlevel, levelcollect);
+    //updatestatus(prevlevel, lc);
   }, 1000);
 
   const footer = tankdoc.getElementById("footer");
-  function fetching(host, port, tanklist, payload, updatelog) {
+  function fetching(host, port, tanklist, payload, ul) {
     const client = new Net.Socket();
     const received = new MessageBuffer(`<FG4TG SC="2">`);
     r("value", "load..");
     client.connect({ port: port, host: host });
     client.on("error", function () {
-      updatelog(`cannot connect group ${host}`);
+      ul(`cannot connect group ${host}`);
       footer.setAttribute("class", "footer footerred");
     });
     client.on("connect", function () {
       client.write(payload);
-      setTimeout(updatelog(`connected to group ${host}`), 1000);
+      setTimeout(ul(`connected to group ${host}`), 1000);
     });
     client.on("data", (data) => {
       received.push(data);
@@ -259,7 +481,7 @@ window.addEventListener("DOMContentLoaded", async () => {
               var temp = `${result.TANK.PARAM[2].$.VALUE.replace(/[+]/, "")}`;
               var name = result.TANK.$.NAME.toString();
               tanklist.forEach((x, i) => {
-                updateDisplay(level, temp, name, x, levelcollect, i);
+                ud(level, temp, name, x, lc, i);
               });
             }
           }
@@ -267,7 +489,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       }
     });
     client.on("timeout", () => {
-      updatelog(`timeout connecting to ${host}`);
+      ul(`timeout connecting to ${host}`);
     });
     client.on("close", () => {
       tanklist.forEach((x, i) => {
@@ -276,9 +498,9 @@ window.addEventListener("DOMContentLoaded", async () => {
       });
       setTimeout(() => {
         client.destroy();
-        fetching(host, port, tanklist, payload, updatelog);
+        fetching(host, port, tanklist, payload, ul);
       }, 2000);
-      updatelog(`connection to ${host} closed`);
+      ul(`connection to ${host} closed`);
     });
     return client;
   }
@@ -313,15 +535,15 @@ window.addEventListener("DOMContentLoaded", async () => {
   let client9;
 
   function loadit() {
-    // client1 = fetching(host1, port1, tanklist1, payload1, updatelog);//213
-    client2 = fetching(host2, port2, tanklist2, payload1, updatelog); //223
-    client3 = fetching(host3, port3, tanklist3, payload1, updatelog); //226
-    client4 = fetching(host4, port4, tanklist4, payload1, updatelog); //227
-    client5 = fetching(host5, port5, tanklist5, payload3, updatelog); //228
-    client6 = fetching(host6, port6, tanklist6, payload1, updatelog); //229
-    client7 = fetching(host7, port7, tanklist7, payload2, updatelog); //231
-    client8 = fetching(host8, port8, tanklist8, payload1, updatelog); //234
-    client9 = fetching(host9, port9, tanklist9, payload4, updatelog); //225
+    // client1 = fetching(host1, port1, tanklist1, payload1, ul);//213
+    client2 = fetching(host2, port2, tanklist2, payload1, ul); //223
+    client3 = fetching(host3, port3, tanklist3, payload1, ul); //226
+    client4 = fetching(host4, port4, tanklist4, payload1, ul); //227
+    client5 = fetching(host5, port5, tanklist5, payload3, ul); //228
+    client6 = fetching(host6, port6, tanklist6, payload1, ul); //229
+    client7 = fetching(host7, port7, tanklist7, payload2, ul); //231
+    client8 = fetching(host8, port8, tanklist8, payload1, ul); //234
+    client9 = fetching(host9, port9, tanklist9, payload4, ul); //225
   }
   loadit();
 
@@ -329,12 +551,12 @@ window.addEventListener("DOMContentLoaded", async () => {
     checkInternet(function (isConnected) {
       if (isConnected) {
         setTimeout(function () {
-          updatelog("connected to intranet"), 1000;
+          ul("connected to intranet"), 1000;
           indintranet.setAttribute("class", "status greencol");
         });
       } else {
         setTimeout(function () {
-          updatelog("please connect to pertamina network"), 1000;
+          ul("please connect to pertamina network"), 1000;
           indintranet.setAttribute("class", "status redcol");
         });
       }
@@ -399,11 +621,11 @@ window.addEventListener("DOMContentLoaded", async () => {
   function logging() {
     // add log to memory
     levelArray.push({
-      level: JSON.stringify(levelcollect),
+      level: JSON.stringify(lc),
     });
     levelArray.shift();
     // add log to sqlite db3
-    // var toSave = JSON.stringify(levelcollect)
+    // var toSave = JSON.stringify(lc)
     // if (toSave != "{}") {
     //     knexInstance("tank").insert({ data: toSave, timestamp: Date.now() }).then((x) => {
     //     })
@@ -414,7 +636,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     logging();
   }, 5000);
   let record = [];
-  async function updateMove() {
+  async function um() {
     function calc(level, levelPast, time, timePast, tank) {
       let sg = datasg[1][tank];
       let diameter = datasg[0][tank];
@@ -634,7 +856,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
   }
   setInterval(() => {
-    updateMove();
+    um();
   }, 5000);
 
   tankdoc.getElementById("reload").addEventListener("click", () => {
