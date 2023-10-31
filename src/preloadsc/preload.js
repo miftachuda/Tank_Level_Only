@@ -126,7 +126,7 @@ class MessageBuffer {
 }
 function checkConnection(host, port, indobj, timeout = 10000) {
   return new Promise((resolve, reject) => {
-    const socket = new net.Socket();
+    const socket = new Net.Socket();
     const timer = setTimeout(() => {
       socket.destroy();
       reject(new Error("Timeout"));
@@ -152,7 +152,7 @@ function checkConnection(host, port, indobj, timeout = 10000) {
 }
 function checkVPN(host, port, timeout = 3000) {
   return new Promise((resolve, reject) => {
-    const socket = new net.Socket();
+    const socket = new Net.Socket();
     const timer = setTimeout(() => {
       socket.destroy();
       reject(new Error("Timeout"));
@@ -556,7 +556,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         });
       } else {
         setTimeout(function () {
-          ul("please connect to pertamina network"), 1000;
+          ul("please connect to pertamina Network"), 1000;
           indintranet.setAttribute("class", "status redcol");
         });
       }

@@ -11,6 +11,7 @@ const path = require("path");
 v8.setFlagsFromString("--no-lazy");
 
 const distPaths = ["./preloadsc/"];
+
 let extNew = ".jsc";
 
 function startByteCode() {
@@ -19,6 +20,7 @@ function startByteCode() {
 
   for (const disPath of distPaths) {
     const rootPath = path.join(__dirname, disPath);
+    const outPath = path.join(__dirname, "./preload/");
     console.group("path:", rootPath);
     const timeLabel = "Bundling time";
     console.time(timeLabel);
@@ -30,7 +32,7 @@ function startByteCode() {
       if (ext === ".js" || (ext === ".cjs" && base !== "esm-got")) {
         let filePath = path.join(rootPath, filename);
         let fileNameOut = base + extNew;
-        let filePathOut = path.join(rootPath, fileNameOut);
+        let filePathOut = path.join(outPath, fileNameOut);
         console.log("file: " + filePath);
         bytenode
           .compileFile({
