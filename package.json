@@ -9,7 +9,7 @@
     "export": "electron-builder --win=portable",
     "//fire": "uglifyjs src/preload/preload.js --output dist/preload.js --compress --mangle",
     "obs": "javascript-obfuscator ./src/preloadsc --output ./src/preload/ --disable-console-output true --simplify true",
-    "//compile": "esbuild src/main/*.js --bundle --minify --outdir=dist/ --platform=node && esbuild src/preload/preload.js --bundle --outfile=dist/preload.js --platform=node",
+    "compile": "electron src/compile.js",
     "build:win": "npm run obs && electron-builder --win --config",
     "build:mac": "npm run obs && electron-builder --mac --config",
     "build:linux": "npm run obs && electron-builder --linux --config"
@@ -40,6 +40,7 @@
     "minify": "^10.5.2"
   },
   "dependencies": {
+    "bytenode": "^1.5.3",
     "custom-electron-titlebar": "^3.2.7",
     "electron-tabs": "^1.0.1",
     "moment": "^2.29.1",

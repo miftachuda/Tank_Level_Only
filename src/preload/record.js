@@ -1,1 +1,68 @@
-const a1_0xc5c895=a1_0x5e66;(function(_0x449f45,_0x153b51){const _0x1aa67f=a1_0x5e66,_0x3eec63=_0x449f45();while(!![]){try{const _0x3196dd=parseInt(_0x1aa67f(0x174))/0x1+-parseInt(_0x1aa67f(0x16b))/0x2*(parseInt(_0x1aa67f(0x168))/0x3)+-parseInt(_0x1aa67f(0x151))/0x4+parseInt(_0x1aa67f(0x156))/0x5*(-parseInt(_0x1aa67f(0x177))/0x6)+-parseInt(_0x1aa67f(0x14e))/0x7+-parseInt(_0x1aa67f(0x157))/0x8+parseInt(_0x1aa67f(0x176))/0x9;if(_0x3196dd===_0x153b51)break;else _0x3eec63['push'](_0x3eec63['shift']());}catch(_0x905841){_0x3eec63['push'](_0x3eec63['shift']());}}}(a1_0x1b71,0x4d79c));const a1_0x44c80f=(function(){let _0x305123=!![];return function(_0x21a3f2,_0x381563){const _0x55ace7=_0x305123?function(){const _0x23f1db=a1_0x5e66;if(_0x381563){const _0x17295c=_0x381563[_0x23f1db(0x15e)](_0x21a3f2,arguments);return _0x381563=null,_0x17295c;}}:function(){};return _0x305123=![],_0x55ace7;};}()),a1_0x32e134=a1_0x44c80f(this,function(){const _0x2f2ac4=a1_0x5e66,_0x531336=function(){const _0x39d2a0=a1_0x5e66;let _0x147336;try{_0x147336=Function(_0x39d2a0(0x16e)+_0x39d2a0(0x161)+');')();}catch(_0x460634){_0x147336=window;}return _0x147336;},_0x1baea5=_0x531336(),_0x34de8b=_0x1baea5[_0x2f2ac4(0x169)]=_0x1baea5[_0x2f2ac4(0x169)]||{},_0x44366d=[_0x2f2ac4(0x152),_0x2f2ac4(0x155),_0x2f2ac4(0x16c),_0x2f2ac4(0x163),'exception',_0x2f2ac4(0x166),'trace'];for(let _0x17053c=0x0;_0x17053c<_0x44366d['length'];_0x17053c++){const _0x168e10=a1_0x44c80f[_0x2f2ac4(0x164)][_0x2f2ac4(0x150)][_0x2f2ac4(0x167)](a1_0x44c80f),_0x2e2472=_0x44366d[_0x17053c],_0x2904f2=_0x34de8b[_0x2e2472]||_0x168e10;_0x168e10['__proto__']=a1_0x44c80f[_0x2f2ac4(0x167)](a1_0x44c80f),_0x168e10[_0x2f2ac4(0x14d)]=_0x2904f2[_0x2f2ac4(0x14d)][_0x2f2ac4(0x167)](_0x2904f2),_0x34de8b[_0x2e2472]=_0x168e10;}});a1_0x32e134();const moment=require(a1_0xc5c895(0x178)),{ipcRenderer}=require('electron');function formatNumber(_0x3e98ab){const _0x2f9fa4=a1_0xc5c895;return _0x3e98ab[_0x2f9fa4(0x14d)]()[_0x2f9fa4(0x16f)](/(\d)(?=(\d{3})+(?!\d))/g,_0x2f9fa4(0x154));}function a1_0x5e66(_0x310646,_0x279547){const _0x283f86=a1_0x1b71();return a1_0x5e66=function(_0x32e134,_0x44c80f){_0x32e134=_0x32e134-0x14b;let _0x325240=_0x283f86[_0x32e134];return _0x325240;},a1_0x5e66(_0x310646,_0x279547);}window[a1_0xc5c895(0x171)]('DOMContentLoaded',async()=>{ipcRenderer['on']('forWin2',function(_0x130de4,_0x4ee555){const _0x27a200=a1_0x5e66;data=_0x4ee555[_0x27a200(0x15b)](-0x5);for(num=0x0;num<data[_0x27a200(0x158)];num++){if(data[num]!=0x1){let _0x552d8a=document[_0x27a200(0x175)](num+'w'),_0xa0e5f=document[_0x27a200(0x175)](''+num);_0x552d8a[_0x27a200(0x159)]=moment(parseInt(data[num][_0x27a200(0x170)]))[_0x27a200(0x15f)](_0x27a200(0x14c));let _0x275b86=JSON[_0x27a200(0x15c)](data[num][_0x27a200(0x165)]);function _0x42fd30(_0x9e1ac5){const _0x5c101f=_0x27a200;return Object[_0x5c101f(0x153)](_0x9e1ac5)[_0x5c101f(0x16d)]()[_0x5c101f(0x15d)](function(_0x42e57d,_0x3f4a1){return _0x42e57d[_0x3f4a1]=_0x9e1ac5[_0x3f4a1],_0x42e57d;},{});}let _0x29b427=_0x42fd30(_0x275b86);for(const _0x183d59 in _0x29b427){let _0x39d6b0=_0x27a200(0x14f)+num+_0x27a200(0x160)+_0x183d59+'\x22><span\x20class=\x22namatank\x22>'+_0x183d59+_0x27a200(0x15a)+formatNumber(_0x29b427[_0x183d59]['level'])+_0x27a200(0x16a)+_0x29b427[_0x183d59][_0x27a200(0x172)]+_0x27a200(0x173);_0xa0e5f[_0x27a200(0x162)](_0x27a200(0x14b),_0x39d6b0);}}}});});function a1_0x1b71(){const _0x30bab9=['slice','parse','reduce','apply','format','\x22\x20tank=\x22','{}.constructor(\x22return\x20this\x22)(\x20)','insertAdjacentHTML','error','constructor','data','table','bind','12EKQxXi','console','</span><span\x20class=\x22temptank\x22\x20>','59242XCpvCg','info','sort','return\x20(function()\x20','replace','timestamp','addEventListener','temp','</span></div>','543457IXDpME','getElementById','13554909Bepwir','48TvIFZT','moment','beforeend','DD-MM-yyyy\x20HH:mm:ss','toString','3958052LEfsqY','<div\x20period=\x22','prototype','2280808DnGLwn','log','keys','$1.','warn','127020tDLqfA','2198912IotpCj','length','innerText','</span><span\x20class=\x22leveltank\x22>'];a1_0x1b71=function(){return _0x30bab9;};return a1_0x1b71();}
+const moment = require("moment");
+//const knexInstance = require("./knexdb")
+const { ipcRenderer } = require("electron");
+
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+}
+window.addEventListener("DOMContentLoaded", async () => {
+  ipcRenderer.on("forWin2", function (event, arg) {
+    // console.log("for win2 ", arg);
+    data = arg.slice(-5);
+    //  console.log(data)
+    for (num = 0; num < data.length; num++) {
+      if (data[num] != 1) {
+        //console.log("its array")
+        let waktutank = document.getElementById(`${num}w`);
+        let datatank = document.getElementById(`${num}`);
+
+        waktutank.innerText = moment(parseInt(data[num].timestamp)).format(
+          "DD-MM-yyyy HH:mm:ss"
+        );
+
+        let dataparsed = JSON.parse(data[num].data);
+        function sortObject(obj) {
+          return Object.keys(obj)
+            .sort()
+            .reduce(function (result, key) {
+              result[key] = obj[key];
+              return result;
+            }, {});
+        }
+        let sorted_data = sortObject(dataparsed);
+        for (const key in sorted_data) {
+          let newelem = `<div period="${num}" tank="${key}"><span class="namatank">${key}</span><span class="leveltank">${formatNumber(
+            sorted_data[key].level
+          )}</span><span class="temptank" >${
+            sorted_data[key].temp
+          }</span></div>`;
+          datatank.insertAdjacentHTML("beforeend", newelem);
+        }
+      }
+    }
+    // data.every((element, i) => {
+    //     console.log(i)
+    //     console.log(element)
+    //     let waktutank = document.getElementById(`${i}w`)
+    //     let datatank = document.getElementById(`${i}`)
+
+    //     waktutank.innerText = moment(parseInt(element.timestamp)).format("DD-MM-yyyy HH:mm:ss")
+
+    //     let data = JSON.parse(element.data)
+    //     function sortObject(obj) {
+    //         return Object.keys(obj).sort().reduce(function (result, key) {
+    //             result[key] = obj[key];
+    //             return result;
+    //         }, {});
+    //     }
+    //     let sorted_data = sortObject(data)
+    //     for (const key in sorted_data) {
+    //         let newelem = `<div period="${i}" tank="${key}"><span class="namatank">${key}</span><span class="leveltank">${formatNumber(sorted_data[key].level)}</span><span class="temptank" >${sorted_data[key].temp}</span></div>`
+    //         datatank.insertAdjacentHTML('beforeend', newelem);
+    //     }
+    //     return true;
+    // });
+  });
+  // get data from sqlite
+  // let data = await knexInstance.select().table('logsheet').orderBy('timestamp', 'desc').limit(5)
+});

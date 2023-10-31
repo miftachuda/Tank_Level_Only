@@ -1,1 +1,874 @@
-const a0_0x400a3a=a0_0x2b58;(function(_0x556891,_0x3686f2){const _0xaea1ad=a0_0x2b58,_0x768db9=_0x556891();while(!![]){try{const _0x2c00a1=-parseInt(_0xaea1ad(0x1ea))/0x1*(parseInt(_0xaea1ad(0x1f4))/0x2)+parseInt(_0xaea1ad(0x204))/0x3+parseInt(_0xaea1ad(0x29d))/0x4+parseInt(_0xaea1ad(0x274))/0x5+parseInt(_0xaea1ad(0x2b5))/0x6*(-parseInt(_0xaea1ad(0x207))/0x7)+parseInt(_0xaea1ad(0x2c2))/0x8+-parseInt(_0xaea1ad(0x28c))/0x9;if(_0x2c00a1===_0x3686f2)break;else _0x768db9['push'](_0x768db9['shift']());}catch(_0x287196){_0x768db9['push'](_0x768db9['shift']());}}}(a0_0x3d33,0x4bf1e));const a0_0xd8a1a6=(function(){let _0x1b56da=!![];return function(_0x13dc4c,_0x12a6e3){const _0x3cda86=_0x1b56da?function(){if(_0x12a6e3){const _0x1bad46=_0x12a6e3['apply'](_0x13dc4c,arguments);return _0x12a6e3=null,_0x1bad46;}}:function(){};return _0x1b56da=![],_0x3cda86;};}()),a0_0x205d6d=a0_0xd8a1a6(this,function(){const _0x2558aa=a0_0x2b58,_0x381744=function(){const _0x110332=a0_0x2b58;let _0x573645;try{_0x573645=Function(_0x110332(0x1e3)+_0x110332(0x255)+');')();}catch(_0x48c172){_0x573645=window;}return _0x573645;},_0x28f2fe=_0x381744(),_0x24c6ed=_0x28f2fe[_0x2558aa(0x25a)]=_0x28f2fe[_0x2558aa(0x25a)]||{},_0x45f293=[_0x2558aa(0x246),_0x2558aa(0x270),_0x2558aa(0x1f3),_0x2558aa(0x2a9),_0x2558aa(0x24e),'table',_0x2558aa(0x267)];for(let _0x3f8e9e=0x0;_0x3f8e9e<_0x45f293[_0x2558aa(0x205)];_0x3f8e9e++){const _0x104a5e=a0_0xd8a1a6['constructor'][_0x2558aa(0x235)][_0x2558aa(0x237)](a0_0xd8a1a6),_0x41514d=_0x45f293[_0x3f8e9e],_0x20d84b=_0x24c6ed[_0x41514d]||_0x104a5e;_0x104a5e[_0x2558aa(0x21c)]=a0_0xd8a1a6[_0x2558aa(0x237)](a0_0xd8a1a6),_0x104a5e['toString']=_0x20d84b[_0x2558aa(0x1f5)][_0x2558aa(0x237)](_0x20d84b),_0x24c6ed[_0x41514d]=_0x104a5e;}});a0_0x205d6d();const parseString=require(a0_0x400a3a(0x25c))['parseString'],Net=require(a0_0x400a3a(0x1e0));let vpnmode=![];const moment=require(a0_0x400a3a(0x213)),cron=require(a0_0x400a3a(0x29c)),path=require(a0_0x400a3a(0x1e8)),recordArray=Array[a0_0x400a3a(0x2b8)]({'length':0xc},(_0x50d1c8,_0x180da6)=>0x1),{ipcRenderer}=require('electron');var tankdoc=document;console[a0_0x400a3a(0x246)](document);const datasg=require(a0_0x400a3a(0x278));var pjson=require(a0_0x400a3a(0x24d));const listshift=[[a0_0x400a3a(0x1fd),'B2\x20Pagi','C3\x20Sore',a0_0x400a3a(0x2bb)],[a0_0x400a3a(0x2ad),a0_0x400a3a(0x20d),'D1\x20Sore',a0_0x400a3a(0x202)],[a0_0x400a3a(0x283),a0_0x400a3a(0x216),a0_0x400a3a(0x1ed),a0_0x400a3a(0x244)],[a0_0x400a3a(0x2be),'C2\x20Pagi',a0_0x400a3a(0x1e5),a0_0x400a3a(0x215)],[a0_0x400a3a(0x289),'C3\x20Pagi',a0_0x400a3a(0x247),a0_0x400a3a(0x253)],[a0_0x400a3a(0x2a6),'D1\x20Pagi',a0_0x400a3a(0x261),a0_0x400a3a(0x2b3)],[a0_0x400a3a(0x26a),a0_0x400a3a(0x248),'A3\x20Sore',a0_0x400a3a(0x293)],[a0_0x400a3a(0x1f8),a0_0x400a3a(0x1e4),a0_0x400a3a(0x232),a0_0x400a3a(0x1ec)],['C3\x20Malam',a0_0x400a3a(0x262),a0_0x400a3a(0x2c3),'D\x20Off-Pagi'],[a0_0x400a3a(0x2a5),a0_0x400a3a(0x284),a0_0x400a3a(0x2bf),a0_0x400a3a(0x27c)],[a0_0x400a3a(0x20c),a0_0x400a3a(0x2ab),a0_0x400a3a(0x1f1),'B\x20Off-Sore'],[a0_0x400a3a(0x25e),a0_0x400a3a(0x287),a0_0x400a3a(0x2b9),a0_0x400a3a(0x263)]];function getPeriod(_0x33dea7){if(_0x33dea7<0x1e0)return 0x0;return _0x33dea7<0x3c0?0x1:0x2;}function checkCurrentShift(){const _0x2116fe=a0_0x400a3a;var _0x19ba94=moment(new Date()),_0x474a78=moment(_0x2116fe(0x288)),_0x76266b=moment['duration'](_0x19ba94['diff'](_0x474a78)),_0x3d1b0b=Math[_0x2116fe(0x1fb)](_0x76266b[_0x2116fe(0x20e)]())%0xc,_0x32ab0e=Math['trunc'](_0x76266b[_0x2116fe(0x22b)]())%0x5a0;return listshift[_0x3d1b0b][getPeriod(_0x32ab0e)];}function cods(_0x4aea78){const _0x2128d1=a0_0x400a3a;var _0x117313=moment(_0x4aea78),_0x54bb67=moment(_0x2128d1(0x288)),_0x3511b7=moment[_0x2128d1(0x2b4)](_0x117313[_0x2128d1(0x211)](_0x54bb67)),_0x3a1468=Math[_0x2128d1(0x1fb)](_0x3511b7[_0x2128d1(0x20e)]())%0xc,_0x5328ef=Math[_0x2128d1(0x1fb)](_0x3511b7[_0x2128d1(0x22b)]())%0x5a0;return listshift[_0x3a1468][getPeriod(_0x5328ef)];}function us(){const _0x4baa24=a0_0x400a3a;let _0x4259d7=Date[_0x4baa24(0x1e2)](),_0xa3af29=_0x4259d7+0x36ee80*0x8,_0x1bc6d7=_0x4259d7+0x36ee80*0x10;document[_0x4baa24(0x271)](_0x4baa24(0x28d))[_0x4baa24(0x23e)]=cods(_0x4259d7)[_0x4baa24(0x26d)]('\x20')[0x0],document[_0x4baa24(0x271)](_0x4baa24(0x1fe))[_0x4baa24(0x23e)]=_0x4baa24(0x21d)+cods(_0xa3af29)[_0x4baa24(0x26d)]('\x20')[0x0],document['getElementById'](_0x4baa24(0x240))['innerHTML']=_0x4baa24(0x21d)+cods(_0x1bc6d7)['split']('\x20')[0x0],document[_0x4baa24(0x271)](_0x4baa24(0x20b))['innerHTML']=_0x4baa24(0x27b)+cods(_0x4259d7)['split']('\x20')[0x1],document[_0x4baa24(0x271)](_0x4baa24(0x22e))[_0x4baa24(0x23e)]='Shift\x20'+cods(_0xa3af29)[_0x4baa24(0x26d)]('\x20')[0x1],document[_0x4baa24(0x271)](_0x4baa24(0x254))['innerHTML']=_0x4baa24(0x27b)+cods(_0x1bc6d7)[_0x4baa24(0x26d)]('\x20')[0x1];}function a0_0x3d33(){const _0x46c844=['B1\x20Malam','B3\x20Sore','41T-302','tank','4506096vhtlGw','B2\x20Sore','41T-317','net','host1','now','return\x20(function()\x20','D3\x20Pagi','D3\x20Sore','class','click','path','0\x200-23/2\x20*\x20*\x20*','521kBqldA','schedule','A\x20Off-Sore','D2\x20Sore','41T-316','time','41T-115','C1\x20Sore','41T-101','info','86ZtRLPp','toString','reload','41T-301','C2\x20Malam','status\x20greencol','lookup','trunc','intranet','A1\x20Malam','shiftblock2','host4','load..','../img/green.svg','C\x20Off-Sore','undefined','1650903ikjiYS','length','host7','7GZarcF','indexOf','41T-107','value','masuk_apa1','D2\x20Malam','B3\x20Pagi','asDays','\x20°C','footer','diff','[tank~=\x270','moment','delimiter','A\x20Off-Malam','C1\x20Pagi','getElementsByClassName','tanknaik','../img/red.svg','41T-121','41T-118','__proto__','&#x2794;\x20','rate','data','<FG4TG\x20MSGID=\x221135\x22\x20KEY=\x22\x22\x20\x20VER=\x220\x22\x20\x20VTYP=\x22RealTime\x22><GROUPID>216</GROUPID></FG4TG>','footer\x20footergreen','host2','10.54.127.234','getMessage','cannot\x20connect\x20group\x20','forEach','dns','then','querySelector','41T-102','asMinutes','VALUE','title','masuk_apa2','change','<FG4TG\x20MSGID=\x221135\x22\x20KEY=\x22\x22\x20\x20VER=\x220\x22\x20\x20VTYP=\x22RealTime\x22><GROUPID>146</GROUPID></FG4TG>','\x20m³/hr','B1\x20Sore','host6','41T-105','prototype','<FG4TG\x20MSGID=\x221135\x22\x20KEY=\x22\x22\x20\x20VER=\x220\x22\x20\x20VTYP=\x22RealTime\x22><GROUPID>74</GROUPID></FG4TG>','bind','41T-113','Socket','setAttribute','41T-120','stable','10.54.127.226','innerHTML','41T-309','shiftblock3','destroy','10.54.127.231','41T-114','B\x20Off-Pagi','rate\x20rateup','log','A1\x20Sore','D2\x20Pagi','\x27]\x20div:nth-child(5)','35T-4','10.54.127.213','write','../../package.json','exception','closed','41T-306','connected\x20to\x20intranet','please\x20connect\x20to\x20pertamina\x20network','D\x20Off-Sore','masuk_apa3','{}.constructor(\x22return\x20this\x22)(\x20)','version','connection\x20to\x20','41T-305','connect','console','41T-307','xml2js','join','D3\x20Malam','src','level','A2\x20Sore','A1\x20Pagi','A\x20Off-Pagi','HH:mm:ss[</br>]DD\x20MMM\x20yyyy','41T-108','10.54.127.235','trace','host8','format','C1\x20Malam','41T-110','41T-314','split','41T-111','clock','warn','getElementById','toFixed','tanklevel','2263495ZCXTvc','handleData','\x20borderidle','\x27]\x20div:nth-child(6)\x20img','../renderer/img/datasg.json','unvisible','41T-116','Shift\x20','C\x20Off-Malam','slice','down','isFinished','Timeout','41T-308','openRecord','A3\x20Malam','A2\x20Pagi','Tank\x20Level\x20v','host5','B1\x20Pagi','2021-12-22','B2\x20Malam','41T-106','TANK','12850200AGxTYO','shiftblock1','host3','\x20closed','rate\x20ratedown','10.54.127.223','className','B\x20Off-Malam','simops.pertamina.com','innerText','\x20ton/day','visible\x20blink','DOMContentLoaded','replace','addEventListener','push','node-cron','2235636oCkegv','connected\x20to\x20group\x20','10.54.127.228','\x20borderturun','41T-24','buffer','10.54.127.227','\x20mm/8hr','D1\x20Malam','B3\x20Malam','tankturun','stringify','error','host9','A3\x20Pagi','Refresh','A2\x20Malam','41T-304','parse','10.54.188.74','[id~=\x270','ratespeed','C\x20Off-Pagi','duration','2183388DsIbkA','41T-311','PARAM','from','C2\x20Sore','send','D\x20Off-Malam','41T-303','\x20mm/day'];a0_0x3d33=function(){return _0x46c844;};return a0_0x3d33();}const checkInternet=_0x365d67=>{const _0xa911fd=a0_0x400a3a;require(_0xa911fd(0x227))[_0xa911fd(0x1fa)](_0xa911fd(0x294),function(_0x31d122){_0x31d122&&_0x31d122['code']=='ENOTFOUND'?_0x365d67(![]):_0x365d67(!![]);});};class MessageBuffer{constructor(_0x45a157){const _0x58a68d=a0_0x400a3a;this['delimiter']=_0x45a157,this[_0x58a68d(0x2a2)]='';}[a0_0x400a3a(0x27f)](){const _0x1e1e29=a0_0x400a3a;if(this['buffer']['length']===0x0||this[_0x1e1e29(0x2a2)][_0x1e1e29(0x208)](this[_0x1e1e29(0x214)])===-0x1)return!![];return![];}['push'](_0x259f2f){this['buffer']+=_0x259f2f;}[a0_0x400a3a(0x224)](){const _0x3bd755=a0_0x400a3a,_0x5d227c=this[_0x3bd755(0x2a2)][_0x3bd755(0x208)](this[_0x3bd755(0x214)]);if(_0x5d227c!==-0x1){const _0x26a1b1=this['buffer'][_0x3bd755(0x27d)](0x0,_0x5d227c);return this[_0x3bd755(0x2a2)]=this['buffer'][_0x3bd755(0x299)](_0x26a1b1+this['delimiter'],''),_0x26a1b1;}return null;}['handleData'](){const _0x3241f1=this['getMessage']();return _0x3241f1;}}function checkConnection(_0x370b3e,_0x556704,_0x587869,_0x482193=0x2710){return new Promise((_0x293777,_0x1ce9ca)=>{const _0x355f15=a0_0x2b58,_0x328f35=new net['Socket'](),_0x5b4fc5=setTimeout(()=>{const _0x5b77d3=a0_0x2b58;_0x328f35[_0x5b77d3(0x241)](),_0x1ce9ca(new Error(_0x5b77d3(0x280)));},_0x482193);_0x328f35[_0x355f15(0x259)](_0x556704,_0x370b3e,()=>{clearTimeout(_0x5b4fc5),_0x328f35['end'](),_0x293777(!![]);}),_0x328f35['on'](_0x355f15(0x2a9),_0x5b1201=>{clearTimeout(_0x5b4fc5),_0x1ce9ca(_0x5b1201);});})['then'](function(){const _0x5adfe4=a0_0x2b58;_0x587869[_0x5adfe4(0x23a)](_0x5adfe4(0x1e6),_0x5adfe4(0x1f9));},function(_0x9f3c99){const _0x563c9c=a0_0x2b58;console['log'](_0x9f3c99),_0x587869[_0x563c9c(0x23a)](_0x563c9c(0x1e6),'status\x20redcol');});}function checkVPN(_0x5c7916,_0x52835e,_0x32e6c6=0xbb8){return new Promise((_0x347306,_0x21877b)=>{const _0x1bb1ba=a0_0x2b58,_0x2ff156=new net['Socket'](),_0xaf539f=setTimeout(()=>{const _0x4ba4a6=a0_0x2b58;_0x2ff156[_0x4ba4a6(0x241)](),_0x21877b(new Error('Timeout'));},_0x32e6c6);_0x2ff156[_0x1bb1ba(0x259)](_0x52835e,_0x5c7916,()=>{clearTimeout(_0xaf539f),_0x2ff156['end'](),_0x347306(!![]);}),_0x2ff156['on'](_0x1bb1ba(0x2a9),_0x22c5d5=>{clearTimeout(_0xaf539f),_0x21877b(_0x22c5d5);});});}function ih(){const _0x5eaba5=a0_0x400a3a;checkVPN('10.54.127.226',0x115c)[_0x5eaba5(0x228)](()=>{const _0x88f36=_0x5eaba5;host1=_0x88f36(0x23d),host2=_0x88f36(0x2a3),host3=_0x88f36(0x242),host4='10.54.127.213',host5='10.54.127.223',host6=_0x88f36(0x29f),host7=_0x88f36(0x223),host8=_0x88f36(0x266),port1=0x115c,port2=0x115c,port3=0x115c,port4=0x115c,port5=0x115c,port6=0x115c,port7=0x115c,port8=0x115c;},()=>{const _0x838575=_0x5eaba5;host1=_0x838575(0x2b0),host2=host1,host3=host1,host4=host1,host5=host1,host6=host1,host7=host1,host8=host1,port1=0x1770,port2=0x1771,port3=0x1772,port4=0x1773,port5=0x1774,port6=0x1775,port7=0x1776,port8=0x1777;});}host1=a0_0x400a3a(0x24b),host2=a0_0x400a3a(0x291),host3=a0_0x400a3a(0x23d),host4=a0_0x400a3a(0x2a3),host5=a0_0x400a3a(0x29f),host6='10.54.127.229',host7=a0_0x400a3a(0x242),host8=a0_0x400a3a(0x223),host9=a0_0x400a3a(0x266),port1=0x115c,port2=0x115c,port3=0x115c,port4=0x115c,port5=0x115c,port6=0x115c,port7=0x115c,port8=0x115c,port9=0x115c;const tanklist1=[a0_0x400a3a(0x1f7),a0_0x400a3a(0x2c0),a0_0x400a3a(0x2bc),a0_0x400a3a(0x2ae),a0_0x400a3a(0x258),a0_0x400a3a(0x250),a0_0x400a3a(0x25b),a0_0x400a3a(0x281),a0_0x400a3a(0x23f),'41T-310',a0_0x400a3a(0x2b6),'41T-315',a0_0x400a3a(0x1ee),a0_0x400a3a(0x2c4)],tanklist2=['35T-2',a0_0x400a3a(0x24a)],tanklist3=[a0_0x400a3a(0x26e),'41T-112',a0_0x400a3a(0x238),a0_0x400a3a(0x243),a0_0x400a3a(0x1f0),a0_0x400a3a(0x27a),'41T-117',a0_0x400a3a(0x21b),a0_0x400a3a(0x21a)],tanklist4=[a0_0x400a3a(0x1f2),a0_0x400a3a(0x22a),'41T-103','41T-104',a0_0x400a3a(0x234),a0_0x400a3a(0x28a),a0_0x400a3a(0x209),a0_0x400a3a(0x265),'41T-122'],tanklist5=['41T-26'],tanklist6=[a0_0x400a3a(0x2a1)],tanklist7=['41T-109',a0_0x400a3a(0x26b),'41T-119',a0_0x400a3a(0x23b)],tanklist8=[a0_0x400a3a(0x2ae),a0_0x400a3a(0x258),'41T-306',a0_0x400a3a(0x25b),a0_0x400a3a(0x281),a0_0x400a3a(0x23f),'41T-315',a0_0x400a3a(0x1ee)],tanklist9=[a0_0x400a3a(0x1f7),a0_0x400a3a(0x2c0),a0_0x400a3a(0x2bc),'41T-310',a0_0x400a3a(0x2b6),'41T-312','41T-313',a0_0x400a3a(0x26c),a0_0x400a3a(0x2c4)],all_tank=tanklist1['concat'](tanklist2,tanklist3,tanklist4,tanklist5,tanklist6,tanklist7,tanklist8,tanklist9),all_tank_arr=[tanklist1,tanklist2,tanklist3,tanklist4,tanklist5,tanklist6,tanklist7,tanklist8,tanklist8,tanklist9];function t(){const _0xd5c29f=a0_0x400a3a;time=moment()[_0xd5c29f(0x269)](_0xd5c29f(0x264)),tankdoc[_0xd5c29f(0x271)](_0xd5c29f(0x26f))['innerHTML']=time;}function y(_0x255df6){const _0x2e1ac8=a0_0x400a3a;return _0x255df6[_0x2e1ac8(0x299)](/\s/g,'');}function a0_0x2b58(_0x163d10,_0x1c1282){const _0x548c38=a0_0x3d33();return a0_0x2b58=function(_0x205d6d,_0xd8a1a6){_0x205d6d=_0x205d6d-0x1e0;let _0x42b3a8=_0x548c38[_0x205d6d];return _0x42b3a8;},a0_0x2b58(_0x163d10,_0x1c1282);}const s=(_0x4c6129,_0x397488)=>{const _0x338b0c=tankdoc['getElementById'](_0x4c6129);if(_0x338b0c)_0x338b0c['innerText']=_0x397488;},r=(_0x2b3789,_0x43e53b)=>{const _0x3944de=a0_0x400a3a,_0x246a67=tankdoc['getElementsByClassName'](_0x2b3789);var _0x3a5286;for(_0x3a5286=0x0;_0x3a5286<_0x246a67[_0x3944de(0x205)];_0x3a5286++){if(_0x246a67[_0x3a5286])_0x246a67[_0x3a5286][_0x3944de(0x295)]=_0x43e53b;}};function ul(_0x2165ad){const _0x31361c=a0_0x400a3a,_0x25d45a=tankdoc[_0x31361c(0x271)](_0x31361c(0x246));_0x25d45a[_0x31361c(0x295)]=_0x2165ad;}function ud(_0x117040,_0x5119e2,_0xe19fc2,_0x3c88c1,_0x15fa34){const _0x4fca53=a0_0x400a3a;function _0x4941c5(_0x2dd0dd){const _0x671e12=a0_0x2b58;return _0x2dd0dd[_0x671e12(0x1f5)]()[_0x671e12(0x299)](/\B(?=(\d{3})+(?!\d))/g,'.');}if(y(_0xe19fc2)==y(_0x3c88c1)){let _0x1683aa=tankdoc[_0x4fca53(0x229)](_0x4fca53(0x2b1)+_0x3c88c1+'\x27]');s('0'+_0x3c88c1,_0x4941c5(_0x117040)),s('0'+_0x3c88c1+'-t','\x20\x20'+_0x5119e2+_0x4fca53(0x20f));if(_0x15fa34[_0x3c88c1]){if(_0x15fa34[_0x3c88c1][_0x4fca53(0x260)]>_0x117040)_0x1683aa[_0x4fca53(0x23a)]('class',_0x4fca53(0x2a7)),setTimeout(()=>{const _0x17c742=_0x4fca53;_0x1683aa[_0x17c742(0x23a)](_0x17c742(0x1e6),_0x17c742(0x273));},0x3e8);else _0x15fa34[_0x3c88c1][_0x4fca53(0x260)]<_0x117040?(_0x1683aa[_0x4fca53(0x23a)]('class',_0x4fca53(0x218)),setTimeout(()=>{const _0x4f7422=_0x4fca53;_0x1683aa[_0x4f7422(0x23a)]('class',_0x4f7422(0x273));},0x3e8)):_0x1683aa[_0x4fca53(0x23a)](_0x4fca53(0x1e6),_0x4fca53(0x273));}_0x15fa34[_0x3c88c1]={'level':_0x117040,'temp':_0x5119e2,'time':Date[_0x4fca53(0x1e2)]()};}}window[a0_0x400a3a(0x29a)](a0_0x400a3a(0x298),async()=>{const _0x5d946b=a0_0x400a3a;let _0x2e4403=document['getElementsByName'](_0x5d946b(0x22d));_0x2e4403[_0x5d946b(0x295)]=_0x5d946b(0x285)+pjson[_0x5d946b(0x256)],us(),setInterval(()=>{us();},0x2710);var _0x27a64b=tankdoc[_0x5d946b(0x217)]('tooltiptext'),_0x25a119=Array['from'](_0x27a64b);_0x25a119['forEach']((_0x40d9de,_0x1a414a)=>{const _0x7249=_0x5d946b;_0x40d9de[_0x7249(0x23e)]=all_tank_arr[_0x1a414a][_0x7249(0x25d)]('<br\x20/>');});const _0x43bf31=tankdoc[_0x5d946b(0x271)](_0x5d946b(0x2b2));let _0x351746='0';_0x43bf31['addEventListener'](_0x5d946b(0x22f),function(_0x1117ff){const _0x2254d9=_0x5d946b;_0x351746=_0x1117ff['srcElement'][_0x2254d9(0x20a)];});const _0x465ea9=tankdoc['getElementById']('record');_0x465ea9[_0x5d946b(0x29a)](_0x5d946b(0x1e7),()=>{const _0x3d0b39=_0x5d946b;ipcRenderer[_0x3d0b39(0x2ba)](_0x3d0b39(0x282),recordArray);});const _0x5e8c25={};ul('Welcome\x20to\x20Tank\x20App'),cron[_0x5d946b(0x1eb)](_0x5d946b(0x1e9),_0x3d5783=>{const _0x238e07=_0x5d946b;recordArray[_0x238e07(0x29b)]({'data':JSON[_0x238e07(0x2a8)](_0x5e8c25),'timestamp':Date[_0x238e07(0x1e2)]()['toString']()}),recordArray['shift']();}),setInterval(()=>{t();},0x3e8);const _0x583aaf=tankdoc[_0x5d946b(0x271)](_0x5d946b(0x210));function _0x228f30(_0x41d268,_0x3df612,_0x20df65,_0x1c6f75,_0x946413){const _0x1c8e8e=_0x5d946b,_0x36649f=new Net[(_0x1c8e8e(0x239))](),_0x3a3f37=new MessageBuffer('<FG4TG\x20SC=\x222\x22>');return r(_0x1c8e8e(0x20a),_0x1c8e8e(0x200)),_0x36649f[_0x1c8e8e(0x259)]({'port':_0x3df612,'host':_0x41d268}),_0x36649f['on']('error',function(){const _0x1a819d=_0x1c8e8e;_0x946413(_0x1a819d(0x225)+_0x41d268),_0x583aaf[_0x1a819d(0x23a)](_0x1a819d(0x1e6),'footer\x20footerred');}),_0x36649f['on'](_0x1c8e8e(0x259),function(){const _0x54621e=_0x1c8e8e;_0x36649f[_0x54621e(0x24c)](_0x1c6f75),setTimeout(_0x946413(_0x54621e(0x29e)+_0x41d268),0x3e8);}),_0x36649f['on'](_0x1c8e8e(0x21f),_0x361812=>{const _0x175b7d=_0x1c8e8e;_0x3a3f37[_0x175b7d(0x29b)](_0x361812);while(!_0x3a3f37[_0x175b7d(0x27f)]()){const _0x3f8d16=_0x3a3f37[_0x175b7d(0x275)]();parseString(_0x3f8d16,function(_0x3d5f20,_0x5ac492){const _0x56ab76=_0x175b7d;_0x583aaf['setAttribute'](_0x56ab76(0x1e6),_0x56ab76(0x221));if(_0x5ac492!=null){if(typeof _0x5ac492[_0x56ab76(0x28b)]!=_0x56ab76(0x203)){var _0x4bd7b5=''+_0x5ac492[_0x56ab76(0x28b)][_0x56ab76(0x2b7)][0x0]['$'][_0x56ab76(0x22c)][_0x56ab76(0x299)](/'/,'')[_0x56ab76(0x299)](/[+]/,''),_0x4bcdb2=''+_0x5ac492[_0x56ab76(0x28b)][_0x56ab76(0x2b7)][0x2]['$'][_0x56ab76(0x22c)][_0x56ab76(0x299)](/[+]/,''),_0x5dac13=_0x5ac492['TANK']['$']['NAME'][_0x56ab76(0x1f5)]();_0x20df65[_0x56ab76(0x226)]((_0x1b9c26,_0x39931d)=>{ud(_0x4bd7b5,_0x4bcdb2,_0x5dac13,_0x1b9c26,_0x5e8c25,_0x39931d);});}}});}}),_0x36649f['on']('timeout',()=>{_0x946413('timeout\x20connecting\x20to\x20'+_0x41d268);}),_0x36649f['on']('close',()=>{const _0x542a2b=_0x1c8e8e;_0x20df65[_0x542a2b(0x226)]((_0x4e1c56,_0x85bc42)=>{const _0x36659d=_0x542a2b;s('0'+_0x4e1c56,_0x36659d(0x24f)),s('0'+_0x4e1c56+'-t','-');}),setTimeout(()=>{const _0xe0e35d=_0x542a2b;_0x36649f[_0xe0e35d(0x241)](),_0x228f30(_0x41d268,_0x3df612,_0x20df65,_0x1c6f75,_0x946413);},0x7d0),_0x946413(_0x542a2b(0x257)+_0x41d268+_0x542a2b(0x28f));}),_0x36649f;}const _0xd15e3d=tankdoc[_0x5d946b(0x271)](_0x5d946b(0x1fc)),_0x1e8fb2=tankdoc['getElementById'](_0x5d946b(0x1e1)),_0x552d9f=tankdoc['getElementById'](_0x5d946b(0x222)),_0x3a6cef=tankdoc[_0x5d946b(0x271)](_0x5d946b(0x28e)),_0x313f49=tankdoc[_0x5d946b(0x271)](_0x5d946b(0x1ff)),_0x33b1ac=tankdoc['getElementById'](_0x5d946b(0x286)),_0x41f6c9=tankdoc['getElementById'](_0x5d946b(0x233)),_0x4504dd=tankdoc['getElementById'](_0x5d946b(0x206)),_0x4b23b7=tankdoc[_0x5d946b(0x271)](_0x5d946b(0x268)),_0x4b58b9=tankdoc['getElementById'](_0x5d946b(0x2aa)),_0x4e5c97='<FG4TG\x20MSGID=\x221135\x22\x20KEY=\x22\x22\x20\x20VER=\x220\x22\x20\x20VTYP=\x22RealTime\x22><GROUPID>8</GROUPID></FG4TG>',_0x2f8371=_0x5d946b(0x230),_0x3d6dd0=_0x5d946b(0x236),_0x46ce27=_0x5d946b(0x220),_0xb11330='<FG4TG\x20MSGID=\x221135\x22\x20KEY=\x22\x22\x20\x20VER=\x220\x22\x20\x20VTYP=\x22RealTime\x22><GROUPID>77</GROUPID></FG4TG>';let _0x1e4c29,_0x137694,_0x375d18,_0x2345d7,_0x2d6190,_0x528ea3,_0x3b96fc,_0x77d73,_0x200e78;function _0x1f6447(){_0x137694=_0x228f30(host2,port2,tanklist2,_0x4e5c97,ul),_0x375d18=_0x228f30(host3,port3,tanklist3,_0x4e5c97,ul),_0x2345d7=_0x228f30(host4,port4,tanklist4,_0x4e5c97,ul),_0x2d6190=_0x228f30(host5,port5,tanklist5,_0x3d6dd0,ul),_0x528ea3=_0x228f30(host6,port6,tanklist6,_0x4e5c97,ul),_0x3b96fc=_0x228f30(host7,port7,tanklist7,_0x2f8371,ul),_0x77d73=_0x228f30(host8,port8,tanklist8,_0x4e5c97,ul),_0x200e78=_0x228f30(host9,port9,tanklist9,_0x46ce27,ul);}_0x1f6447(),setInterval(()=>{checkInternet(function(_0x3ad3e1){_0x3ad3e1?setTimeout(function(){const _0x2062c5=a0_0x2b58;ul(_0x2062c5(0x251)),0x3e8,_0xd15e3d[_0x2062c5(0x23a)](_0x2062c5(0x1e6),'status\x20greencol');}):setTimeout(function(){const _0x24ee62=a0_0x2b58;ul(_0x24ee62(0x252)),0x3e8,_0xd15e3d[_0x24ee62(0x23a)](_0x24ee62(0x1e6),'status\x20redcol');});}),checkConnection(host1,port1,_0x1e8fb2,0xbb8),checkConnection(host2,port2,_0x552d9f,0xbb8),checkConnection(host3,port3,_0x3a6cef,0xbb8),checkConnection(host4,port4,_0x313f49,0xbb8),checkConnection(host5,port5,_0x33b1ac,0xbb8),checkConnection(host6,port6,_0x41f6c9,0xbb8),checkConnection(host7,port7,_0x4504dd,0xbb8),checkConnection(host8,port8,_0x4b23b7,0xbb8),checkConnection(host9,port9,_0x4b58b9,0xbb8);},0xbb8);let _0x147150=Array[_0x5d946b(0x2b8)]({'length':0xb5},(_0x1dd252,_0x5c60d8)=>0x1);function _0x265655(){const _0x18944b=_0x5d946b;_0x147150[_0x18944b(0x29b)]({'level':JSON[_0x18944b(0x2a8)](_0x5e8c25)}),_0x147150['shift']();}setInterval(()=>{_0x265655();},0x1388);let _0x3b0834=[];async function _0x4206ab(){function _0xe69f41(_0x4e9102,_0x1be75a,_0x7ef8d8,_0x5d5bc5,_0x1598cc){const _0x46e0fc=a0_0x2b58;let _0x2e71c7=datasg[0x1][_0x1598cc],_0x435158=datasg[0x0][_0x1598cc],_0x3219ca=_0x4e9102-_0x1be75a,_0xc8db34=(_0x7ef8d8-_0x5d5bc5)/0x3e8;return _0x3219ca!=0x0&&_0xc8db34!=0x0?(mm_per_hour=(_0x3219ca/_0xc8db34*0x3c*0x3c)[_0x46e0fc(0x272)](0x1),mm_per_8hour=(_0x3219ca/_0xc8db34*0x3c*0x3c*0x8)['toFixed'](0x1),mm_per_day=(_0x3219ca/_0xc8db34*0x3c*0x3c*0x18)[_0x46e0fc(0x272)](0x1),meter_cubic_hour=(mm_per_hour*(0x16/0x7*(_0x435158/0x2)**0x2/0x3b9aca00))['toFixed'](0x1),ton_per_day=(mm_per_hour*(0x16/0x7*(_0x435158/0x2)**0x2/0x3b9aca00)*_0x2e71c7*0x18)['toFixed'](0x1),{'mm_per_hour':mm_per_hour,'mm_per_8hour':mm_per_8hour,'mm_per_day':mm_per_day,'meter_cubic_hour':meter_cubic_hour,'ton_per_day':ton_per_day}):(mm_per_hour=mm_per_8hour=mm_per_day=meter_cubic_hour=ton_per_day=_0x46e0fc(0x2ac),{'mm_per_hour':mm_per_hour,'mm_per_8hour':mm_per_8hour,'mm_per_day':mm_per_day,'meter_cubic_hour':meter_cubic_hour,'ton_per_day':ton_per_day});}let _0x230132=0x4,_0x449a4f=0x5,_0x59f588=_0x147150[0xb4],_0x4f9450=_0x147150[0x5a],_0x40db6e=_0x147150[0x0];all_tank['forEach'](_0xe900ae=>{const _0xa5879c=a0_0x2b58;let _0xfa40e6=tankdoc['querySelector'](_0xa5879c(0x212)+_0xe900ae+_0xa5879c(0x277)),_0x3f4a8b=tankdoc[_0xa5879c(0x229)]('[tank~=\x270'+_0xe900ae+'\x27]'),_0x2591b5=tankdoc[_0xa5879c(0x229)](_0xa5879c(0x212)+_0xe900ae+_0xa5879c(0x249)),_0x5785a6=_0xa5879c(0x219),_0x33dc59=_0xa5879c(0x201);if(_0x4f9450!=0x1){if(JSON[_0xa5879c(0x2af)](_0x4f9450['level'])[_0xe900ae]){let _0x24df5f=parseInt(JSON[_0xa5879c(0x2af)](_0x59f588[_0xa5879c(0x260)])[_0xe900ae][_0xa5879c(0x260)])??0x0,_0x84f72a=parseInt(JSON[_0xa5879c(0x2af)](_0x4f9450[_0xa5879c(0x260)])[_0xe900ae][_0xa5879c(0x260)])??0x0;if(_0x24df5f-_0x84f72a<-_0x230132)_0x3b0834[_0xe900ae]!=_0xa5879c(0x27e)&&(_0x3f4a8b[_0xa5879c(0x23a)](_0xa5879c(0x2c1),'0'+_0xe900ae+_0xa5879c(0x2a0)),_0xfa40e6[_0xa5879c(0x23a)]('class',_0xa5879c(0x297)),_0xfa40e6[_0xa5879c(0x25f)]=_0x5785a6),_0x3b0834[_0xe900ae]='down';else{if(_0x24df5f-_0x84f72a>_0x230132)_0x3b0834[_0xe900ae]!='up'&&(_0x3f4a8b[_0xa5879c(0x23a)]('tank','0'+_0xe900ae+'\x20bordernaik'),_0xfa40e6[_0xa5879c(0x23a)](_0xa5879c(0x1e6),_0xa5879c(0x297)),_0xfa40e6[_0xa5879c(0x25f)]=_0x33dc59),_0x3b0834[_0xe900ae]='up';else{if(_0x40db6e!=0x1){if(JSON[_0xa5879c(0x2af)](_0x40db6e['level'])[_0xe900ae]){let _0x5708e6=parseInt(JSON['parse'](_0x40db6e[_0xa5879c(0x260)])[_0xe900ae][_0xa5879c(0x260)])??0x0;if(_0x24df5f-_0x5708e6<-_0x449a4f)_0x3b0834[_0xe900ae]!=_0xa5879c(0x27e)&&(_0x3f4a8b['setAttribute'](_0xa5879c(0x2c1),'0'+_0xe900ae+_0xa5879c(0x2a0)),_0xfa40e6[_0xa5879c(0x23a)]('class',_0xa5879c(0x297)),_0xfa40e6['src']=_0x5785a6),_0x3b0834[_0xe900ae]=_0xa5879c(0x27e);else{if(_0x24df5f-_0x5708e6>_0x449a4f)_0x3b0834[_0xe900ae]!='up'&&(_0x3f4a8b[_0xa5879c(0x23a)](_0xa5879c(0x2c1),'0'+_0xe900ae+'\x20bordernaik'),_0xfa40e6['setAttribute']('class',_0xa5879c(0x297)),_0xfa40e6['src']=_0x33dc59),_0x3b0834[_0xe900ae]='up';else{if(_0x3b0834[_0xe900ae]!=_0xa5879c(0x23c))_0x3f4a8b['setAttribute']('tank','0'+_0xe900ae+'\x20borderidle'),_0xfa40e6[_0xa5879c(0x23a)](_0xa5879c(0x1e6),'unvisible'),_0xfa40e6[_0xa5879c(0x25f)]='';else{}_0x3b0834[_0xe900ae]=_0xa5879c(0x23c);}}}else{if(_0x3b0834[_0xe900ae]!=_0xa5879c(0x23c))_0x3f4a8b[_0xa5879c(0x23a)](_0xa5879c(0x2c1),'0'+_0xe900ae+_0xa5879c(0x276)),_0xfa40e6['setAttribute']('class',_0xa5879c(0x279)),_0xfa40e6[_0xa5879c(0x25f)]='';else{}_0x3b0834[_0xe900ae]=_0xa5879c(0x23c);}}else{if(_0x3b0834[_0xe900ae]!=_0xa5879c(0x23c))_0x3f4a8b[_0xa5879c(0x23a)]('tank','0'+_0xe900ae+_0xa5879c(0x276)),_0xfa40e6[_0xa5879c(0x23a)](_0xa5879c(0x1e6),_0xa5879c(0x279)),_0xfa40e6['src']='';else{}_0x3b0834[_0xe900ae]=_0xa5879c(0x23c);}}}}}else{if(_0x3b0834[_0xe900ae]!=_0xa5879c(0x23c))_0x3f4a8b['setAttribute']('tank','0'+_0xe900ae+'\x20borderidle'),_0xfa40e6['setAttribute'](_0xa5879c(0x1e6),_0xa5879c(0x279)),_0xfa40e6[_0xa5879c(0x25f)]='';else{}_0x3b0834[_0xe900ae]=_0xa5879c(0x23c);}if(_0x40db6e!=0x1){if(JSON[_0xa5879c(0x2af)](_0x40db6e[_0xa5879c(0x260)])[_0xe900ae]){let _0x395d38=parseInt(JSON['parse'](_0x59f588['level'])[_0xe900ae][_0xa5879c(0x260)])??0x0,_0x4f675c=parseInt(JSON['parse'](_0x40db6e[_0xa5879c(0x260)])[_0xe900ae][_0xa5879c(0x260)])??0x0,_0x2b002e=parseInt(JSON['parse'](_0x59f588[_0xa5879c(0x260)])[_0xe900ae]['time'])??0x0,_0x16bdae=parseInt(JSON[_0xa5879c(0x2af)](_0x40db6e[_0xa5879c(0x260)])[_0xe900ae][_0xa5879c(0x1ef)])??0x0,{mm_per_hour:_0x38b31a,mm_per_8hour:_0x1e5868,mm_per_day:_0x2677ae,meter_cubic_hour:_0x235830,ton_per_day:_0x348d62}=_0xe69f41(_0x395d38,_0x4f675c,_0x2b002e,_0x16bdae,_0xe900ae);if(_0x38b31a>0x0)_0x2591b5[_0xa5879c(0x292)]=_0xa5879c(0x245);else _0x38b31a<0x0?_0x2591b5[_0xa5879c(0x292)]=_0xa5879c(0x290):_0x2591b5[_0xa5879c(0x292)]=_0xa5879c(0x21e);switch(_0x351746){case'0':_0x2591b5['innerHTML']=_0x38b31a+'\x20mm/hr';break;case'1':_0x2591b5[_0xa5879c(0x23e)]=_0x235830+_0xa5879c(0x231);break;case'2':_0x2591b5[_0xa5879c(0x23e)]=_0x348d62+_0xa5879c(0x296);break;case'3':_0x2591b5[_0xa5879c(0x23e)]=_0x2677ae+_0xa5879c(0x2bd);break;case'4':_0x2591b5[_0xa5879c(0x23e)]=_0x1e5868+_0xa5879c(0x2a4);break;default:break;}}}});}setInterval(()=>{_0x4206ab();},0x1388),tankdoc[_0x5d946b(0x271)](_0x5d946b(0x1f6))[_0x5d946b(0x29a)](_0x5d946b(0x1e7),()=>{const _0x2f3ca5=_0x5d946b;_0x1e4c29[_0x2f3ca5(0x241)](),_0x137694[_0x2f3ca5(0x241)](),_0x375d18['destroy'](),_0x2d6190[_0x2f3ca5(0x241)](),_0x528ea3[_0x2f3ca5(0x241)](),_0x3b96fc[_0x2f3ca5(0x241)](),_0x77d73[_0x2f3ca5(0x241)](),_0x1f6447();});});
+const parseString = require("xml2js").parseString;
+const Net = require("net");
+
+let vpnmode = false;
+const moment = require("moment");
+const cron = require("node-cron");
+const path = require("path");
+const recordArray = Array.from({ length: 12 }, (x, i) => 1);
+const { ipcRenderer } = require("electron");
+var tankdoc = document;
+console.log(document);
+const datasg = require("../renderer/img/datasg.json");
+var pjson = require("../../package.json");
+const listshift = [
+  ["A1 Malam", "B2 Pagi", "C3 Sore", "D Off-Malam"],
+  ["A2 Malam", "B3 Pagi", "D1 Sore", "C Off-Sore"],
+  ["A3 Malam", "C1 Pagi", "D2 Sore", "B Off-Pagi"],
+  ["B1 Malam", "C2 Pagi", "D3 Sore", "A Off-Malam"],
+  ["B2 Malam", "C3 Pagi", "A1 Sore", "D Off-Sore"],
+  ["B3 Malam", "D1 Pagi", "A2 Sore", "C Off-Pagi"],
+  ["C1 Malam", "D2 Pagi", "A3 Sore", "B Off-Malam"],
+  ["C2 Malam", "D3 Pagi", "B1 Sore", "A Off-Sore"],
+  ["C3 Malam", "A1 Pagi", "B2 Sore", "D Off-Pagi"],
+  ["D1 Malam", "A2 Pagi", "B3 Sore", "C Off-Malam"],
+  ["D2 Malam", "A3 Pagi", "C1 Sore", "B Off-Sore"],
+  ["D3 Malam", "B1 Pagi", "C2 Sore", "A Off-Pagi"],
+];
+function getPeriod(min) {
+  if (min < 480) {
+    return 0;
+  }
+  if (min < 960) {
+    return 1;
+  } else {
+    return 2;
+  }
+}
+function checkCurrentShift() {
+  var now = moment(new Date());
+  var end = moment("2021-12-22");
+  var duration = moment.duration(now.diff(end));
+  var day = Math.trunc(duration.asDays()) % 12;
+  var minutes = Math.trunc(duration.asMinutes()) % 1440;
+  return listshift[day][getPeriod(minutes)];
+}
+function cods(date) {
+  var now = moment(date);
+  var end = moment("2021-12-22");
+  var duration = moment.duration(now.diff(end));
+  var day = Math.trunc(duration.asDays()) % 12;
+  var minutes = Math.trunc(duration.asMinutes()) % 1440;
+  return listshift[day][getPeriod(minutes)];
+}
+function us() {
+  //console.log(document);
+  let now = Date.now();
+  let next = now + 3600000 * 8;
+  let double_next = now + 3600000 * 16;
+  document.getElementById("shiftblock1").innerHTML = cods(now).split(" ")[0];
+  document.getElementById("shiftblock2").innerHTML = `&#x2794; ${
+    cods(next).split(" ")[0]
+  }`;
+  document.getElementById("shiftblock3").innerHTML = `&#x2794; ${
+    cods(double_next).split(" ")[0]
+  }`;
+  document.getElementById("masuk_apa1").innerHTML = `Shift ${
+    cods(now).split(" ")[1]
+  }`;
+  document.getElementById("masuk_apa2").innerHTML = `Shift ${
+    cods(next).split(" ")[1]
+  }`;
+  document.getElementById("masuk_apa3").innerHTML = `Shift ${
+    cods(double_next).split(" ")[1]
+  }`;
+}
+const checkInternet = (cb) => {
+  require("dns").lookup("simops.pertamina.com", function (err) {
+    if (err && err.code == "ENOTFOUND") {
+      cb(false);
+    } else {
+      cb(true);
+    }
+  });
+};
+
+class MessageBuffer {
+  constructor(delimiter) {
+    this.delimiter = delimiter;
+    this.buffer = "";
+  }
+
+  isFinished() {
+    if (
+      this.buffer.length === 0 ||
+      this.buffer.indexOf(this.delimiter) === -1
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  push(data) {
+    this.buffer += data;
+  }
+
+  getMessage() {
+    const delimiterIndex = this.buffer.indexOf(this.delimiter);
+    if (delimiterIndex !== -1) {
+      const message = this.buffer.slice(0, delimiterIndex);
+      this.buffer = this.buffer.replace(message + this.delimiter, "");
+      return message;
+    }
+    return null;
+  }
+
+  handleData() {
+    /**
+     * Try to accumulate the buffer with messages
+     *
+     * If the server isnt sending delimiters for some reason
+     * then nothing will ever come back for these requests
+     */
+    const message = this.getMessage();
+    return message;
+  }
+}
+function checkConnection(host, port, indobj, timeout = 10000) {
+  return new Promise((resolve, reject) => {
+    const socket = new net.Socket();
+    const timer = setTimeout(() => {
+      socket.destroy();
+      reject(new Error("Timeout"));
+    }, timeout);
+    socket.connect(port, host, () => {
+      clearTimeout(timer);
+      socket.end();
+      resolve(true);
+    });
+    socket.on("error", (err) => {
+      clearTimeout(timer);
+      reject(err);
+    });
+  }).then(
+    function () {
+      indobj.setAttribute("class", "status greencol");
+    },
+    function (err) {
+      console.log(err);
+      indobj.setAttribute("class", "status redcol");
+    }
+  );
+}
+function checkVPN(host, port, timeout = 3000) {
+  return new Promise((resolve, reject) => {
+    const socket = new net.Socket();
+    const timer = setTimeout(() => {
+      socket.destroy();
+      reject(new Error("Timeout"));
+    }, timeout);
+    socket.connect(port, host, () => {
+      clearTimeout(timer);
+      socket.end();
+      resolve(true);
+    });
+    socket.on("error", (err) => {
+      clearTimeout(timer);
+      reject(err);
+    });
+  });
+}
+
+function ih() {
+  checkVPN("10.54.127.226", 4444).then(
+    () => {
+      host1 = "10.54.127.226";
+      host2 = "10.54.127.227";
+      host3 = "10.54.127.231";
+      host4 = "10.54.127.213";
+      host5 = "10.54.127.223";
+      host6 = "10.54.127.228";
+      host7 = "10.54.127.234";
+      host8 = "10.54.127.235";
+      port1 = 4444;
+      port2 = 4444;
+      port3 = 4444;
+      port4 = 4444;
+      port5 = 4444;
+      port6 = 4444;
+      port7 = 4444;
+      port8 = 4444;
+    },
+    () => {
+      host1 = "10.54.188.74";
+      host2 = host1;
+      host3 = host1;
+      host4 = host1;
+      host5 = host1;
+      host6 = host1;
+      host7 = host1;
+      host8 = host1;
+      port1 = 6000;
+      port2 = 6001;
+      port3 = 6002;
+      port4 = 6003;
+      port5 = 6004;
+      port6 = 6005;
+      port7 = 6006;
+      port8 = 6007;
+    }
+  );
+}
+host1 = "10.54.127.213";
+host2 = "10.54.127.223";
+host3 = "10.54.127.226";
+host4 = "10.54.127.227";
+host5 = "10.54.127.228";
+host6 = "10.54.127.229";
+host7 = "10.54.127.231";
+host8 = "10.54.127.234";
+host9 = "10.54.127.235";
+
+// host1 = "10.54.127.226";
+// host2 = "10.54.127.227";
+// host3 = "10.54.127.231";
+// host4 = "10.54.127.213";
+// host5 = "10.54.127.223";
+// host6 = "10.54.127.228";
+// host7 = "10.54.127.234";
+// host8 = "10.54.127.235";
+// host9 = "10.54.127.229";
+port1 = 4444;
+port2 = 4444;
+port3 = 4444;
+port4 = 4444;
+port5 = 4444;
+port6 = 4444;
+port7 = 4444;
+port8 = 4444;
+port9 = 4444;
+const tanklist1 = [
+  "41T-301",
+  "41T-302",
+  "41T-303",
+  "41T-304",
+  "41T-305",
+  "41T-306",
+  "41T-307",
+  "41T-308",
+  "41T-309",
+  "41T-310",
+  "41T-311",
+  "41T-315",
+  "41T-316",
+  "41T-317",
+]; //213
+const tanklist2 = ["35T-2", "35T-4"]; //223
+const tanklist3 = [
+  "41T-111",
+  "41T-112",
+  "41T-113",
+  "41T-114",
+  "41T-115",
+  "41T-116",
+  "41T-117",
+  "41T-118",
+  "41T-121",
+]; //226
+const tanklist4 = [
+  "41T-101",
+  "41T-102",
+  "41T-103",
+  "41T-104",
+  "41T-105",
+  "41T-106",
+  "41T-107",
+  "41T-108",
+  "41T-122",
+]; //227
+const tanklist5 = ["41T-26"]; //228
+const tanklist6 = ["41T-24"]; //229
+const tanklist7 = ["41T-109", "41T-110", "41T-119", "41T-120"]; //231
+const tanklist8 = [
+  "41T-304",
+  "41T-305",
+  "41T-306",
+  "41T-307",
+  "41T-308",
+  "41T-309",
+  "41T-315",
+  "41T-316",
+]; //234
+const tanklist9 = [
+  "41T-301",
+  "41T-302",
+  "41T-303",
+  "41T-310",
+  "41T-311",
+  "41T-312",
+  "41T-313",
+  "41T-314",
+  "41T-317",
+]; //235
+const all_tank = tanklist1.concat(
+  tanklist2,
+  tanklist3,
+  tanklist4,
+  tanklist5,
+  tanklist6,
+  tanklist7,
+  tanklist8,
+  tanklist9
+);
+const all_tank_arr = [
+  tanklist1,
+  tanklist2,
+  tanklist3,
+  tanklist4,
+  tanklist5,
+  tanklist6,
+  tanklist7,
+  tanklist8,
+  tanklist8,
+  tanklist9,
+];
+function t() {
+  time = moment().format("HH:mm:ss[</br>]DD MMM yyyy");
+  tankdoc.getElementById("clock").innerHTML = time;
+}
+function y(x) {
+  return x.replace(/\s/g, "");
+}
+const s = (selector, text) => {
+  const element = tankdoc.getElementById(selector);
+  if (element) element.innerText = text;
+};
+
+const r = (selector, text) => {
+  const x = tankdoc.getElementsByClassName(selector);
+  var i;
+  for (i = 0; i < x.length; i++) {
+    if (x[i]) x[i].innerText = text;
+  }
+};
+function ul(text) {
+  const log = tankdoc.getElementById("log");
+  log.innerText = text;
+}
+
+function ud(level, temp, name, x, lc) {
+  function nwc(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+  if (y(name) == y(x)) {
+    let komponen = tankdoc.querySelector(`[id~='0${x}']`);
+    s(`0${x}`, nwc(level));
+    s(`0${x}-t`, `  ${temp} °C`);
+    if (lc[x]) {
+      if (lc[x].level > level) {
+        komponen.setAttribute("class", "tankturun");
+        setTimeout(() => {
+          komponen.setAttribute("class", "tanklevel");
+        }, 1000);
+      } else if (lc[x].level < level) {
+        komponen.setAttribute("class", "tanknaik");
+        setTimeout(() => {
+          komponen.setAttribute("class", "tanklevel");
+        }, 1000);
+      } else {
+        komponen.setAttribute("class", "tanklevel");
+      }
+    }
+
+    lc[x] = {
+      level: level,
+      temp: temp,
+      time: Date.now(),
+    };
+  }
+}
+
+//update arrow not used
+// function updatestatus(prevlevel, lc) {
+//     if (prevlevel != {} && lc != {}) {
+//         all_tank.forEach((tank) => {
+//             //console.log(prevlevel)
+//             let komponen = tankdoc.querySelector(`[tank~='0${tank}'] .arrow`)
+//             //let border = tankdoc.querySelector(`[tank~='0${tank}']`)
+//             if (prevlevel[tank].level > lc[tank].level) {
+//                 // border.setAttribute("tank", `0${tank} borderturun`);
+//                 komponen.id = "down"
+//                 komponen.setAttribute('class', "arrow visible")
+//             } else if (prevlevel[tank].level < lc[tank].level) {
+//                 // border.setAttribute("tank", `0${tank} bordernaik`);
+//                 komponen.id = "up"
+//                 komponen.setAttribute('class', "arrow visible")
+//             } else {
+//                 // border.setAttribute("tank", `0${tank} borderidle`);
+//                 komponen.id = "idle"
+//                 komponen.setAttribute('class', "arrow unvisible")
+//             }
+//         })
+//     }
+
+// }
+
+window.addEventListener("DOMContentLoaded", async () => {
+  let title = document.getElementsByName("title");
+  title.innerText = `Tank Level v${pjson.version}`;
+  us();
+  setInterval(() => {
+    us();
+  }, 10000);
+  var tooltip = tankdoc.getElementsByClassName("tooltiptext");
+  var arr_tooltip = Array.from(tooltip);
+  arr_tooltip.forEach((el, i) => {
+    el.innerHTML = all_tank_arr[i].join("<br />");
+  });
+
+  const select = tankdoc.getElementById("ratespeed");
+  let select_button = "0";
+  select.addEventListener("change", function (x) {
+    select_button = x.srcElement.value;
+  });
+  const button = tankdoc.getElementById("record");
+  button.addEventListener("click", () => {
+    // console.log("load record windows");
+    ipcRenderer.send("openRecord", recordArray);
+  });
+
+  const lc = {};
+  ul("Welcome to Tank App");
+  // '0 0-23/2 * * *'
+  cron.schedule("0 0-23/2 * * *", (x) => {
+    // save 2 hours record to memmory
+    recordArray.push({
+      data: JSON.stringify(lc),
+      timestamp: Date.now().toString(),
+    });
+    recordArray.shift();
+
+    //console.log(`${x} record saved`)
+    // save 2 hours record to sqlite db
+    // var toSave = JSON.stringify(lc)
+    // if (toSave != "{}") {
+    //     knexInstance("logsheet").insert({ data: toSave, timestamp: Date.now() }).then((x) => {
+    //     })
+    // }
+  });
+  setInterval(() => {
+    t();
+    //updatestatus(prevlevel, lc);
+  }, 1000);
+
+  const footer = tankdoc.getElementById("footer");
+  function fetching(host, port, tanklist, payload, ul) {
+    const client = new Net.Socket();
+    const received = new MessageBuffer(`<FG4TG SC="2">`);
+    r("value", "load..");
+    client.connect({ port: port, host: host });
+    client.on("error", function () {
+      ul(`cannot connect group ${host}`);
+      footer.setAttribute("class", "footer footerred");
+    });
+    client.on("connect", function () {
+      client.write(payload);
+      setTimeout(ul(`connected to group ${host}`), 1000);
+    });
+    client.on("data", (data) => {
+      received.push(data);
+      while (!received.isFinished()) {
+        const message = received.handleData();
+        parseString(message, function (err, result) {
+          footer.setAttribute("class", "footer footergreen");
+          if (result != null) {
+            if (typeof result.TANK != "undefined") {
+              var level = `${result.TANK.PARAM[0].$.VALUE.replace(
+                /'/,
+                ""
+              ).replace(/[+]/, "")}`;
+              var temp = `${result.TANK.PARAM[2].$.VALUE.replace(/[+]/, "")}`;
+              var name = result.TANK.$.NAME.toString();
+              tanklist.forEach((x, i) => {
+                ud(level, temp, name, x, lc, i);
+              });
+            }
+          }
+        });
+      }
+    });
+    client.on("timeout", () => {
+      ul(`timeout connecting to ${host}`);
+    });
+    client.on("close", () => {
+      tanklist.forEach((x, i) => {
+        s(`0${x}`, `closed`);
+        s(`0${x}-t`, `-`);
+      });
+      setTimeout(() => {
+        client.destroy();
+        fetching(host, port, tanklist, payload, ul);
+      }, 2000);
+      ul(`connection to ${host} closed`);
+    });
+    return client;
+  }
+  const indintranet = tankdoc.getElementById("intranet");
+  const indhost1 = tankdoc.getElementById("host1");
+  const indhost2 = tankdoc.getElementById("host2");
+  const indhost3 = tankdoc.getElementById("host3");
+  const indhost4 = tankdoc.getElementById("host4");
+  const indhost5 = tankdoc.getElementById("host5");
+  const indhost6 = tankdoc.getElementById("host6");
+  const indhost7 = tankdoc.getElementById("host7");
+  const indhost8 = tankdoc.getElementById("host8");
+  const indhost9 = tankdoc.getElementById("host9");
+  const payload1 =
+    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>8</GROUPID></FG4TG>'; //234,226,227,223
+  const payload2 =
+    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>146</GROUPID></FG4TG>'; //231
+  const payload3 =
+    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>74</GROUPID></FG4TG>'; //228
+  const payload4 =
+    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>216</GROUPID></FG4TG>'; //235
+  const payload5 =
+    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>77</GROUPID></FG4TG>'; //229
+  let client1;
+  let client2;
+  let client3;
+  let client4;
+  let client5;
+  let client6;
+  let client7;
+  let client8;
+  let client9;
+
+  function loadit() {
+    // client1 = fetching(host1, port1, tanklist1, payload1, ul);//213
+    client2 = fetching(host2, port2, tanklist2, payload1, ul); //223
+    client3 = fetching(host3, port3, tanklist3, payload1, ul); //226
+    client4 = fetching(host4, port4, tanklist4, payload1, ul); //227
+    client5 = fetching(host5, port5, tanklist5, payload3, ul); //228
+    client6 = fetching(host6, port6, tanklist6, payload1, ul); //229
+    client7 = fetching(host7, port7, tanklist7, payload2, ul); //231
+    client8 = fetching(host8, port8, tanklist8, payload1, ul); //234
+    client9 = fetching(host9, port9, tanklist9, payload4, ul); //225
+  }
+  loadit();
+
+  setInterval(() => {
+    checkInternet(function (isConnected) {
+      if (isConnected) {
+        setTimeout(function () {
+          ul("connected to intranet"), 1000;
+          indintranet.setAttribute("class", "status greencol");
+        });
+      } else {
+        setTimeout(function () {
+          ul("please connect to pertamina network"), 1000;
+          indintranet.setAttribute("class", "status redcol");
+        });
+      }
+    });
+    checkConnection(host1, port1, indhost1, 3000);
+    checkConnection(host2, port2, indhost2, 3000);
+    checkConnection(host3, port3, indhost3, 3000);
+    checkConnection(host4, port4, indhost4, 3000);
+    checkConnection(host5, port5, indhost5, 3000);
+    checkConnection(host6, port6, indhost6, 3000);
+    checkConnection(host7, port7, indhost7, 3000);
+    checkConnection(host8, port8, indhost8, 3000);
+    checkConnection(host9, port9, indhost9, 3000);
+  }, 3000);
+  // setInterval(() => {
+  //   checkVPN("10.54.127.226", 4444).then(
+  //     () => {
+  //       if (port1 != 4444) {
+  //         host1 = "10.54.127.226";
+  //         host2 = "10.54.127.227";
+  //         host3 = "10.54.127.231";
+  //         host4 = "10.54.127.213";
+  //         host5 = "10.54.127.223";
+  //         host6 = "10.54.127.228";
+  //         host7 = "10.54.127.234";
+  //         host8 = "10.54.127.235";
+  //         port1 = 4444;
+  //         port2 = 4444;
+  //         port3 = 4444;
+  //         port4 = 4444;
+  //         port5 = 4444;
+  //         port6 = 4444;
+  //         port7 = 4444;
+  //         port8 = 4444;
+  //         loadit();
+  //       }
+  //     },
+  //     () => {
+  //       if (port1 != 6000) {
+  //         host1 = "10.54.188.74";
+  //         host2 = host1;
+  //         host3 = host1;
+  //         host4 = host1;
+  //         host5 = host1;
+  //         host6 = host1;
+  //         host7 = host1;
+  //         host8 = host1;
+  //         port1 = 6000;
+  //         port2 = 6001;
+  //         port3 = 6002;
+  //         port4 = 6003;
+  //         port5 = 6004;
+  //         port6 = 6005;
+  //         port7 = 6006;
+  //         port8 = 6007;
+  //         loadit();
+  //       }
+  //     }
+  //   );
+  // }, 10000);
+  let levelArray = Array.from({ length: 181 }, (x, i) => 1);
+  function logging() {
+    // add log to memory
+    levelArray.push({
+      level: JSON.stringify(lc),
+    });
+    levelArray.shift();
+    // add log to sqlite db3
+    // var toSave = JSON.stringify(lc)
+    // if (toSave != "{}") {
+    //     knexInstance("tank").insert({ data: toSave, timestamp: Date.now() }).then((x) => {
+    //     })
+    // }
+  }
+
+  setInterval(() => {
+    logging();
+  }, 5000);
+  let record = [];
+  async function um() {
+    function calc(level, levelPast, time, timePast, tank) {
+      let sg = datasg[1][tank];
+      let diameter = datasg[0][tank];
+      let selisih = level - levelPast;
+      let selisiht = (time - timePast) / 1000;
+      if (selisih != 0 && selisiht != 0) {
+        mm_per_hour = ((selisih / selisiht) * 60 * 60).toFixed(1);
+        mm_per_8hour = ((selisih / selisiht) * 60 * 60 * 8).toFixed(1);
+        mm_per_day = ((selisih / selisiht) * 60 * 60 * 24).toFixed(1);
+        meter_cubic_hour = (
+          mm_per_hour *
+          (((22 / 7) * (diameter / 2) ** 2) / 1000000000)
+        ).toFixed(1);
+        ton_per_day = (
+          mm_per_hour *
+          (((22 / 7) * (diameter / 2) ** 2) / 1000000000) *
+          sg *
+          24
+        ).toFixed(1);
+        return {
+          mm_per_hour,
+          mm_per_8hour,
+          mm_per_day,
+          meter_cubic_hour,
+          ton_per_day,
+        };
+      } else {
+        mm_per_hour =
+          mm_per_8hour =
+          mm_per_day =
+          meter_cubic_hour =
+          ton_per_day =
+            "Refresh";
+        return {
+          mm_per_hour,
+          mm_per_8hour,
+          mm_per_day,
+          meter_cubic_hour,
+          ton_per_day,
+        };
+      }
+    }
+    // get data from sqlitedb
+    // let data = await knexInstance.select().table('tank').orderBy('timestamp', 'desc').limit(301)
+    // let datas = data[1].data
+    // // let time = data[1].timestamp
+    // let dataPasts = data[90].data
+    // // let timePast = data[90].timestamp
+    // get data from memory
+    let delta = 4;
+    let deltaExtend = 5;
+    let datas = levelArray[180];
+    let dataPasts = levelArray[90];
+    let dataPastsExtend = levelArray[0];
+    // console.log(datas, dataPasts)
+    all_tank.forEach((tank) => {
+      let komponen = tankdoc.querySelector(
+        `[tank~='0${tank}'] div:nth-child(6) img`
+      );
+      let border = tankdoc.querySelector(`[tank~='0${tank}']`);
+      let rate = tankdoc.querySelector(`[tank~='0${tank}'] div:nth-child(5)`);
+      let red = "../img/red.svg";
+      let green = "../img/green.svg";
+      //fast move
+      if (dataPasts != 1) {
+        if (JSON.parse(dataPasts.level)[tank]) {
+          let level = parseInt(JSON.parse(datas.level)[tank].level) ?? 0;
+          // let timestamp = parseInt(JSON.parse(datas.level)[tank].time) ?? 1
+          let levelPast =
+            parseInt(JSON.parse(dataPasts.level)[tank].level) ?? 0;
+
+          // let timestampPast = parseInt(JSON.parse(dataPasts.level)[tank].time) ?? 0
+          // let { mm_per_hour, mm_per_8hour, mm_per_day, meter_cubic_hour, ton_per_day } = calc(level, levelPast, timestamp, timestampPast, tank)
+          // if (mm_per_hour > 0) {
+          //     rate.className = "rate rateup"
+          // } else if (mm_per_hour < 0) {
+          //     rate.className = "rate ratedown"
+          // } else {
+          //     rate.className = "rate"
+          // }
+          // switch (select_button) {
+          //     case "0":
+          //         rate.innerHTML = `${mm_per_hour} mm/hr`
+          //         break;
+          //     case "1":
+          //         rate.innerHTML = `${meter_cubic_hour} m³/hr`
+          //         break;
+          //     case "2":
+          //         rate.innerHTML = `${ton_per_day} ton/day`
+          //         break;
+          //     case "3":
+          //         rate.innerHTML = `${mm_per_day} mm/day`
+          //         break;
+          //     case "4":
+          //         rate.innerHTML = `${mm_per_8hour} mm/8hr`
+          //         break;
+          //     default:
+          //         break;
+          // }
+          if (level - levelPast < -delta) {
+            if (record[tank] != "down") {
+              border.setAttribute("tank", `0${tank} borderturun`);
+              // komponen.id = "down"
+              komponen.setAttribute("class", "visible blink");
+              komponen.src = red;
+            }
+            record[tank] = "down";
+          } else if (level - levelPast > delta) {
+            if (record[tank] != "up") {
+              border.setAttribute("tank", `0${tank} bordernaik`);
+              // komponen.id = "up"
+              komponen.setAttribute("class", "visible blink");
+              komponen.src = green;
+            }
+            record[tank] = "up";
+          } else {
+            if (dataPastsExtend != 1) {
+              if (JSON.parse(dataPastsExtend.level)[tank]) {
+                let levelPastExtend =
+                  parseInt(JSON.parse(dataPastsExtend.level)[tank].level) ?? 0;
+                if (level - levelPastExtend < -deltaExtend) {
+                  if (record[tank] != "down") {
+                    border.setAttribute("tank", `0${tank} borderturun`);
+                    komponen.setAttribute("class", "visible blink");
+                    komponen.src = red;
+                  }
+                  record[tank] = "down";
+                } else if (level - levelPastExtend > deltaExtend) {
+                  if (record[tank] != "up") {
+                    border.setAttribute("tank", `0${tank} bordernaik`);
+                    komponen.setAttribute("class", "visible blink");
+                    komponen.src = green;
+                  }
+                  record[tank] = "up";
+                } else {
+                  if (record[tank] != "stable") {
+                    border.setAttribute("tank", `0${tank} borderidle`);
+                    komponen.setAttribute("class", "unvisible");
+                    komponen.src = "";
+                  } else {
+                  }
+                  record[tank] = "stable";
+                }
+              } else {
+                if (record[tank] != "stable") {
+                  border.setAttribute("tank", `0${tank} borderidle`);
+                  komponen.setAttribute("class", "unvisible");
+                  komponen.src = "";
+                } else {
+                }
+                record[tank] = "stable";
+              }
+            } else {
+              if (record[tank] != "stable") {
+                border.setAttribute("tank", `0${tank} borderidle`);
+                komponen.setAttribute("class", "unvisible");
+                komponen.src = "";
+              } else {
+              }
+              record[tank] = "stable";
+            }
+          }
+        }
+      } else {
+        if (record[tank] != "stable") {
+          border.setAttribute("tank", `0${tank} borderidle`);
+          komponen.setAttribute("class", "unvisible");
+          komponen.src = "";
+        } else {
+        }
+        record[tank] = "stable";
+      }
+      //rate move
+      if (dataPastsExtend != 1) {
+        if (JSON.parse(dataPastsExtend.level)[tank]) {
+          let level = parseInt(JSON.parse(datas.level)[tank].level) ?? 0;
+          let levelPastExtend =
+            parseInt(JSON.parse(dataPastsExtend.level)[tank].level) ?? 0;
+          let timestamp = parseInt(JSON.parse(datas.level)[tank].time) ?? 0;
+          let timestampPast =
+            parseInt(JSON.parse(dataPastsExtend.level)[tank].time) ?? 0;
+          let {
+            mm_per_hour,
+            mm_per_8hour,
+            mm_per_day,
+            meter_cubic_hour,
+            ton_per_day,
+          } = calc(level, levelPastExtend, timestamp, timestampPast, tank);
+          if (mm_per_hour > 0) {
+            rate.className = "rate rateup";
+          } else if (mm_per_hour < 0) {
+            rate.className = "rate ratedown";
+          } else {
+            rate.className = "rate";
+          }
+          switch (select_button) {
+            case "0":
+              rate.innerHTML = `${mm_per_hour} mm/hr`;
+              break;
+            case "1":
+              rate.innerHTML = `${meter_cubic_hour} m³/hr`;
+              break;
+            case "2":
+              rate.innerHTML = `${ton_per_day} ton/day`;
+              break;
+            case "3":
+              rate.innerHTML = `${mm_per_day} mm/day`;
+              break;
+            case "4":
+              rate.innerHTML = `${mm_per_8hour} mm/8hr`;
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    });
+  }
+  setInterval(() => {
+    um();
+  }, 5000);
+
+  tankdoc.getElementById("reload").addEventListener("click", () => {
+    client1.destroy();
+    client2.destroy();
+    client3.destroy();
+    //client4.destroy()
+    client5.destroy();
+    client6.destroy();
+    client7.destroy();
+    client8.destroy();
+
+    loadit();
+  });
+});
