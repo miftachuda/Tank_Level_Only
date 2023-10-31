@@ -20,7 +20,6 @@ function createWindow() {
     show: false,
     webPreferences: {
       preload: path.join(__dirname, "../preload/preload.js"),
-      //preload: path.join(__dirname, "../../dist/preload.js"),
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,

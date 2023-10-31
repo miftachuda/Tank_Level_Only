@@ -99,17 +99,19 @@ port7 = 4444;
 port8 = 4444;
 port9 = 4444;
 
-function startTime() {
+function t() {
   time = moment().format("HH:mm:ss[</br>]DD MMM yyyy");
   tankdoc.getElementById("clock").innerHTML = time;
 }
-
-const replaceText = (selector, text) => {
+function y(x) {
+  return x.replace(/\s/g, "");
+}
+const s = (selector, text) => {
   const element = tankdoc.getElementById(selector);
   if (element) element.innerText = text;
 };
 
-const replaceText2 = (selector, text) => {
+const r = (selector, text) => {
   const x = tankdoc.getElementsByClassName(selector);
   var i;
   for (i = 0; i < x.length; i++) {
@@ -120,17 +122,16 @@ function updatelog(text) {
   const log = tankdoc.getElementById("log");
   log.innerText = text;
 }
+
 function updateDisplay(level, temp, name, x, levelcollect) {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
-  function text(x) {
-    return x.replace(/\s/g, "");
-  }
-  if (text(name) == x) {
+
+  if (y(name) == y(x)) {
     let komponen = tankdoc.querySelector(`[id~='0${x}']`);
-    replaceText(`0${x}`, numberWithCommas(level));
-    replaceText(`0${x}-t`, `  ${temp} °C`);
+    s(`0${x}`, numberWithCommas(level));
+    s(`0${x}-t`, `  ${temp} °C`);
     if (levelcollect[x]) {
       if (levelcollect[x].level > level) {
         komponen.setAttribute("class", "tankturun");
@@ -225,7 +226,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     // }
   });
   setInterval(() => {
-    startTime();
+    t();
     //updatestatus(prevlevel, levelcollect);
   }, 1000);
 
@@ -233,7 +234,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   function fetching(host, port, tanklist, payload, updatelog) {
     const client = new Net.Socket();
     const received = new MessageBuffer(`<FG4TG SC="2">`);
-    replaceText2("value", "load..");
+    r("value", "load..");
     client.connect({ port: port, host: host });
     client.on("error", function () {
       updatelog(`cannot connect group ${host}`);
@@ -256,7 +257,7 @@ window.addEventListener("DOMContentLoaded", async () => {
                 ""
               ).replace(/[+]/, "")}`;
               var temp = `${result.TANK.PARAM[2].$.VALUE.replace(/[+]/, "")}`;
-              var name = result.TANK.$.NAME;
+              var name = result.TANK.$.NAME.toString();
               tanklist.forEach((x, i) => {
                 updateDisplay(level, temp, name, x, levelcollect, i);
               });
@@ -270,8 +271,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
     client.on("close", () => {
       tanklist.forEach((x, i) => {
-        replaceText(`0${x}`, `closed`);
-        replaceText(`0${x}-t`, `-`);
+        s(`0${x}`, `closed`);
+        s(`0${x}-t`, `-`);
       });
       setTimeout(() => {
         client.destroy();
@@ -317,7 +318,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     client3 = fetching(host3, port3, tanklist3, payload1, updatelog); //226
     client4 = fetching(host4, port4, tanklist4, payload1, updatelog); //227
     client5 = fetching(host5, port5, tanklist5, payload3, updatelog); //228
-    client6 = fetching(host6, port6, tanklist6, payload5, updatelog); //229
+    client6 = fetching(host6, port6, tanklist6, payload1, updatelog); //229
     client7 = fetching(host7, port7, tanklist7, payload2, updatelog); //231
     client8 = fetching(host8, port8, tanklist8, payload1, updatelog); //234
     client9 = fetching(host9, port9, tanklist9, payload4, updatelog); //225

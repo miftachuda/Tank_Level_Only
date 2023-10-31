@@ -25,10 +25,10 @@
     "win": {
       "icon": "./src/renderer/img/ico.png"
     },
-    "extraFiles": [
-      "./src/renderer/img/datasg.json"
-    ],
-    "files": "!./src/preloadsc/*"
+    "files": [
+      "**/*",
+      "!src/preloadsc/*"
+    ]
   },
   "author": "Miftchul Huda",
   "license": "CC0-1.0",
@@ -36,7 +36,8 @@
     "electron": "^12.2.3",
     "electron-builder": "^24.6.4",
     "electron-reloader": "^1.2.1",
-    "javascript-obfuscator": "^4.1.0"
+    "javascript-obfuscator": "^4.1.0",
+    "minify": "^10.5.2"
   },
   "dependencies": {
     "custom-electron-titlebar": "^3.2.7",
