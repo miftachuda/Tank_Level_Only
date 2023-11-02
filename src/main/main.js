@@ -68,4 +68,4 @@ if (!fs.existsSync(path.join(__dirname, "./main.jsc"))) {
   startByteCode();
 }
 
-require("./main.src.js");
+require("./main.jsc");
