@@ -3,17 +3,23 @@ productName: Tank Level
 directories:
   buildResources: build
 files:
+  - "**/*"
   - "!**/.vscode/*"
-  - "!src/*"
   - "!electron.vite.config.{js,ts,mjs,cjs}"
   - "!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}"
   - "!{.env,.env.*,.npmrc,pnpm-lock.yaml}"
   - "!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}"
+  - "!src/preload2/*"
+  - "!src/compile.js"
 asarUnpack:
   - resources/**
-afterSign: build/notarize.js
+
+# afterPack: "node_modules/electron-builder-encryptor"
+
+asar: false
 win:
-  executableName: ${productName}-${version}
+  executableName: tanklevelapp
+  icon: "./src/renderer/img/ico.png"
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
