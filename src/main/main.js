@@ -4,7 +4,7 @@ const bytenode = require("bytenode");
 const fs = require("fs");
 const v8 = require("v8");
 console.log(path.join(__dirname, "../preload"));
-const distPaths = [path.join(__dirname, "../preload/")];
+const distPaths = ["../preload/"];
 
 let extNew = ".jsc";
 let extOld = ".js";
