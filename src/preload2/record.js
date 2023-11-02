@@ -1,0 +1,1 @@
+require('bytenode');module.exports = require('./record.jsc');

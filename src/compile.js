@@ -13,6 +13,7 @@ v8.setFlagsFromString("--no-lazy");
 const distPaths = ["./preloadsc/"];
 
 let extNew = ".jsc";
+let extOld = ".js";
 
 function startByteCode() {
   const totalTimeLabel = "Start";
@@ -32,7 +33,9 @@ function startByteCode() {
       if (ext === ".js" || (ext === ".cjs" && base !== "esm-got")) {
         let filePath = path.join(rootPath, filename);
         let fileNameOut = base + extNew;
+        let loaderNameOut = base + extOld;
         let filePathOut = path.join(outPath, fileNameOut);
+        let fileLoaderout = path.join(outPath, loaderNameOut);
         console.log("file: " + filePath);
         bytenode
           .compileFile({
@@ -41,7 +44,7 @@ function startByteCode() {
           })
           .then(() => {
             fs.writeFileSync(
-              filePath,
+              fileLoaderout,
               `require('bytenode');module.exports = require('./${fileNameOut}');`
             );
             let fileNameLoader = base + ".loader.js";

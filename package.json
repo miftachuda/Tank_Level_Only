@@ -10,6 +10,7 @@
     "//fire": "uglifyjs src/preload/preload.js --output dist/preload.js --compress --mangle",
     "obs": "javascript-obfuscator ./src/preloadsc --output ./src/preload/ --disable-console-output true --simplify true",
     "compile": "electron src/compile.js",
+    "build": "electron-builder --win --config",
     "build:win": "npm run compile && electron-builder --win --config",
     "build:mac": "npm run compile && electron-builder --mac --config",
     "build:linux": "npm run compile && electron-builder --linux --config"
@@ -22,6 +23,7 @@
   "build": {
     "appId": "com.tanklevelapp.example",
     "compression": "maximum",
+    "asar": false,
     "win": {
       "icon": "./src/renderer/img/ico.png"
     },
