@@ -17,7 +17,7 @@ jobs:
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
       - name: Install Wine
-        run: sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install wine32
+        run: sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install wine-stable
       - run: |
           npm i
           npm install electron-builder --save-dev
