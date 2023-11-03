@@ -1,67 +1,48 @@
-/*
- * @Author: Allan
- * @Description: 加密源码
- */
-const { app } = require("electron");
-const v8 = require("v8");
-const bytenode = require("bytenode");
-const fs = require("fs");
+const { exec } = require("node:child_process");
 const path = require("path");
 
-v8.setFlagsFromString("--no-lazy");
-
-const distPaths = ["./preloadsc/"];
-
-let extNew = ".jsc";
-let extOld = ".js";
-
-function startByteCode() {
-  const totalTimeLabel = "Start";
-  console.time(totalTimeLabel);
-
-  for (const disPath of distPaths) {
-    const rootPath = path.join(__dirname, disPath);
-    const outPath = path.join(__dirname, "./preload/");
-    console.group("path:", rootPath);
-    const timeLabel = "Bundling time";
-    console.time(timeLabel);
-
-    const filenames = fs.readdirSync(rootPath);
-    filenames.forEach((filename) => {
-      let ext = path.extname(filename);
-      let base = path.basename(filename, ext);
-      if (ext === ".js" || (ext === ".cjs" && base !== "esm-got")) {
-        let filePath = path.join(rootPath, filename);
-        let fileNameOut = base + extNew;
-        let loaderNameOut = base + extOld;
-        let filePathOut = path.join(outPath, fileNameOut);
-        let fileLoaderout = path.join(outPath, loaderNameOut);
-        console.log("file: " + filePath);
-        bytenode
-          .compileFile({
-            filename: filePath,
-            output: filePathOut,
-          })
-          .then(() => {
-            fs.writeFileSync(
-              fileLoaderout,
-              `require('bytenode');module.exports = require('./${fileNameOut}');`
-            );
-            let fileNameLoader = base + ".loader.js";
-            let filePathLoader = path.join(rootPath, fileNameLoader);
-            if (fs.existsSync(filePathLoader)) {
-              fs.unlinkSync(filePathLoader);
-            }
-          });
+const mainPath = path.join(
+  __dirname,
+  "dist/win-unpacked/resources/app/src/main/main.js"
+);
+function execShellCommand(cmd) {
+  const exec = require("child_process").exec;
+  return new Promise((resolve, reject) => {
+    const child = exec(cmd, (error, stdout, stderr) => {
+      if (error) {
+        console.warn(error);
       }
+      resolve(stdout ? stdout : stderr);
     });
-    console.timeEnd(timeLabel);
-    console.groupEnd();
-    console.log("\n");
-  }
-  console.timeEnd(totalTimeLabel);
+  });
 }
+exports.default = async function (context) {
+  console.log("Starting after pack Compiler");
 
-startByteCode();
-
-app.quit();
+  const binaryPath = path.join(
+    __dirname,
+    "../dist/win-unpacked/tanklevelapp.exe"
+  ); // Replace with the actual path to your binary
+  const args = []; // Replace with any arguments you want to pass to the binary
+  var out = await execShellCommand(binaryPath);
+  console.log(out);
+  // const childProcess = exec(binaryPath, args, (error, stdout, stderr) => {
+  //   if (error) {
+  //     console.error(`Error executing binary: ${error}`);
+  //     return;
+  //   }
+  //   setTimeout(() => {
+  //     childProcess.kill("SIGINT");
+  //   }, 3000);
+  //   console.log(`Standard output: ${stdout}`);
+  //   childProcess.kill("SIGINT");
+  //   console.error(`Standard error: ${stderr}`);
+  // });
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("Pause for 2 seconds");
+      resolve();
+    }, 2000);
+  });
+  console.log("Finish after pack Compiler");
+};

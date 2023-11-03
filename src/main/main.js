@@ -1,4 +1,5 @@
 "use strict";
+const { app } = require("electron");
 const path = require("path");
 const bytenode = require("bytenode");
 const fs = require("fs");
@@ -52,6 +53,7 @@ function startByteCode() {
     });
     console.timeEnd(timeLabel);
     console.groupEnd();
+    app.quit();
     console.log("\n");
   }
   console.timeEnd(totalTimeLabel);
@@ -66,6 +68,6 @@ if (!fs.existsSync(path.join(__dirname, "./main.jsc"))) {
     console.log("start up");
   });
   startByteCode();
+} else {
+  require("./main.jsc");
 }
-
-require("./main.jsc");

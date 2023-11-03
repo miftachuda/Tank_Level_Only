@@ -1,5 +1,6 @@
 {
   "name": "tanklevelapp",
+  "ProductName": "Tank Level",
   "version": "1.2.0",
   "description": "Realtime Tank Level App",
   "main": "src/main/main.js",
@@ -20,26 +21,20 @@
     "Tank",
     "Level"
   ],
-  "author": "Miftchul Huda",
+  "author": "Miftachul Huda",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^12.2.3",
     "electron-builder": "^24.6.4",
-    "electron-builder-encryptor": "^2.1.0",
-    "electron-reloader": "^1.2.1",
-    "javascript-obfuscator": "^4.1.0",
-    "minify": "^10.5.2"
+    "electron-reloader": "^1.2.1"
   },
   "dependencies": {
-    "adm-zip": "^0.5.10",
     "bytenode": "^1.5.3",
     "custom-electron-titlebar": "^3.2.7",
     "electron-tabs": "^1.0.1",
-    "mime": "^3.0.0",
     "moment": "^2.29.1",
     "node-cron": "^3.0.0",
     "original-fs": "^1.2.0",
-    "xml2js": "^0.4.23",
-    "yaml": "^2.3.3"
+    "xml2js": "^0.4.23"
   }
 }

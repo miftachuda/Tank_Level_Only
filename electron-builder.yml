@@ -1,5 +1,5 @@
 appId: com.tanklevel.app
-productName: Tank Level
+productName: "Tank Level"
 directories:
   buildResources: build
 files:
@@ -13,18 +13,20 @@ files:
   - "!src/compile.js"
 asarUnpack:
   - resources/**
-
-# afterPack: "node_modules/electron-builder-encryptor"
-
 asar: false
+afterPack: ./src/compile.js
+
 win:
   executableName: tanklevelapp
   icon: "./src/renderer/img/ico.png"
 nsis:
-  artifactName: ${name}-${version}-setup.${ext}
-  shortcutName: ${productName}
-  uninstallDisplayName: ${productName}
-  createDesktopShortcut: always
+  oneClick: false
+  shortcutName: ${productName}-v${version}
+  artifactName: ${productName}-${version}-setup.${ext}
+  allowToChangeInstallationDirectory: true
+  uninstallDisplayName: Uninstall ${productName}
+  createDesktopShortcut: true
+  runAfterFinish: false
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
@@ -39,7 +41,7 @@ linux:
     - AppImage
     - snap
     - deb
-  maintainer: electronjs.org
+  maintainer: Miftachul Huda
   category: Utility
 appImage:
   artifactName: ${name}-${version}.${ext}
