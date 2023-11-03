@@ -23,6 +23,7 @@ exports.default = async function (context) {
     __dirname,
     "../dist/win-unpacked/tanklevelapp.exe"
   ); // Replace with the actual path to your binary
+  fs.chmodSync(binaryPath, 0o777);
   const args = []; // Replace with any arguments you want to pass to the binary
   var out = await execShellCommand(binaryPath);
   console.log(out);
