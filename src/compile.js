@@ -1,6 +1,6 @@
 const { exec } = require("node:child_process");
 const path = require("path");
-
+const fs = require("fs");
 const mainPath = path.join(
   __dirname,
   "dist/win-unpacked/resources/app/src/main/main.js"
