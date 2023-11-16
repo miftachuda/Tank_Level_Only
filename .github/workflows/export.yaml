@@ -5,7 +5,7 @@ on: workflow_dispatch
 jobs:
   build:
     name: Building
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
         with:
@@ -16,8 +16,8 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
-      - name: Install Wine
-        run: sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install wine-stable
+      # - name: Install Wine
+      #   run: sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install wine-stable
       - run: |
           npm i
           npm install electron-builder --save-dev
