@@ -18,9 +18,9 @@ jobs:
         uses: beaconbrigade/package-json-version@v0.3
         with:
           path: .
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
+      # - name: get-npm-version
+      #   id: package-version
+      #   uses: martinbeentjes/npm-get-version-action@main
       # - name: Install Wine
       #   run: sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install wine-stable
       - run: |
