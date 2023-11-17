@@ -669,7 +669,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           mm_per_day =
           meter_cubic_hour =
           ton_per_day =
-            "Refresh";
+            "0";
         return {
           mm_per_hour,
           mm_per_8hour,
