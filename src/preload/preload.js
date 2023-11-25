@@ -276,7 +276,7 @@ const tanklist4 = [
   "41T-108",
   "41T-122",
 ]; //227
-const tanklist5 = ["41T-26"]; //228
+const tanklist5 = ["41T-25", "41T-26"]; //228
 const tanklist6 = ["41T-24"]; //229
 const tanklist7 = ["41T-109", "41T-110", "41T-119", "41T-120"]; //231
 const tanklist8 = [
@@ -300,7 +300,7 @@ const tanklist9 = [
   "41T-314",
   "41T-317",
 ]; //235
-const all_tank = tanklist1.concat(
+const all_tank_raw = tanklist1.concat(
   tanklist2,
   tanklist3,
   tanklist4,
@@ -310,6 +310,7 @@ const all_tank = tanklist1.concat(
   tanklist8,
   tanklist9
 );
+const all_tank = Array.from(new Set(all_tank_raw));
 const all_tank_arr = [
   tanklist1,
   tanklist2,
@@ -547,30 +548,30 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
   loadit();
 
-  setInterval(() => {
-    checkInternet(function (isConnected) {
-      if (isConnected) {
-        setTimeout(function () {
-          ul("connected to intranet"), 1000;
-          indintranet.setAttribute("class", "status greencol");
-        });
-      } else {
-        setTimeout(function () {
-          ul("please connect to pertamina Network"), 1000;
-          indintranet.setAttribute("class", "status redcol");
-        });
-      }
-    });
-    checkConnection(host1, port1, indhost1, 3000);
-    checkConnection(host2, port2, indhost2, 3000);
-    checkConnection(host3, port3, indhost3, 3000);
-    checkConnection(host4, port4, indhost4, 3000);
-    checkConnection(host5, port5, indhost5, 3000);
-    checkConnection(host6, port6, indhost6, 3000);
-    checkConnection(host7, port7, indhost7, 3000);
-    checkConnection(host8, port8, indhost8, 3000);
-    checkConnection(host9, port9, indhost9, 3000);
-  }, 3000);
+  // setInterval(() => {
+  //   checkInternet(function (isConnected) {
+  //     if (isConnected) {
+  //       setTimeout(function () {
+  //         ul("connected to intranet"), 1000;
+  //         indintranet.setAttribute("class", "status greencol");
+  //       });
+  //     } else {
+  //       setTimeout(function () {
+  //         ul("please connect to pertamina Network"), 1000;
+  //         indintranet.setAttribute("class", "status redcol");
+  //       });
+  //     }
+  //   });
+  //   checkConnection(host1, port1, indhost1, 3000);
+  //   checkConnection(host2, port2, indhost2, 3000);
+  //   checkConnection(host3, port3, indhost3, 3000);
+  //   checkConnection(host4, port4, indhost4, 3000);
+  //   checkConnection(host5, port5, indhost5, 3000);
+  //   checkConnection(host6, port6, indhost6, 3000);
+  //   checkConnection(host7, port7, indhost7, 3000);
+  //   checkConnection(host8, port8, indhost8, 3000);
+  //   checkConnection(host9, port9, indhost9, 3000);
+  // }, 3000);
   // setInterval(() => {
   //   checkVPN("10.54.127.226", 4444).then(
   //     () => {
