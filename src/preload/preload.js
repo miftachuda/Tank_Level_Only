@@ -548,30 +548,30 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
   loadit();
 
-  // setInterval(() => {
-  //   checkInternet(function (isConnected) {
-  //     if (isConnected) {
-  //       setTimeout(function () {
-  //         ul("connected to intranet"), 1000;
-  //         indintranet.setAttribute("class", "status greencol");
-  //       });
-  //     } else {
-  //       setTimeout(function () {
-  //         ul("please connect to pertamina Network"), 1000;
-  //         indintranet.setAttribute("class", "status redcol");
-  //       });
-  //     }
-  //   });
-  //   checkConnection(host1, port1, indhost1, 3000);
-  //   checkConnection(host2, port2, indhost2, 3000);
-  //   checkConnection(host3, port3, indhost3, 3000);
-  //   checkConnection(host4, port4, indhost4, 3000);
-  //   checkConnection(host5, port5, indhost5, 3000);
-  //   checkConnection(host6, port6, indhost6, 3000);
-  //   checkConnection(host7, port7, indhost7, 3000);
-  //   checkConnection(host8, port8, indhost8, 3000);
-  //   checkConnection(host9, port9, indhost9, 3000);
-  // }, 3000);
+  setInterval(() => {
+    checkInternet(function (isConnected) {
+      if (isConnected) {
+        setTimeout(function () {
+          ul("connected to intranet"), 1000;
+          indintranet.setAttribute("class", "status greencol");
+        });
+      } else {
+        setTimeout(function () {
+          ul("please connect to pertamina Network"), 1000;
+          indintranet.setAttribute("class", "status redcol");
+        });
+      }
+    });
+    checkConnection(host1, port1, indhost1, 3000);
+    checkConnection(host2, port2, indhost2, 3000);
+    checkConnection(host3, port3, indhost3, 3000);
+    checkConnection(host4, port4, indhost4, 3000);
+    checkConnection(host5, port5, indhost5, 3000);
+    checkConnection(host6, port6, indhost6, 3000);
+    checkConnection(host7, port7, indhost7, 3000);
+    checkConnection(host8, port8, indhost8, 3000);
+    checkConnection(host9, port9, indhost9, 3000);
+  }, 3000);
   // setInterval(() => {
   //   checkVPN("10.54.127.226", 4444).then(
   //     () => {
