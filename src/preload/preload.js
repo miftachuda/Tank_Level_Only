@@ -295,7 +295,6 @@ const tanklist9 = [
   "41T-303",
   "41T-310",
   "41T-311",
-  "41T-312",
   "41T-313",
   "41T-314",
   "41T-317",
@@ -353,6 +352,7 @@ function ud(level, temp, name, x, lc) {
   }
 
   if (y(name) == y(x)) {
+    //console.log(x);
     let komponen = tankdoc.querySelector(`[id~='0${x}']`);
     s(`0${x}`, nwc(level));
     s(`0${x}-t`, `  ${temp} °C`);
@@ -697,7 +697,10 @@ window.addEventListener("DOMContentLoaded", async () => {
       let komponen = tankdoc.querySelector(
         `[tank~='0${tank}'] div:nth-child(6) img`
       );
+
       let border = tankdoc.querySelector(`[tank~='0${tank}']`);
+      console.log(border);
+      console.log(tank);
       let rate = tankdoc.querySelector(`[tank~='0${tank}'] div:nth-child(5)`);
       let red = "../img/red.svg";
       let green = "../img/green.svg";
@@ -826,6 +829,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             meter_cubic_hour,
             ton_per_day,
           } = calc(level, levelPastExtend, timestamp, timestampPast, tank);
+          console.log(tank);
           if (mm_per_hour > 0) {
             rate.className = "rate rateup";
           } else if (mm_per_hour < 0) {
@@ -861,14 +865,15 @@ window.addEventListener("DOMContentLoaded", async () => {
   }, 5000);
 
   tankdoc.getElementById("reload").addEventListener("click", () => {
-    client1.destroy();
+    //client1.destroy();
     client2.destroy();
     client3.destroy();
-    //client4.destroy()
+    client4.destroy();
     client5.destroy();
     client6.destroy();
     client7.destroy();
     client8.destroy();
+    client9.destroy();
 
     loadit();
   });
