@@ -28,6 +28,10 @@ jobs:
           npm install electron-builder --save-dev
       # - name: Build for windows 64 bit
       #   run: npx electron-builder build --windows --x64 --publish=never
+      - name: Install Windows Build Tools
+        run: |
+          npm install --global --production windows-build-tools
+          npm electron-rebuild
       - name: Build for windows 64 bit
         run: npm run build
       # - name: Setup Upx

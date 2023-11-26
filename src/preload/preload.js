@@ -8,7 +8,7 @@ const path = require("path");
 const recordArray = Array.from({ length: 12 }, (x, i) => 1);
 const { ipcRenderer } = require("electron");
 var tankdoc = document;
-console.log(document);
+//console.log(document);
 const datasg = require("../renderer/img/datasg.json");
 var pjson = require("../../package.json");
 const listshift = [
@@ -82,6 +82,53 @@ const checkInternet = (cb) => {
     }
   });
 };
+
+const knexInstance = require("knex")({
+  client: "better-sqlite3", // or 'better-sqlite3'
+  connection: {
+    filename: "./log.sqlite",
+  },
+});
+function shiftData(data) {
+  // For simplicity, let's just shift all values to the right by 1 position
+  const shiftedData = data.map((row) => ({
+    ...row,
+    column1: row.column1, // adjust based on your column names
+    column2: row.column2, // adjust based on your column names
+    // Add other columns as needed
+  }));
+
+  return shiftedData;
+}
+async function insertAndShiftData(table, newData) {
+  try {
+    // Start a transaction
+    await knexInstance.transaction(async (trx) => {
+      // Insert new data
+      await trx(table).insert(newData);
+
+      // Get the current data
+      const existingData = await trx(table).select("*");
+
+      // Check if the current data length is more than 100
+      if (existingData.length > 100) {
+        // Shift the existing data
+        const shiftedData = shiftData(existingData);
+
+        // Update the existing data with shifted data
+        for (let i = 0; i < shiftedData.length; i++) {
+          await trx(table)
+            .where("id", existingData[i].id)
+            .update(shiftedData[i]);
+        }
+      }
+    });
+
+    console.log("Insert and shift successful");
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 
 class MessageBuffer {
   constructor(delimiter) {
@@ -296,7 +343,6 @@ const tanklist9 = [
   "41T-310",
   "41T-311",
   "41T-313",
-  "41T-314",
   "41T-317",
 ]; //235
 const all_tank_raw = tanklist1.concat(
@@ -440,13 +486,16 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
     recordArray.shift();
 
-    //console.log(`${x} record saved`)
-    // save 2 hours record to sqlite db
-    // var toSave = JSON.stringify(lc)
-    // if (toSave != "{}") {
-    //     knexInstance("logsheet").insert({ data: toSave, timestamp: Date.now() }).then((x) => {
-    //     })
-    // }
+    console.log(`${x} record saved`);
+    //save 2 hours record to sqlite db
+    var toSave = JSON.stringify(lc);
+    if (toSave != "{}") {
+      knexInstance("logsheet")
+        .insert({ data: toSave, timestamp: Date.now() })
+        .then((x) => {
+          console.log(x);
+        });
+    }
   });
   setInterval(() => {
     t();
@@ -625,14 +674,20 @@ window.addEventListener("DOMContentLoaded", async () => {
       level: JSON.stringify(lc),
     });
     levelArray.shift();
-    // add log to sqlite db3
-    // var toSave = JSON.stringify(lc)
-    // if (toSave != "{}") {
-    //     knexInstance("tank").insert({ data: toSave, timestamp: Date.now() }).then((x) => {
-    //     })
-    // }
   }
-
+  async function loggingDB() {
+    //add log to sqlite db3
+    var toSave = JSON.stringify(lc);
+    if (toSave != "{}") {
+      await insertAndShiftData("tank", lc);
+      // knexInstance("tank")
+      //   .insert({ data: toSave, timestamp: Date.now() })
+      //   .then((x) => {});
+    }
+  }
+  setInterval(() => {
+    loggingDB();
+  }, 5000);
   setInterval(() => {
     logging();
   }, 5000);
@@ -699,8 +754,8 @@ window.addEventListener("DOMContentLoaded", async () => {
       );
 
       let border = tankdoc.querySelector(`[tank~='0${tank}']`);
-      console.log(border);
-      console.log(tank);
+      //console.log(border);
+      //console.log(tank);
       let rate = tankdoc.querySelector(`[tank~='0${tank}'] div:nth-child(5)`);
       let red = "../img/red.svg";
       let green = "../img/green.svg";
