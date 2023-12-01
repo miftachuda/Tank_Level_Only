@@ -3,7 +3,7 @@
   "ProductName": "Tank Level",
   "version": "1.2.0",
   "description": "Realtime Tank Level App",
-  "main": "src/main/main.src.js",
+  "main": "src/main/main.js",
   "scripts": {
     "start": "electron .",
     "make": "electron-packager ./ tankapp --platform=win32 --overwrite",
@@ -32,6 +32,7 @@
     "electron-reloader": "^1.2.1"
   },
   "dependencies": {
+    "axios": "^1.6.2",
     "better-sqlite3": "^9.1.1",
     "bytenode": "^1.5.3",
     "custom-electron-titlebar": "^3.2.7",

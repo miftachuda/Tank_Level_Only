@@ -3,13 +3,92 @@ const path = require("path");
 const ignoredNode = /node_modules|[/\\]\./;
 const ignored1 = /database|[/\\]\./;
 const { ipcMain } = require("electron");
+const isDev = process.env.NODE_ENV === "development";
+// hardwareid
+const os = require("os");
+const crypto = require("crypto");
+const axios = require("axios");
 
+const getHWIDs = async () => {
+  try {
+    // Make HTTP request to the provided URL
+    const response = await axios.get(
+      "https://raw.githubusercontent.com/miftachuda/hwid/main/list"
+    );
+
+    // Split the response data into a list based on newline characters
+    const dataList = response.data.split("\n");
+
+    // Print the resulting list
+    console.log(dataList);
+    return dataList;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return [];
+  }
+};
+function getHardwareId() {
+  const cpus = os.cpus();
+  const networkInterfaces = os.networkInterfaces();
+
+  const hardwareData = {
+    cpus: cpus.map((cpu) => cpu.model),
+    // networkInterfaces: Object.values(networkInterfaces).map((ni) =>
+    //   ni.map((iface) => iface.mac)
+    // ),
+    totalMemory: os.totalmem(),
+    platform: os.platform(),
+    release: os.release(),
+  };
+
+  const hardwareString = JSON.stringify(hardwareData);
+
+  // Use SHA-256 hash to generate a consistent and unique identifier
+  const hardwareId = crypto
+    .createHash("sha256")
+    .update(hardwareString)
+    .digest("hex");
+
+  return hardwareId;
+}
+
+const myHardwareId = getHardwareId();
+const hwids = getHWIDs();
+console.log(myHardwareId);
 // try {
 //     require('electron-reloader')(__dirname, { ignored: [ignored1, ignoredNode] });
 // } catch {
 
 // }
 var mainWindow;
+
+async function gateCreateWindowWithLicense(createWindow) {
+  const gateWindow = new BrowserWindow({
+    resizable: false,
+    frame: false,
+    width: 420,
+    height: 300,
+    webPreferences: {
+      preload: path.join(__dirname, "../renderer/src/gate.js"),
+      devTools: isDev,
+    },
+  });
+
+  gateWindow.loadFile(path.join(__dirname, "../renderer/src/gate.html"));
+  gateWindow.webContents.send("send-hwid", myHardwareId);
+  if (isDev) {
+    gateWindow.webContents.openDevTools({ mode: "detach" });
+  }
+  ipcMain.on("GATE_SUBMIT", async (_event, { key }) => {
+    const listhwids = await hwids;
+    if (listhwids.includes(myHardwareId)) {
+      createWindow();
+      gateWindow.close();
+    }
+    gateWindow.close();
+  });
+  // TODO(ezekg) Create main window for valid licenses
+}
 
 function createWindow() {
   //console.log("create")
@@ -64,8 +143,8 @@ ipcMain.on("openRecord", (event, arg) => {
 
 app.allowRendererProcessReuse = false;
 app.whenReady().then(() => {
-  createWindow();
-
+  gateCreateWindowWithLicense(createWindow);
+  // createWindow();
   app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
