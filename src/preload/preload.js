@@ -25,6 +25,7 @@ const listshift = [
   ["D2 Malam", "A3 Pagi", "C1 Sore", "B Off-Sore"],
   ["D3 Malam", "B1 Pagi", "C2 Sore", "A Off-Pagi"],
 ];
+
 function getPeriod(min) {
   if (min < 480) {
     return 0;
@@ -82,13 +83,36 @@ const checkInternet = (cb) => {
     }
   });
 };
-
-const knexInstance = require("knex")({
-  client: "better-sqlite3", // or 'better-sqlite3'
+//setup database
+const knex = require("knex");
+const knexInstance = knex({
+  client: "better-sqlite3",
   connection: {
-    filename: "./log.sqlite",
+    filename: "./database.db",
   },
+  useNullAsDefault: true,
 });
+function createTable() {
+  knexInstance.schema.hasTable("tank").then(function (exists) {
+    if (!exists) {
+      return knexInstance.schema.createTable("tank", function (table) {
+        table.json("data");
+        table.timestamp("timestamp");
+      });
+    }
+  });
+  knexInstance.schema.hasTable("logsheet").then(function (exists) {
+    if (!exists) {
+      return knexInstance.schema.createTable("logsheet", function (table) {
+        table.json("data");
+        table.timestamp("timestamp");
+      });
+    }
+  });
+}
+
+createTable();
+
 function shiftData(data) {
   // For simplicity, let's just shift all values to the right by 1 position
   const shiftedData = data.map((row) => ({
@@ -105,7 +129,7 @@ async function insertAndShiftData(table, newData) {
     // Start a transaction
     await knexInstance.transaction(async (trx) => {
       // Insert new data
-      await trx(table).insert(newData);
+      await trx(table).insert({ data: newData, timestamp: Date.now() });
 
       // Get the current data
       const existingData = await trx(table).select("*");
