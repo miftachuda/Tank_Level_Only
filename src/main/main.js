@@ -5,7 +5,8 @@ const bytenode = require("bytenode");
 const fs = require("fs");
 const v8 = require("v8");
 const distPaths = ["../preload/"];
-
+const os = require("os");
+console.log(os.arch());
 const isDevelopment = process.env.NODE_ENV === "development";
 
 let extNew = ".jsc";
