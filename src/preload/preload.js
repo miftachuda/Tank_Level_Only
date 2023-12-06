@@ -1,6 +1,6 @@
 const parseString = require("xml2js").parseString;
 const Net = require("net");
-
+var axios = require("axios");
 let vpnmode = false;
 const moment = require("moment");
 const cron = require("node-cron");
@@ -136,19 +136,25 @@ async function insertAndShiftData(table, newData) {
 
       // Check if the current data length is more than 100
       if (existingData.length > 100) {
-        // Shift the existing data
-        const shiftedData = shiftData(existingData);
-
-        // Update the existing data with shifted data
-        for (let i = 0; i < shiftedData.length; i++) {
-          await trx(table)
-            .where("id", existingData[i].id)
-            .update(shiftedData[i]);
-        }
+        console.log("length exceeded, deleteing first row");
+        knexInstance("tank")
+          .where("timestamp", "=", function () {
+            this.select("timestamp")
+              .from("tank")
+              .orderBy("timestamp", "asc")
+              .limit(1);
+          }) // Limit the result to one row (the last inserted row)
+          .del()
+          .then(() => {
+            console.log("First row deleted");
+          })
+          .catch((error) => {
+            console.error("Error deleting first row:", error);
+          });
       }
     });
 
-    console.log("Insert and shift successful");
+    console.log("Insert successful");
   } catch (error) {
     console.error("Error:", error);
   }
@@ -476,6 +482,7 @@ function ud(level, temp, name, x, lc) {
 // }
 
 window.addEventListener("DOMContentLoaded", async () => {
+  var jadwal;
   let title = document.getElementsByName("title");
   title.innerText = `Tank Level v${pjson.version}`;
   us();
@@ -502,7 +509,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const lc = {};
   ul("Welcome to Tank App");
   // '0 0-23/2 * * *'
-  cron.schedule("0 0-23/2 * * *", (x) => {
+  cron.schedule("0 0-23/2 * * *", async (x) => {
     // save 2 hours record to memmory
     recordArray.push({
       data: JSON.stringify(lc),
@@ -510,10 +517,10 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
     recordArray.shift();
 
-    console.log(`${x} record saved`);
     //save 2 hours record to sqlite db
     var toSave = JSON.stringify(lc);
     if (toSave != "{}") {
+      await insertAndShiftData("logsheet", lc);
       knexInstance("logsheet")
         .insert({ data: toSave, timestamp: Date.now() })
         .then((x) => {
@@ -521,6 +528,114 @@ window.addEventListener("DOMContentLoaded", async () => {
         });
     }
   });
+  cron.schedule("50 3 * * *", async (x) => {
+    jadwal = await getSholat();
+  });
+
+  async function callAxiosWithRetry(config, depth, failMassage) {
+    const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+    try {
+      return await axios(config);
+    } catch (e) {
+      if (depth > 20) {
+        throw e;
+      }
+      console.log(failMassage.red);
+      await wait(2 ** depth * 100);
+      console.log("Retrying .. ".green + depth);
+      return callAxiosWithRetry(config, depth + 1, failMassage);
+    }
+  }
+
+  async function getSholat() {
+    var config = {
+      method: "get",
+      url: "https://api.myquran.com/v1/sholat/jadwal/1407/2023/12/05",
+      headers: {},
+    };
+
+    const jadwal = await callAxiosWithRetry(
+      config,
+      0,
+      "Fail get Jadwal Sholat"
+    ).then(function (response) {
+      console.log("Succes");
+      return response.data;
+    });
+    var boxSholatElements = document.querySelectorAll(".box-sholat");
+    boxSholatElements.forEach(function (boxSholatElement) {
+      // Get the child elements inside each box-sholat
+      var childElements = boxSholatElement.children[1];
+      console.log(childElements.id);
+      console.log(jadwal);
+      childElements.textContent = jadwal.data.jadwal[childElements.id];
+    });
+    return jadwal;
+  }
+  jadwal = await getSholat();
+  await markSholat();
+  async function markSholat() {
+    function parseTime(time) {}
+    const currentTime = new Date().toLocaleTimeString("en-US", {
+      hour12: false,
+    });
+    const [currentHour, currentMinute] = currentTime.split(":");
+    const currentTimeInMinutes =
+      parseInt(currentHour) * 60 + parseInt(currentMinute);
+    const imsakTimeInMinutes =
+      parseInt(jadwal.data.jadwal.imsak.split(":")[0]) * 60 +
+      parseInt(jadwal.data.jadwal.imsak.split(":")[1]);
+    const subuhTimeInMinutes =
+      parseInt(jadwal.data.jadwal.subuh.split(":")[0]) * 60 +
+      parseInt(jadwal.data.jadwal.subuh.split(":")[1]);
+    const terbitTimeInMinutes =
+      parseInt(jadwal.data.jadwal.terbit.split(":")[0]) * 60 +
+      parseInt(jadwal.data.jadwal.terbit.split(":")[1]);
+    const dhuhaTimeInMinutes =
+      parseInt(jadwal.data.jadwal.dhuha.split(":")[0]) * 60 +
+      parseInt(jadwal.data.jadwal.dhuha.split(":")[1]);
+    const dzuhurTimeInMinutes =
+      parseInt(jadwal.data.jadwal.dzuhur.split(":")[0]) * 60 +
+      parseInt(jadwal.data.jadwal.dzuhur.split(":")[1]);
+    const asharTimeInMinutes =
+      parseInt(jadwal.data.jadwal.ashar.split(":")[0]) * 60 +
+      parseInt(jadwal.data.jadwal.ashar.split(":")[1]);
+    const isyaTimeInMinutes =
+      parseInt(jadwal.data.jadwal.isya.split(":")[0]) * 60 +
+      parseInt(jadwal.data.jadwal.isya.split(":")[1]);
+    if (currentTimeInMinutes > isyaTimeInMinutes) {
+      var el = document.getElementById("isya").parentNode;
+      el.style.backgroundImage =
+        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+    } else if (currentTimeInMinutes > asharTimeInMinutes) {
+      var el = document.getElementById("ashar").parentNode;
+      el.style.backgroundImage =
+        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+    } else if (currentTimeInMinutes > dzuhurTimeInMinutes) {
+      var el = document.getElementById("dzuhur").parentNode;
+      el.style.backgroundImage =
+        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+    } else if (currentTimeInMinutes > dhuhaTimeInMinutes) {
+      var el = document.getElementById("dhuha").parentNode;
+      el.style.backgroundImage =
+        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+    } else if (currentTimeInMinutes > terbitTimeInMinutes) {
+      var el = document.getElementById("terbit").parentNode;
+      el.style.backgroundImage =
+        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+    } else if (currentTimeInMinutes > subuhTimeInMinutes) {
+      var el = document.getElementById("subuh").parentNode;
+      el.style.backgroundImage =
+        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+    } else if (currentTimeInMinutes > imsakTimeInMinutes) {
+      var el = document.getElementById("imsak").parentNode;
+      el.style.backgroundImage =
+        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+    }
+  }
+  setInterval(async () => {
+    await markSholat();
+  }, 60000);
   setInterval(() => {
     t();
     //updatestatus(prevlevel, lc);

@@ -76,6 +76,11 @@ async function gateCreateWindowWithLicense(createWindow) {
 
   gateWindow.loadFile(path.join(__dirname, "../renderer/src/gate.html"));
   gateWindow.webContents.send("send-hwid", myHardwareId);
+  const listhwids = await hwids;
+  if (listhwids.includes(myHardwareId)) {
+    createWindow();
+    gateWindow.close();
+  }
   if (isDev) {
     gateWindow.webContents.openDevTools({ mode: "detach" });
   }
