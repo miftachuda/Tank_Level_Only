@@ -34,6 +34,7 @@
     "electron-reloader": "^1.2.1"
   },
   "dependencies": {
+    "@electron/remote": "^2.1.0",
     "axios": "^1.6.2",
     "better-sqlite3": "^9.1.1",
     "bytenode": "^1.5.3",

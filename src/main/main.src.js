@@ -3,6 +3,8 @@ const path = require("path");
 const ignoredNode = /node_modules|[/\\]\./;
 const ignored1 = /database|[/\\]\./;
 const { ipcMain } = require("electron");
+const remoteMain = require("@electron/remote/main");
+remoteMain.initialize();
 const isDev = process.env.NODE_ENV === "development";
 // hardwareid
 const os = require("os");
@@ -70,10 +72,11 @@ async function gateCreateWindowWithLicense(createWindow) {
     height: 300,
     webPreferences: {
       preload: path.join(__dirname, "../renderer/src/gate.js"),
+      devTools: false,
       //devTools: isDev,
     },
   });
-
+  remoteMain.enable(gateWindow.webContents);
   gateWindow.loadFile(path.join(__dirname, "../renderer/src/gate.html"));
   gateWindow.webContents.send("send-hwid", myHardwareId);
   const listhwids = await hwids;
@@ -105,13 +108,13 @@ function createWindow() {
     show: false,
     webPreferences: {
       preload: path.join(__dirname, "../preload/preload.js"),
-      enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
       webviewTag: true,
       //devTools: false
     },
   });
+  remoteMain.enable(mainWindow.webContents);
   mainWindow.setResizable(true);
   mainWindow.setMenuBarVisibility(false);
   mainWindow.loadFile(
@@ -123,23 +126,23 @@ function createWindow() {
   });
 }
 function createRecordWindow() {
-  const win = new BrowserWindow({
+  const recordWindow = new BrowserWindow({
     height: 1000,
     width: 980,
     frame: false,
     darkTheme: true,
     webPreferences: {
       preload: path.join(__dirname, "../preload/record.js"),
-      enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
       //  devTools: false
     },
   });
-  win.setResizable(false);
-  win.setMenuBarVisibility(false);
-  win.loadFile(path.join(__dirname, "../renderer/src/record.html"));
-  return win;
+  remoteMain.enable(recordWindow.webContents);
+  recordWindow.setResizable(false);
+  recordWindow.setMenuBarVisibility(false);
+  recordWindow.loadFile(path.join(__dirname, "../renderer/src/record.html"));
+  return recordWindow;
 }
 ipcMain.on("openRecord", (event, arg) => {
   //console.log("Open Record");

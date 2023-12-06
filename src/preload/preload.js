@@ -293,9 +293,10 @@ host3 = "10.54.127.226";
 host4 = "10.54.127.227";
 host5 = "10.54.127.228";
 host6 = "10.54.127.229";
-host7 = "10.54.127.231";
-host8 = "10.54.127.234";
-host9 = "10.54.127.235";
+host7 = "10.54.127.230";
+host8 = "10.54.127.231";
+host9 = "10.54.127.234";
+host10 = "10.54.127.235";
 
 // host1 = "10.54.127.226";
 // host2 = "10.54.127.227";
@@ -315,6 +316,7 @@ port6 = 4444;
 port7 = 4444;
 port8 = 4444;
 port9 = 4444;
+port10 = 4444;
 const tanklist1 = [
   "41T-301",
   "41T-302",
@@ -356,8 +358,9 @@ const tanklist4 = [
 ]; //227
 const tanklist5 = ["41T-25", "41T-26"]; //228
 const tanklist6 = ["41T-24"]; //229
-const tanklist7 = ["41T-109", "41T-110", "41T-119", "41T-120"]; //231
-const tanklist8 = [
+const tanklist7 = ["41T-17", "41T-18"]; //230
+const tanklist8 = ["41T-109", "41T-110", "41T-119", "41T-120"]; //231
+const tanklist9 = [
   "41T-304",
   "41T-305",
   "41T-306",
@@ -367,7 +370,7 @@ const tanklist8 = [
   "41T-315",
   "41T-316",
 ]; //234
-const tanklist9 = [
+const tanklist10 = [
   "41T-301",
   "41T-302",
   "41T-303",
@@ -384,7 +387,8 @@ const all_tank_raw = tanklist1.concat(
   tanklist6,
   tanklist7,
   tanklist8,
-  tanklist9
+  tanklist9,
+  tanklist10
 );
 const all_tank = Array.from(new Set(all_tank_raw));
 const all_tank_arr = [
@@ -398,6 +402,7 @@ const all_tank_arr = [
   tanklist8,
   tanklist8,
   tanklist9,
+  tanklist10,
 ];
 function t() {
   time = moment().format("HH:mm:ss[</br>]DD MMM yyyy");
@@ -733,7 +738,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const indhost8 = tankdoc.getElementById("host8");
   const indhost9 = tankdoc.getElementById("host9");
   const payload1 =
-    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>8</GROUPID></FG4TG>'; //234,226,227,223
+    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>8</GROUPID></FG4TG>'; //234,226,227,223,230
   const payload2 =
     '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>146</GROUPID></FG4TG>'; //231
   const payload3 =
@@ -741,7 +746,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const payload4 =
     '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>216</GROUPID></FG4TG>'; //235
   const payload5 =
-    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>77</GROUPID></FG4TG>'; //229
+    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>77</GROUPID></FG4TG>';
   let client1;
   let client2;
   let client3;
@@ -751,6 +756,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   let client7;
   let client8;
   let client9;
+  let client10;
 
   function loadit() {
     // client1 = fetching(host1, port1, tanklist1, payload1, ul);//213
@@ -759,9 +765,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     client4 = fetching(host4, port4, tanklist4, payload1, ul); //227
     client5 = fetching(host5, port5, tanklist5, payload3, ul); //228
     client6 = fetching(host6, port6, tanklist6, payload1, ul); //229
-    client7 = fetching(host7, port7, tanklist7, payload2, ul); //231
-    client8 = fetching(host8, port8, tanklist8, payload1, ul); //234
-    client9 = fetching(host9, port9, tanklist9, payload4, ul); //225
+    client7 = fetching(host7, port7, tanklist7, payload1, ul); //230
+
+    client8 = fetching(host8, port8, tanklist8, payload2, ul); //231
+    client9 = fetching(host9, port9, tanklist9, payload1, ul); //234
+    client10 = fetching(host10, port10, tanklist10, payload4, ul); //235
   }
   loadit();
 
@@ -1097,7 +1105,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     client7.destroy();
     client8.destroy();
     client9.destroy();
-
+    client10.destroy();
     loadit();
   });
 });
