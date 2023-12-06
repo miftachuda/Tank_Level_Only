@@ -114,17 +114,6 @@ function createTable() {
 
 createTable();
 
-function shiftData(data) {
-  // For simplicity, let's just shift all values to the right by 1 position
-  const shiftedData = data.map((row) => ({
-    ...row,
-    column1: row.column1, // adjust based on your column names
-    column2: row.column2, // adjust based on your column names
-    // Add other columns as needed
-  }));
-
-  return shiftedData;
-}
 async function insertAndShiftData(table, newData) {
   try {
     // Start a transaction
@@ -428,7 +417,7 @@ function ul(text) {
   log.innerText = text;
 }
 
-function ud(level, temp, name, x, lc) {
+function ud(level, temp, name, x, levelcol) {
   function nwc(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
@@ -438,23 +427,23 @@ function ud(level, temp, name, x, lc) {
     let komponen = tankdoc.querySelector(`[id~='0${x}']`);
     s(`0${x}`, nwc(level));
     s(`0${x}-t`, `  ${temp} °C`);
-    if (lc[x]) {
-      if (lc[x].level > level) {
+    if (levelcol[x]) {
+      if (levelcol[x].level > level) {
         komponen.setAttribute("class", "tankturun");
-        setTimeout(() => {
-          komponen.setAttribute("class", "tanklevel");
-        }, 1000);
-      } else if (lc[x].level < level) {
+        // setTimeout(() => {
+        //   komponen.setAttribute("class", "tanklevel");
+        // }, 2000);
+      } else if (levelcol[x].level < level) {
         komponen.setAttribute("class", "tanknaik");
-        setTimeout(() => {
-          komponen.setAttribute("class", "tanklevel");
-        }, 1000);
+        // setTimeout(() => {
+        //   komponen.setAttribute("class", "tanklevel");
+        // }, 2000);
       } else {
         komponen.setAttribute("class", "tanklevel");
       }
     }
 
-    lc[x] = {
+    levelcol[x] = {
       level: level,
       temp: temp,
       time: Date.now(),
@@ -512,21 +501,21 @@ window.addEventListener("DOMContentLoaded", async () => {
     ipcRenderer.send("openRecord", recordArray);
   });
 
-  const lc = {};
+  const levelcollect = {};
   ul("Welcome to Tank App");
   // '0 0-23/2 * * *'
   cron.schedule("0 0-23/2 * * *", async (x) => {
     // save 2 hours record to memmory
     recordArray.push({
-      data: JSON.stringify(lc),
+      data: JSON.stringify(levelcollect),
       timestamp: Date.now().toString(),
     });
     recordArray.shift();
 
     //save 2 hours record to sqlite db
-    var toSave = JSON.stringify(lc);
+    var toSave = JSON.stringify(levelcollect);
     if (toSave != "{}") {
-      await insertAndShiftData("logsheet", lc);
+      await insertAndShiftData("logsheet", levelcollect);
       knexInstance("logsheet")
         .insert({ data: toSave, timestamp: Date.now() })
         .then((x) => {
@@ -704,7 +693,7 @@ window.addEventListener("DOMContentLoaded", async () => {
               var temp = `${result.TANK.PARAM[2].$.VALUE.replace(/[+]/, "")}`;
               var name = result.TANK.$.NAME.toString();
               tanklist.forEach((x, i) => {
-                ud(level, temp, name, x, lc, i);
+                ud(level, temp, name, x, levelcollect, i);
               });
             }
           }
@@ -847,15 +836,15 @@ window.addEventListener("DOMContentLoaded", async () => {
   function logging() {
     // add log to memory
     levelArray.push({
-      level: JSON.stringify(lc),
+      level: JSON.stringify(levelcollect),
     });
     levelArray.shift();
   }
   async function loggingDB() {
     //add log to sqlite db3
-    var toSave = JSON.stringify(lc);
+    var toSave = JSON.stringify(levelcollect);
     if (toSave != "{}") {
-      await insertAndShiftData("tank", lc);
+      await insertAndShiftData("tank", levelcollect);
       // knexInstance("tank")
       //   .insert({ data: toSave, timestamp: Date.now() })
       //   .then((x) => {});

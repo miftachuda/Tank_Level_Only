@@ -31,13 +31,21 @@ const getHWIDs = async () => {
 };
 function getHardwareId() {
   const cpus = os.cpus();
+  const macAddresses = [];
   const networkInterfaces = os.networkInterfaces();
-
+  Object.keys(networkInterfaces).forEach((iface) => {
+    networkInterfaces[iface].forEach((entry) => {
+      if (entry.family === "IPv4" && !entry.internal) {
+        macAddresses.push(entry.mac);
+      }
+    });
+  });
   const hardwareData = {
     cpus: cpus.map((cpu) => cpu.model),
     // networkInterfaces: Object.values(networkInterfaces).map((ni) =>
     //   ni.map((iface) => iface.mac)
     // ),
+    mac: macAddresses,
     totalMemory: os.totalmem(),
     platform: os.platform(),
     release: os.release(),
@@ -142,6 +150,8 @@ function createRecordWindow() {
   recordWindow.setResizable(false);
   recordWindow.setMenuBarVisibility(false);
   recordWindow.loadFile(path.join(__dirname, "../renderer/src/record.html"));
+  //recordWindow.setMenuBarVisibility(false);
+
   return recordWindow;
 }
 ipcMain.on("openRecord", (event, arg) => {
@@ -151,6 +161,7 @@ ipcMain.on("openRecord", (event, arg) => {
 });
 
 app.allowRendererProcessReuse = false;
+app.commandLine.appendSwitch("force_high_performance_gpu", "");
 app.whenReady().then(() => {
   gateCreateWindowWithLicense(createWindow);
   // createWindow();
