@@ -3,20 +3,20 @@
   "ProductName": "Tank Level",
   "version": "1.2.0",
   "description": "Realtime Tank Level App",
-  "main": "src/main/main.src.js",
+  "main": "src/main/main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "cross-env NODE_ENV=development electron .",
     "make": "electron-packager ./ tankapp --platform=win32 --overwrite",
     "export": "electron-builder --win=portable",
     "//fire": "uglifyjs src/preload/preload.js --output dist/preload.js --compress --mangle",
     "obs": "javascript-obfuscator ./src/preloadsc --output ./src/preload/ --disable-console-output true --simplify true",
     "compile": "node src/compile.js",
     "build": "electron-builder --win --config",
-    "build:win": "npm run compile && electron-builder --win --config",
+    "build:win": "cross-env NODE_ENV=publish npm run compile && electron-builder --win --config",
     "build:mac": "npm run compile && electron-builder --mac --config",
     "build:linux": "npm run compile && electron-builder --linux --config",
     "rebuild": "electron-rebuild -f -w better-sqlite3",
-    "_comment": "to rebuild npm run rebuild --arch=ia32 --openssl_fips=''"
+    "_comment": "to rebuild 'npm run rebuild --arch=ia32 --openssl_fips='''"
   },
   "repository": "https://github.com/miftachuda/Tank_Level_Only",
   "keywords": [
@@ -27,6 +27,7 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "@electron/rebuild": "^3.3.1",
+    "cross-env": "^7.0.3",
     "electron": "^12.2.3",
     "electron-builder": "^24.6.4",
     "electron-reloader": "^1.2.1"
@@ -40,6 +41,7 @@
     "knex": "^3.0.1",
     "moment": "^2.29.1",
     "node-cron": "^3.0.0",
+    "node-schedule": "^2.1.1",
     "original-fs": "^1.2.0",
     "xml2js": "^0.4.23"
   }

@@ -4,8 +4,9 @@ const path = require("path");
 const bytenode = require("bytenode");
 const fs = require("fs");
 const v8 = require("v8");
-console.log(path.join(__dirname, "../preload"));
 const distPaths = ["../preload/"];
+
+const isDevelopment = process.env.NODE_ENV === "development";
 
 let extNew = ".jsc";
 let extOld = ".js";
@@ -14,6 +15,14 @@ v8.setFlagsFromString("--no-lazy");
 function startByteCode() {
   const totalTimeLabel = "Start";
   console.time(totalTimeLabel);
+  bytenode.compileFile(
+    path.join(__dirname, "./main.src.js"),
+    path.join(__dirname, "./main.jsc")
+  );
+  const filePath = path.join(__dirname, "./main.src.js");
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath);
+  }
 
   for (const disPath of distPaths) {
     const rootPath = path.join(__dirname, disPath);
@@ -59,15 +68,28 @@ function startByteCode() {
   console.timeEnd(totalTimeLabel);
 }
 
-if (!fs.existsSync(path.join(__dirname, "./main.jsc"))) {
+if (isDevelopment) {
   bytenode.compileFile(
     path.join(__dirname, "./main.src.js"),
     path.join(__dirname, "./main.jsc")
   );
-  fs.unlinkSync(path.join(__dirname, "./main.src.js"), () => {
-    console.log("start up");
-  });
-  startByteCode();
+  require("./main.jsc");
 } else {
+  if (!fs.existsSync(path.join(__dirname, "./main.jsc"))) {
+    startByteCode();
+  }
   require("./main.jsc");
 }
+
+// if (!fs.existsSync(path.join(__dirname, "./main.jsc"))) {
+//   bytenode.compileFile(
+//     path.join(__dirname, "./main.src.js"),
+//     path.join(__dirname, "./main.jsc")
+//   );
+//   fs.unlinkSync(path.join(__dirname, "./main.src.js"), () => {
+//     console.log("start up");
+//   });
+//   startByteCode();
+// } else {
+//   require("./main.jsc");
+// }

@@ -20,7 +20,7 @@ const getHWIDs = async () => {
     const dataList = response.data.split("\n");
 
     // Print the resulting list
-    console.log(dataList);
+    // console.log(dataList);
     return dataList;
   } catch (error) {
     console.error("Error fetching data:", error.message);
@@ -54,7 +54,7 @@ function getHardwareId() {
 
 const myHardwareId = getHardwareId();
 const hwids = getHWIDs();
-console.log(myHardwareId);
+// console.log(myHardwareId);
 // try {
 //     require('electron-reloader')(__dirname, { ignored: [ignored1, ignoredNode] });
 // } catch {
@@ -70,20 +70,21 @@ async function gateCreateWindowWithLicense(createWindow) {
     height: 300,
     webPreferences: {
       preload: path.join(__dirname, "../renderer/src/gate.js"),
-      devTools: isDev,
+      //devTools: isDev,
     },
   });
 
   gateWindow.loadFile(path.join(__dirname, "../renderer/src/gate.html"));
   gateWindow.webContents.send("send-hwid", myHardwareId);
   const listhwids = await hwids;
+  if (isDev) {
+    gateWindow.webContents.openDevTools({ mode: "detach" });
+  }
   if (listhwids.includes(myHardwareId)) {
     createWindow();
     gateWindow.close();
   }
-  if (isDev) {
-    gateWindow.webContents.openDevTools({ mode: "detach" });
-  }
+
   ipcMain.on("GATE_SUBMIT", async (_event, { key }) => {
     const listhwids = await hwids;
     if (listhwids.includes(myHardwareId)) {

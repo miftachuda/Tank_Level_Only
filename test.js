@@ -72,8 +72,8 @@ const all_tank_raw = tanklist1.concat(
   tanklist9
 );
 const all_tank = Array.from(new Set(all_tank_raw));
-console.log(all_tank_raw);
-console.log(all_tank);
+// console.log(all_tank_raw);
+// console.log(all_tank);
 
 const all_tank_arr = [
   tanklist1,

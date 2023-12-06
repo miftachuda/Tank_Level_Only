@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
   });
   submit.addEventListener("click", async (event) => {
     event.preventDefault();
-    console.log("submited");
+    //console.log("submited");
     // const data = new FormData(gate);
     // const key = data.get("key");
 

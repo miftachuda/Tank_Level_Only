@@ -11,6 +11,7 @@ files:
   - "!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}"
   - "!src/preload2/*"
   - "!src/compile.js"
+  - "!**/*.jsc"
 asarUnpack:
   - resources/**
 asar: false

@@ -4,6 +4,7 @@ var axios = require("axios");
 let vpnmode = false;
 const moment = require("moment");
 const cron = require("node-cron");
+const schedule = require("node-schedule");
 const path = require("path");
 const recordArray = Array.from({ length: 12 }, (x, i) => 1);
 const { ipcRenderer } = require("electron");
@@ -136,7 +137,7 @@ async function insertAndShiftData(table, newData) {
 
       // Check if the current data length is more than 100
       if (existingData.length > 100) {
-        console.log("length exceeded, deleteing first row");
+        //console.log("length exceeded, deleteing first row");
         knexInstance("tank")
           .where("timestamp", "=", function () {
             this.select("timestamp")
@@ -146,7 +147,7 @@ async function insertAndShiftData(table, newData) {
           }) // Limit the result to one row (the last inserted row)
           .del()
           .then(() => {
-            console.log("First row deleted");
+            // console.log("First row deleted");
           })
           .catch((error) => {
             console.error("Error deleting first row:", error);
@@ -154,7 +155,7 @@ async function insertAndShiftData(table, newData) {
       }
     });
 
-    console.log("Insert successful");
+    //console.log("Insert successful");
   } catch (error) {
     console.error("Error:", error);
   }
@@ -524,12 +525,9 @@ window.addEventListener("DOMContentLoaded", async () => {
       knexInstance("logsheet")
         .insert({ data: toSave, timestamp: Date.now() })
         .then((x) => {
-          console.log(x);
+          //console.log(x);
         });
     }
-  });
-  cron.schedule("50 3 * * *", async (x) => {
-    jadwal = await getSholat();
   });
 
   async function callAxiosWithRetry(config, depth, failMassage) {
@@ -548,9 +546,21 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function getSholat() {
+    // Get today's date
+    const today = new Date();
+    const year = today.getFullYear();
+    // Month is 0-indexed, so we add 1 to get the correct month
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+
+    // Format the date as "YYYY/MM/DD"
+    const formattedDate = `${year}/${month.toString().padStart(2, "0")}/${day
+      .toString()
+      .padStart(2, "0")}`;
+    console.log(formattedDate);
     var config = {
       method: "get",
-      url: "https://api.myquran.com/v1/sholat/jadwal/1407/2023/12/05",
+      url: `https://api.myquran.com/v1/sholat/jadwal/1407/${formattedDate}`,
       headers: {},
     };
 
@@ -559,83 +569,102 @@ window.addEventListener("DOMContentLoaded", async () => {
       0,
       "Fail get Jadwal Sholat"
     ).then(function (response) {
-      console.log("Succes");
+      //console.log("Succes");
       return response.data;
     });
     var boxSholatElements = document.querySelectorAll(".box-sholat");
     boxSholatElements.forEach(function (boxSholatElement) {
       // Get the child elements inside each box-sholat
       var childElements = boxSholatElement.children[1];
-      console.log(childElements.id);
-      console.log(jadwal);
       childElements.textContent = jadwal.data.jadwal[childElements.id];
     });
     return jadwal;
   }
   jadwal = await getSholat();
-  await markSholat();
+
   async function markSholat() {
-    function parseTime(time) {}
-    const currentTime = new Date().toLocaleTimeString("en-US", {
-      hour12: false,
-    });
-    const [currentHour, currentMinute] = currentTime.split(":");
-    const currentTimeInMinutes =
-      parseInt(currentHour) * 60 + parseInt(currentMinute);
-    const imsakTimeInMinutes =
-      parseInt(jadwal.data.jadwal.imsak.split(":")[0]) * 60 +
-      parseInt(jadwal.data.jadwal.imsak.split(":")[1]);
-    const subuhTimeInMinutes =
-      parseInt(jadwal.data.jadwal.subuh.split(":")[0]) * 60 +
-      parseInt(jadwal.data.jadwal.subuh.split(":")[1]);
-    const terbitTimeInMinutes =
-      parseInt(jadwal.data.jadwal.terbit.split(":")[0]) * 60 +
-      parseInt(jadwal.data.jadwal.terbit.split(":")[1]);
-    const dhuhaTimeInMinutes =
-      parseInt(jadwal.data.jadwal.dhuha.split(":")[0]) * 60 +
-      parseInt(jadwal.data.jadwal.dhuha.split(":")[1]);
-    const dzuhurTimeInMinutes =
-      parseInt(jadwal.data.jadwal.dzuhur.split(":")[0]) * 60 +
-      parseInt(jadwal.data.jadwal.dzuhur.split(":")[1]);
-    const asharTimeInMinutes =
-      parseInt(jadwal.data.jadwal.ashar.split(":")[0]) * 60 +
-      parseInt(jadwal.data.jadwal.ashar.split(":")[1]);
-    const isyaTimeInMinutes =
-      parseInt(jadwal.data.jadwal.isya.split(":")[0]) * 60 +
-      parseInt(jadwal.data.jadwal.isya.split(":")[1]);
-    if (currentTimeInMinutes > isyaTimeInMinutes) {
-      var el = document.getElementById("isya").parentNode;
-      el.style.backgroundImage =
-        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
-    } else if (currentTimeInMinutes > asharTimeInMinutes) {
-      var el = document.getElementById("ashar").parentNode;
-      el.style.backgroundImage =
-        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
-    } else if (currentTimeInMinutes > dzuhurTimeInMinutes) {
-      var el = document.getElementById("dzuhur").parentNode;
-      el.style.backgroundImage =
-        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
-    } else if (currentTimeInMinutes > dhuhaTimeInMinutes) {
-      var el = document.getElementById("dhuha").parentNode;
-      el.style.backgroundImage =
-        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
-    } else if (currentTimeInMinutes > terbitTimeInMinutes) {
-      var el = document.getElementById("terbit").parentNode;
-      el.style.backgroundImage =
-        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
-    } else if (currentTimeInMinutes > subuhTimeInMinutes) {
-      var el = document.getElementById("subuh").parentNode;
-      el.style.backgroundImage =
-        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
-    } else if (currentTimeInMinutes > imsakTimeInMinutes) {
-      var el = document.getElementById("imsak").parentNode;
-      el.style.backgroundImage =
-        "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+    const prayerTimes = [
+      "isya",
+      "maghrib",
+      "ashar",
+      "dzuhur",
+      "dhuha",
+      "terbit",
+      "subuh",
+      "imsak",
+    ];
+    for (const prayer of prayerTimes) {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth();
+      const day = today.getDate();
+      const hour = jadwal.data.jadwal[prayer].split(":")[0];
+      const min = jadwal.data.jadwal[prayer].split(":")[1];
+      const date = new Date(year, month, day, hour, min, 0);
+      console.log(date);
+      const jobs = schedule.scheduleJob(date, function () {
+        console.log(`Task scheduled at ${prayer}`);
+        const el = document.getElementById(prayer).parentNode;
+        var elements = Array.from(
+          document.getElementsByClassName("box-sholat")
+        );
+        elements.forEach((element) => {
+          element.style.backgroundImage = "";
+        });
+        el.style.backgroundImage =
+          "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+      });
+      // // const job = new CronJob(
+      // //   `0 ${jadwal.data.jadwal[prayer].split(":")[1]} ${
+      // //     jadwal.data.jadwal[prayer].split(":")[0]
+      // //   } * * *`,
+      // //   function () {
+      // //     console.log(`Task scheduled at ${prayer}`);
+      // //     const el = document.getElementById(prayer).parentNode;
+      // //     var elements = Array.from(
+      // //       document.getElementsByClassName("box-sholat")
+      // //     );
+      // //     elements.forEach((element) => {
+      // //       element.style.backgroundImage = "";
+      // //     });
+      // //     el.style.backgroundImage =
+      // //       "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+      // //     job.stop();
+      // //   }
+      // // );
+      // job.start();
+    }
+    function parseTime(time) {
+      return time.split(":").map(Number);
+    }
+    const currentTime = parseTime(
+      new Date().toLocaleTimeString("en-US", { hour12: false })
+    );
+    const currentTimeInMinutes = currentTime[0] * 60 + currentTime[1];
+
+    for (const prayer of prayerTimes) {
+      const prayerTime = parseTime(jadwal.data.jadwal[prayer]);
+      const prayerTimeInMinutes = prayerTime[0] * 60 + prayerTime[1];
+
+      if (currentTimeInMinutes >= prayerTimeInMinutes) {
+        const el = document.getElementById(prayer).parentNode;
+        var elements = Array.from(
+          document.getElementsByClassName("box-sholat")
+        );
+        elements.forEach((element) => {
+          element.style.backgroundImage = "";
+        });
+        el.style.backgroundImage =
+          "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+        break; // Stop marking other prayers once the current one is marked
+      }
     }
   }
-  setInterval(async () => {
+  await markSholat();
+  cron.schedule("0 0 * * *", async (x) => {
+    jadwal = await getSholat();
     await markSholat();
-  }, 60000);
+  });
   setInterval(() => {
     t();
     //updatestatus(prevlevel, lc);
