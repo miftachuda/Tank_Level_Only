@@ -1,7 +1,7 @@
 {
   "name": "tanklevelapp",
   "ProductName": "Tank Level",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Realtime Tank Level App",
   "main": "src/main/main.js",
   "scripts": {
