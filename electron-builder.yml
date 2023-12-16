@@ -20,6 +20,7 @@ afterPack: ./src/compile.js
 win:
   executableName: tanklevelapp
   icon: "./src/renderer/img/ico.png"
+  requestedExecutionLevel: highestAvailable
 nsis:
   oneClick: false
   shortcutName: ${productName}-v${version}

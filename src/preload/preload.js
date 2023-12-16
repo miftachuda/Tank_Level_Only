@@ -755,7 +755,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     client5 = fetching(host5, port5, tanklist5, payload3, ul); //228
     client6 = fetching(host6, port6, tanklist6, payload1, ul); //229
     client7 = fetching(host7, port7, tanklist7, payload1, ul); //230
-
     client8 = fetching(host8, port8, tanklist8, payload2, ul); //231
     client9 = fetching(host9, port9, tanklist9, payload1, ul); //234
     client10 = fetching(host10, port10, tanklist10, payload4, ul); //235
