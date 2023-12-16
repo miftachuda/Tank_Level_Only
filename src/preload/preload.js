@@ -322,7 +322,7 @@ const tanklist1 = [
   "41T-316",
   "41T-317",
 ]; //213
-const tanklist2 = ["35T-2", "35T-4"]; //223
+const tanklist2 = ["35T-2 ", "35T-4"]; //223
 const tanklist3 = [
   "41T-111",
   "41T-112",
@@ -422,7 +422,7 @@ function ud(level, temp, name, x, levelcol) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
-  if (y(name) == y(x)) {
+  if (name == y(x)) {
     //console.log(x);
     let komponen = tankdoc.querySelector(`[id~='0${x}']`);
     s(`0${x}`, nwc(level));
