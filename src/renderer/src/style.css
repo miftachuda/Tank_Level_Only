@@ -229,8 +229,8 @@ header {
 }
 
 .status {
-  height: 1.8vw;
-  width: 1.8vw;
+  height: 1.5vw;
+  width: 1.5vw;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
@@ -252,7 +252,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 5px;
   width: auto;
 }
 
@@ -279,6 +279,7 @@ header {
 
 .desc {
   color: #fff;
+  font-size: 1.1vw;
 }
 
 .level {
@@ -286,41 +287,27 @@ header {
   flex-direction: column;
 }
 
-.loc2 {
-  height: 40vh;
-  position: relative;
-  top: 0vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2px;
-  padding-bottom: 0;
-  border-radius: 5px;
-}
-
 .firstrow,
 .secondrow {
-  height: 47%;
+  height: 49.5%;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  margin: 5px;
+  margin: 1px;
 }
-
+.loc2,
 .loc3 {
-  height: 40vh;
+  height: 38vh;
   position: relative;
-  top: 0vh;
-  display: flex;
+  top: 1vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2px;
-  padding-top: 0px;
+  padding-bottom: 0;
   border-radius: 5px;
 }
 
@@ -375,7 +362,7 @@ header {
 }
 
 .tankbox1 {
-  border-radius: 15px;
+  border-radius: 20px;
   height: 100%;
   width: 9%;
   margin-left: 3px;
@@ -391,7 +378,7 @@ header {
   border-radius: 10px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   height: 100%;
-  border-radius: 30px;
+  border-radius: 20px;
   width: 9%;
   margin-left: 3px;
   margin-right: 3px;
@@ -413,21 +400,21 @@ header {
 }
 
 .tanklevel {
-  font-weight: 600;
+  font-weight: 700;
   color: #f5e342;
-  font-size: 3.5vmin;
+  font-size: 4vmin;
 }
 
 .tanknaik {
   font-weight: 600;
   color: #15ff00;
-  font-size: 3.4vmin;
+  font-size: 4vmin;
 }
 
 .tankturun {
   font-weight: 600;
   color: #e100ff;
-  font-size: 3.4vmin;
+  font-size: 4vmin;
 }
 
 .tankidle {
@@ -493,8 +480,7 @@ header {
 }
 
 #record {
-  margin-left: 20px;
-  height: 50px;
+  margin-left: 10px;
   background-color: #c2fbd7;
   border-radius: 100px;
   box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
@@ -711,5 +697,5 @@ ul li {
 }
 
 .mainwindow {
-  padding: 10px;
+  padding: 2px;
 }

@@ -10,7 +10,7 @@ const recordArray = Array.from({ length: 12 }, (x, i) => 1);
 const { ipcRenderer } = require("electron");
 var tankdoc = document;
 //console.log(document);
-const datasg = require("../renderer/img/datasg.json");
+var datasg = require("../renderer/img/datasg.json");
 var pjson = require("../../package.json");
 const listshift = [
   ["A1 Malam", "B2 Pagi", "C3 Sore", "D Off-Malam"],
@@ -45,7 +45,7 @@ function checkCurrentShift() {
   var minutes = Math.trunc(duration.asMinutes()) % 1440;
   return listshift[day][getPeriod(minutes)];
 }
-function cods(date) {
+function checkOnDateShift(date) {
   var now = moment(date);
   var end = moment("2021-12-22");
   var duration = moment.duration(now.diff(end));
@@ -58,21 +58,22 @@ function us() {
   let now = Date.now();
   let next = now + 3600000 * 8;
   let double_next = now + 3600000 * 16;
-  document.getElementById("shiftblock1").innerHTML = cods(now).split(" ")[0];
+  document.getElementById("shiftblock1").innerHTML =
+    checkOnDateShift(now).split(" ")[0];
   document.getElementById("shiftblock2").innerHTML = `&#x2794; ${
-    cods(next).split(" ")[0]
+    checkOnDateShift(next).split(" ")[0]
   }`;
   document.getElementById("shiftblock3").innerHTML = `&#x2794; ${
-    cods(double_next).split(" ")[0]
+    checkOnDateShift(double_next).split(" ")[0]
   }`;
   document.getElementById("masuk_apa1").innerHTML = `Shift ${
-    cods(now).split(" ")[1]
+    checkOnDateShift(now).split(" ")[1]
   }`;
   document.getElementById("masuk_apa2").innerHTML = `Shift ${
-    cods(next).split(" ")[1]
+    checkOnDateShift(next).split(" ")[1]
   }`;
   document.getElementById("masuk_apa3").innerHTML = `Shift ${
-    cods(double_next).split(" ")[1]
+    checkOnDateShift(double_next).split(" ")[1]
   }`;
 }
 const checkInternet = (cb) => {
@@ -108,6 +109,34 @@ function createTable() {
         table.json("data");
         table.timestamp("timestamp");
       });
+    }
+  });
+  knexInstance.schema.hasTable("alarm").then(function (exists) {
+    if (!exists) {
+      knexInstance.schema
+        .createTable("alarm", function (table) {
+          table.increments();
+          table.string("name");
+          table.integer("low");
+          table.integer("high");
+        })
+        .then(() => {
+          Object.keys(datasg[2]).forEach((key) => {
+            const value = datasg[2][key];
+            knexInstance("alarm")
+              .insert({
+                name: key,
+                low: value.low,
+                high: value.high,
+              })
+              .then((x) => {
+                console.log(x);
+              });
+            console.log(`Key: ${key}, Value: ${value}`);
+          });
+
+          return knexInstance;
+        });
     }
   });
 }
@@ -401,7 +430,8 @@ function y(x) {
   return x.replace(/\s/g, "");
 }
 const s = (selector, text) => {
-  const element = tankdoc.getElementById(selector);
+  new_sel = y(selector);
+  const element = tankdoc.getElementById(new_sel);
   if (element) element.innerText = text;
 };
 
@@ -417,12 +447,13 @@ function ul(text) {
   log.innerText = text;
 }
 
-function ud(level, temp, name, x, levelcol) {
+function ud(level, temp, name, x1, levelcol) {
+  x = y(x1);
   function nwc(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
-
-  if (name == y(x)) {
+  // if (y(name) == y(x)) {
+  if (name == x1) {
     //console.log(x);
     let komponen = tankdoc.querySelector(`[id~='0${x}']`);
     s(`0${x}`, nwc(level));
@@ -516,67 +547,32 @@ window.addEventListener("DOMContentLoaded", async () => {
     var toSave = JSON.stringify(levelcollect);
     if (toSave != "{}") {
       await insertAndShiftData("logsheet", levelcollect);
-      knexInstance("logsheet")
-        .insert({ data: toSave, timestamp: Date.now() })
-        .then((x) => {
-          //console.log(x);
-        });
+      // knexInstance("logsheet")
+      //   .insert({ data: toSave, timestamp: Date.now() })
+      //   .then((x) => {
+      //     //console.log(x);
+      //   });
     }
   });
 
-  async function callAxiosWithRetry(config, depth, failMassage) {
-    const wait = (ms) => new Promise((res) => setTimeout(res, ms));
-    try {
-      return await axios(config);
-    } catch (e) {
-      if (depth > 20) {
-        throw e;
-      }
-      console.log(failMassage.red);
-      await wait(2 ** depth * 100);
-      console.log("Retrying .. ".green + depth);
-      return callAxiosWithRetry(config, depth + 1, failMassage);
-    }
-  }
-
-  async function getSholat() {
-    // Get today's date
+  async function markSholat(jadwal_sholat) {
     const today = new Date();
     const year = today.getFullYear();
-    // Month is 0-indexed, so we add 1 to get the correct month
     const month = today.getMonth() + 1;
     const day = today.getDate();
 
-    // Format the date as "YYYY/MM/DD"
-    const formattedDate = `${year}/${month.toString().padStart(2, "0")}/${day
+    //Format the date as "YYYY-MM-DD"
+    const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
       .toString()
       .padStart(2, "0")}`;
-    console.log(formattedDate);
-    var config = {
-      method: "get",
-      url: `https://api.myquran.com/v1/sholat/jadwal/1407/${formattedDate}`,
-      headers: {},
-    };
-
-    const jadwal = await callAxiosWithRetry(
-      config,
-      0,
-      "Fail get Jadwal Sholat"
-    ).then(function (response) {
-      //console.log("Succes");
-      return response.data;
-    });
     var boxSholatElements = document.querySelectorAll(".box-sholat");
     boxSholatElements.forEach(function (boxSholatElement) {
       // Get the child elements inside each box-sholat
       var childElements = boxSholatElement.children[1];
-      childElements.textContent = jadwal.data.jadwal[childElements.id];
+      childElements.textContent =
+        jadwal_sholat.data[formattedDate][childElements.id];
     });
-    return jadwal;
-  }
-  jadwal = await getSholat();
 
-  async function markSholat() {
     const prayerTimes = [
       "isya",
       "maghrib",
@@ -592,10 +588,11 @@ window.addEventListener("DOMContentLoaded", async () => {
       const year = today.getFullYear();
       const month = today.getMonth();
       const day = today.getDate();
-      const hour = jadwal.data.jadwal[prayer].split(":")[0];
-      const min = jadwal.data.jadwal[prayer].split(":")[1];
+      const hour = await jadwal_sholat.data[formattedDate][prayer].split(
+        ":"
+      )[0];
+      const min = await jadwal_sholat.data[formattedDate][prayer].split(":")[1];
       const date = new Date(year, month, day, hour, min, 0);
-      console.log(date);
       const jobs = schedule.scheduleJob(date, function () {
         console.log(`Task scheduled at ${prayer}`);
         const el = document.getElementById(prayer).parentNode;
@@ -637,7 +634,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const currentTimeInMinutes = currentTime[0] * 60 + currentTime[1];
 
     for (const prayer of prayerTimes) {
-      const prayerTime = parseTime(jadwal.data.jadwal[prayer]);
+      const prayerTime = parseTime(jadwal_sholat.data[formattedDate][prayer]);
       const prayerTimeInMinutes = prayerTime[0] * 60 + prayerTime[1];
 
       if (currentTimeInMinutes >= prayerTimeInMinutes) {
@@ -649,15 +646,18 @@ window.addEventListener("DOMContentLoaded", async () => {
           element.style.backgroundImage = "";
         });
         el.style.backgroundImage =
-          "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+          "radial-gradient(circle at 49% 49.5%, rgb(245, 76, 100) 0%, rgb(247, 129, 97) 90%)";
         break; // Stop marking other prayers once the current one is marked
       }
     }
   }
-  await markSholat();
+  ipcRenderer.send("get-jadwal-sholat");
   cron.schedule("0 0 * * *", async (x) => {
-    jadwal = await getSholat();
-    await markSholat();
+    ipcRenderer.send("get-jadwal-sholat");
+  });
+
+  ipcRenderer.on("jadwal-sholat", async (event, data) => {
+    await markSholat(data);
   });
   setInterval(() => {
     t();
@@ -775,15 +775,15 @@ window.addEventListener("DOMContentLoaded", async () => {
         });
       }
     });
-    checkConnection(host1, port1, indhost1, 3000);
-    checkConnection(host2, port2, indhost2, 3000);
-    checkConnection(host3, port3, indhost3, 3000);
-    checkConnection(host4, port4, indhost4, 3000);
-    checkConnection(host5, port5, indhost5, 3000);
-    checkConnection(host6, port6, indhost6, 3000);
-    checkConnection(host7, port7, indhost7, 3000);
-    checkConnection(host8, port8, indhost8, 3000);
-    checkConnection(host9, port9, indhost9, 3000);
+    // checkConnection(host1, port1, indhost1, 3000);
+    // checkConnection(host2, port2, indhost2, 3000);
+    // checkConnection(host3, port3, indhost3, 3000);
+    // checkConnection(host4, port4, indhost4, 3000);
+    // checkConnection(host5, port5, indhost5, 3000);
+    // checkConnection(host6, port6, indhost6, 3000);
+    // checkConnection(host7, port7, indhost7, 3000);
+    // checkConnection(host8, port8, indhost8, 3000);
+    // checkConnection(host9, port9, indhost9, 3000);
   }, 3000);
   // setInterval(() => {
   //   checkVPN("10.54.127.226", 4444).then(
@@ -912,10 +912,32 @@ window.addEventListener("DOMContentLoaded", async () => {
     let dataPasts = levelArray[90];
     let dataPastsExtend = levelArray[0];
     // console.log(datas, dataPasts)
-    all_tank.forEach((tank) => {
+    async function getAllAlarm() {
+      var the = await knexInstance
+        .column("name", "low", "high")
+        .select()
+        .from("alarm");
+      var alarm = Object.fromEntries(
+        the.map((x) => {
+          return [
+            [x.name],
+            {
+              low: x.low,
+              high: x.high,
+            },
+          ];
+        })
+      );
+      return alarm;
+    }
+
+    all_tank.forEach(async (tank1) => {
+      var tank = y(tank1);
+
       let komponen = tankdoc.querySelector(
         `[tank~='0${tank}'] div:nth-child(6) img`
       );
+      let tankbox = tankdoc.querySelector(`[tank~='0${tank}']`);
 
       let border = tankdoc.querySelector(`[tank~='0${tank}']`);
       //console.log(border);
@@ -924,6 +946,8 @@ window.addEventListener("DOMContentLoaded", async () => {
       let red = "../img/red.svg";
       let green = "../img/green.svg";
       //fast move
+      var alarm = await getAllAlarm();
+
       if (dataPasts != 1) {
         if (JSON.parse(dataPasts.level)[tank]) {
           let level = parseInt(JSON.parse(datas.level)[tank].level) ?? 0;
@@ -959,12 +983,20 @@ window.addEventListener("DOMContentLoaded", async () => {
           //     default:
           //         break;
           // }
+
           if (level - levelPast < -delta) {
             if (record[tank] != "down") {
               border.setAttribute("tank", `0${tank} borderturun`);
               // komponen.id = "down"
               komponen.setAttribute("class", "visible blink");
               komponen.src = red;
+
+              //create alarm
+              console.log(tank, level, alarm[tank].low);
+              if (level > alarm[tank].low) {
+                tankbox.backgroundColor = "#c738389c";
+                console.log(tank, "low", level, alarm[tank].low);
+              }
             }
             record[tank] = "down";
           } else if (level - levelPast > delta) {
@@ -973,6 +1005,7 @@ window.addEventListener("DOMContentLoaded", async () => {
               // komponen.id = "up"
               komponen.setAttribute("class", "visible blink");
               komponen.src = green;
+              //create alarm
             }
             record[tank] = "up";
           } else {
@@ -1032,7 +1065,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         }
         record[tank] = "stable";
       }
-      //rate move
+      //slow move
       if (dataPastsExtend != 1) {
         if (JSON.parse(dataPastsExtend.level)[tank]) {
           let level = parseInt(JSON.parse(datas.level)[tank].level) ?? 0;
@@ -1048,7 +1081,6 @@ window.addEventListener("DOMContentLoaded", async () => {
             meter_cubic_hour,
             ton_per_day,
           } = calc(level, levelPastExtend, timestamp, timestampPast, tank);
-          console.log(tank);
           if (mm_per_hour > 0) {
             rate.className = "rate rateup";
           } else if (mm_per_hour < 0) {

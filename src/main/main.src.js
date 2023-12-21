@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require("electron");
+const { session } = require("electron");
 const path = require("path");
 const ignoredNode = /node_modules|[/\\]\./;
 const ignored1 = /database|[/\\]\./;
@@ -45,7 +46,7 @@ function getHardwareId() {
     // networkInterfaces: Object.values(networkInterfaces).map((ni) =>
     //   ni.map((iface) => iface.mac)
     // ),
-    mac: macAddresses,
+    // mac: macAddresses,
     totalMemory: os.totalmem(),
     platform: os.platform(),
     release: os.release(),
@@ -81,6 +82,7 @@ async function gateCreateWindowWithLicense(createWindow) {
     webPreferences: {
       preload: path.join(__dirname, "../renderer/src/gate.js"),
       devTools: false,
+      webSecurity: false,
       //devTools: isDev,
     },
   });
@@ -165,6 +167,24 @@ app.commandLine.appendSwitch("force_high_performance_gpu", "");
 app.whenReady().then(() => {
   gateCreateWindowWithLicense(createWindow);
   // createWindow();
+  // session.defaultSession.webRequest.onHeadersReceived(
+  //   { urls: ["https://bimasislam.kemenag.go.id/*"] },
+  //   (details, callback) => {
+  //     console.log(details);
+
+  //     if (
+  //       details.responseHeaders &&
+  //       details.responseHeaders["Set-Cookie"] &&
+  //       details.responseHeaders["Set-Cookie"].length &&
+  //       !details.responseHeaders["Set-Cookie"][0].includes("SameSite=none")
+  //     ) {
+  //       details.responseHeaders["Set-Cookie"][0] =
+  //         details.responseHeaders["Set-Cookie"][0] +
+  //         "; SameSite=none; Secure=true";
+  //     }
+  //     callback({ cancel: false, responseHeaders: details.responseHeaders });
+  //   }
+  // );
   app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
@@ -172,3 +192,75 @@ app.whenReady().then(() => {
 app.on("window-all-closed", function () {
   if (process.platform !== "darwin") app.quit();
 });
+ipcMain.on("get-jadwal-sholat", async (event, arg) => {
+  var jadwal = await getSholat();
+  mainWindow.webContents.send("jadwal-sholat", jadwal);
+});
+async function getSholat() {
+  async function callAxiosWithRetry(config, depth, failMassage) {
+    const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+    try {
+      return await axios(config);
+    } catch (e) {
+      if (depth > 20) {
+        throw e;
+      }
+      console.log(failMassage);
+      await wait(2 ** depth * 100);
+      console.log("Retrying .. ".green + depth);
+      return callAxiosWithRetry(config, depth + 1, failMassage);
+    }
+  }
+  const today = new Date();
+  const year = today.getFullYear();
+  // Month is 0-indexed, so we add 1 to get the correct month
+  const month = today.getMonth() + 1;
+  var config1 = {
+    method: "get",
+    url: "https://bimasislam.kemenag.go.id/jadwalshalat",
+  };
+  config1.withCredentials = true;
+  const cookie = await callAxiosWithRetry(config1, 0, "Fail get cookie").then(
+    function (response) {
+      const cookies = response.headers["set-cookie"];
+      const phpsessidCookie = cookies.find((cookie) =>
+        cookie.includes("PHPSESSID")
+      );
+      return phpsessidCookie;
+    }
+  );
+  var qs = require("qs");
+  var data = qs.stringify({
+    bln: month.toString().padStart(2, "0"),
+    thn: year,
+    x: "aab3238922bcc25a6f606eb525ffdc56",
+    y: "854d6fae5ee42911677c739ee1734486",
+  });
+  var config = {
+    method: "post",
+    url: "https://bimasislam.kemenag.go.id/ajax/getShalatbln",
+    headers: {
+      "sec-ch-ua":
+        '"Not_A Brand";v="8", "Chromium";v="120", "Microsoft Edge";v="120"',
+      Accept: "application/json, text/javascript, */*; q=0.01",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "X-Requested-With": "XMLHttpRequest",
+      "sec-ch-ua-mobile": "?0",
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
+      "sec-ch-ua-platform": '"Windows"',
+      "Sec-Fetch-Site": "same-origin",
+      "Sec-Fetch-Mode": "cors",
+      "Sec-Fetch-Dest": "empty",
+      Cookie: `${cookie}`,
+    },
+    data: data,
+  };
+
+  jadwal = await callAxiosWithRetry(config, 0, "Fail get Jadwal Sholat").then(
+    function (response) {
+      return response.data;
+    }
+  );
+  return jadwal;
+}
