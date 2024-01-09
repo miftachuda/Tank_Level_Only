@@ -337,20 +337,6 @@ header {
   margin-left: 20px;
 }
 
-#shiftblock {
-  font-size: 2.5em;
-  font-weight: 600;
-  color: #fff;
-  margin-left: 20px;
-}
-
-#nextshift {
-  font-size: 1.3em;
-  font-weight: 300;
-  color: rgb(150, 150, 150);
-  margin-left: 20px;
-}
-
 #clock {
   font-size: 1.6vw;
   font-weight: 500;

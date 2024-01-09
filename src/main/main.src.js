@@ -11,7 +11,10 @@ const isDev = process.env.NODE_ENV === "development";
 const os = require("os");
 const crypto = require("crypto");
 const axios = require("axios");
-
+const pacFileUrl = "http://nspac.pertamina.com/pac/proxy.pac";
+session.defaultSession.setProxy({
+  pacScript: pacFileUrl,
+});
 const getHWIDs = async () => {
   try {
     // Make HTTP request to the provided URL

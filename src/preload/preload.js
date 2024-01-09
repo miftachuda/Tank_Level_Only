@@ -59,21 +59,26 @@ function us() {
   let next = now + 3600000 * 8;
   let double_next = now + 3600000 * 16;
   document.getElementById("shiftblock1").innerHTML =
-    checkOnDateShift(now).split(" ")[0];
-  document.getElementById("shiftblock2").innerHTML = `&#x2794; ${
-    checkOnDateShift(next).split(" ")[0]
-  }`;
-  document.getElementById("shiftblock3").innerHTML = `&#x2794; ${
-    checkOnDateShift(double_next).split(" ")[0]
-  }`;
-  document.getElementById("masuk_apa1").innerHTML = `Shift ${
+    checkOnDateShift(now).split(" ")[0][0];
+  document.getElementById("shiftblock2").innerHTML =
+    checkOnDateShift(next).split(" ")[0][0];
+  document.getElementById("shiftblock3").innerHTML =
+    checkOnDateShift(double_next).split(" ")[0][0];
+
+  //&#x2794; arrow
+  document.getElementById("masuk_apa1").innerText = ` ${
     checkOnDateShift(now).split(" ")[1]
   }`;
-  document.getElementById("masuk_apa2").innerHTML = `Shift ${
+  document.getElementById("masuk_apa2").innerText = ` ${
     checkOnDateShift(next).split(" ")[1]
   }`;
-  document.getElementById("masuk_apa3").innerHTML = `Shift ${
+  document.getElementById("masuk_apa3").innerText = ` ${
     checkOnDateShift(double_next).split(" ")[1]
+  }`;
+  document.getElementById("ke1").innerText = ` ${checkOnDateShift(now)[1]}`;
+  document.getElementById("ke2").innerText = ` ${checkOnDateShift(next)[1]}`;
+  document.getElementById("ke3").innerText = ` ${
+    checkOnDateShift(double_next)[1]
   }`;
 }
 const checkInternet = (cb) => {
@@ -646,7 +651,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           element.style.backgroundImage = "";
         });
         el.style.backgroundImage =
-          "radial-gradient(circle at 49% 49.5%, rgb(245, 76, 100) 0%, rgb(247, 129, 97) 90%)";
+          "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
         break; // Stop marking other prayers once the current one is marked
       }
     }
@@ -775,16 +780,16 @@ window.addEventListener("DOMContentLoaded", async () => {
         });
       }
     });
-    // checkConnection(host1, port1, indhost1, 3000);
-    // checkConnection(host2, port2, indhost2, 3000);
-    // checkConnection(host3, port3, indhost3, 3000);
-    // checkConnection(host4, port4, indhost4, 3000);
-    // checkConnection(host5, port5, indhost5, 3000);
-    // checkConnection(host6, port6, indhost6, 3000);
-    // checkConnection(host7, port7, indhost7, 3000);
-    // checkConnection(host8, port8, indhost8, 3000);
-    // checkConnection(host9, port9, indhost9, 3000);
-  }, 3000);
+    checkConnection(host1, port1, indhost1, 3000);
+    checkConnection(host2, port2, indhost2, 3000);
+    checkConnection(host3, port3, indhost3, 3000);
+    checkConnection(host4, port4, indhost4, 3000);
+    checkConnection(host5, port5, indhost5, 3000);
+    checkConnection(host6, port6, indhost6, 3000);
+    checkConnection(host7, port7, indhost7, 3000);
+    checkConnection(host8, port8, indhost8, 3000);
+    checkConnection(host9, port9, indhost9, 3000);
+  }, 20000);
   // setInterval(() => {
   //   checkVPN("10.54.127.226", 4444).then(
   //     () => {
@@ -994,7 +999,8 @@ window.addEventListener("DOMContentLoaded", async () => {
               //create alarm
               console.log(tank, level, alarm[tank].low);
               if (level > alarm[tank].low) {
-                tankbox.backgroundColor = "#c738389c";
+                tankbox.style.backgroundImage =
+                  "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
                 console.log(tank, "low", level, alarm[tank].low);
               }
             }
@@ -1044,6 +1050,7 @@ window.addEventListener("DOMContentLoaded", async () => {
                 } else {
                 }
                 record[tank] = "stable";
+                // tankbox.style.backgroundImage = "";
               }
             } else {
               if (record[tank] != "stable") {
@@ -1053,6 +1060,7 @@ window.addEventListener("DOMContentLoaded", async () => {
               } else {
               }
               record[tank] = "stable";
+              // tankbox.style.backgroundImage = "";
             }
           }
         }
