@@ -75,9 +75,9 @@ function us() {
   document.getElementById("masuk_apa3").innerText = ` ${
     checkOnDateShift(double_next).split(" ")[1]
   }`;
-  document.getElementById("ke1").innerText = ` ${checkOnDateShift(now)[1]}`;
-  document.getElementById("ke2").innerText = ` ${checkOnDateShift(next)[1]}`;
-  document.getElementById("ke3").innerText = ` ${
+  document.getElementById("ke1").innerText = `ke ${checkOnDateShift(now)[1]}`;
+  document.getElementById("ke2").innerText = `ke ${checkOnDateShift(next)[1]}`;
+  document.getElementById("ke3").innerText = `ke ${
     checkOnDateShift(double_next)[1]
   }`;
 }
