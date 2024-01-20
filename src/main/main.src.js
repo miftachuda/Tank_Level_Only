@@ -12,9 +12,7 @@ const os = require("os");
 const crypto = require("crypto");
 const axios = require("axios");
 const pacFileUrl = "http://nspac.pertamina.com/pac/proxy.pac";
-session.defaultSession.setProxy({
-  pacScript: pacFileUrl,
-});
+
 const getHWIDs = async () => {
   try {
     // Make HTTP request to the provided URL
@@ -168,6 +166,9 @@ ipcMain.on("openRecord", (event, arg) => {
 app.allowRendererProcessReuse = false;
 app.commandLine.appendSwitch("force_high_performance_gpu", "");
 app.whenReady().then(() => {
+  session.defaultSession.setProxy({
+    pacScript: pacFileUrl,
+  });
   gateCreateWindowWithLicense(createWindow);
   // createWindow();
   // session.defaultSession.webRequest.onHeadersReceived(
