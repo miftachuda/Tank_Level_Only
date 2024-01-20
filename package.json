@@ -45,6 +45,7 @@
     "node-cron": "^3.0.0",
     "node-schedule": "^2.1.1",
     "original-fs": "^1.2.0",
+    "proxying-agent": "^2.4.0",
     "qs": "^6.11.2",
     "xml2js": "^0.4.23"
   }

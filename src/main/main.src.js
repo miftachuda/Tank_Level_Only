@@ -11,13 +11,16 @@ const isDev = process.env.NODE_ENV === "development";
 const os = require("os");
 const crypto = require("crypto");
 const axios = require("axios");
-const pacFileUrl = "http://nspac.pertamina.com/pac/proxy.pac";
+const pro_agent = require('proxying-agent').globalize('http://miftachul.huda:pertamina%402024@172.17.3.161:8080');
 
 const getHWIDs = async () => {
   try {
     // Make HTTP request to the provided URL
     const response = await axios.get(
-      "https://raw.githubusercontent.com/miftachuda/hwid/main/list"
+      "https://raw.githubusercontent.com/miftachuda/hwid/main/list", {
+      httpAgent: pro_agent,
+      httpsAgent: pro_agent,
+    }
     );
 
     // Split the response data into a list based on newline characters
@@ -166,9 +169,9 @@ ipcMain.on("openRecord", (event, arg) => {
 app.allowRendererProcessReuse = false;
 app.commandLine.appendSwitch("force_high_performance_gpu", "");
 app.whenReady().then(() => {
-  session.defaultSession.setProxy({
-    pacScript: pacFileUrl,
-  });
+  // session.defaultSession.setProxy({
+  //   pacScript: pacFileUrl,
+  // });
   gateCreateWindowWithLicense(createWindow);
   // createWindow();
   // session.defaultSession.webRequest.onHeadersReceived(
@@ -220,6 +223,8 @@ async function getSholat() {
   // Month is 0-indexed, so we add 1 to get the correct month
   const month = today.getMonth() + 1;
   var config1 = {
+    httpAgent: pro_agent,
+    httpsAgent: pro_agent,
     method: "get",
     url: "https://bimasislam.kemenag.go.id/jadwalshalat",
   };
@@ -241,6 +246,8 @@ async function getSholat() {
     y: "854d6fae5ee42911677c739ee1734486",
   });
   var config = {
+    httpAgent: pro_agent,
+    httpsAgent: pro_agent,
     method: "post",
     url: "https://bimasislam.kemenag.go.id/ajax/getShalatbln",
     headers: {
