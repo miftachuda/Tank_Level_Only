@@ -66,20 +66,16 @@ function us() {
     checkOnDateShift(double_next).split(" ")[0][0];
 
   //&#x2794; arrow
-  document.getElementById("masuk_apa1").innerText = ` ${
-    checkOnDateShift(now).split(" ")[1]
-  }`;
-  document.getElementById("masuk_apa2").innerText = ` ${
-    checkOnDateShift(next).split(" ")[1]
-  }`;
-  document.getElementById("masuk_apa3").innerText = ` ${
-    checkOnDateShift(double_next).split(" ")[1]
-  }`;
+  document.getElementById("masuk_apa1").innerText = ` ${checkOnDateShift(now).split(" ")[1]
+    }`;
+  document.getElementById("masuk_apa2").innerText = ` ${checkOnDateShift(next).split(" ")[1]
+    }`;
+  document.getElementById("masuk_apa3").innerText = ` ${checkOnDateShift(double_next).split(" ")[1]
+    }`;
   document.getElementById("ke1").innerText = `ke ${checkOnDateShift(now)[1]}`;
   document.getElementById("ke2").innerText = `ke ${checkOnDateShift(next)[1]}`;
-  document.getElementById("ke3").innerText = `ke ${
-    checkOnDateShift(double_next)[1]
-  }`;
+  document.getElementById("ke3").innerText = `ke ${checkOnDateShift(double_next)[1]
+    }`;
 }
 const checkInternet = (cb) => {
   require("dns").lookup("simops.pertamina.com", function (err) {
@@ -894,7 +890,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           mm_per_day =
           meter_cubic_hour =
           ton_per_day =
-            "0";
+          "0";
         return {
           mm_per_hour,
           mm_per_8hour,
@@ -996,13 +992,13 @@ window.addEventListener("DOMContentLoaded", async () => {
               komponen.setAttribute("class", "visible blink");
               komponen.src = red;
 
-              //create alarm
-              console.log(tank, level, alarm[tank].low);
-              if (level > alarm[tank].low) {
-                tankbox.style.backgroundImage =
-                  "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
-                console.log(tank, "low", level, alarm[tank].low);
-              }
+              //TODO://create alarm
+              // console.log(tank, level, alarm[tank].low);
+              // if (level > alarm[tank].low) {
+              //   tankbox.style.backgroundImage =
+              //     "linear-gradient(to left bottom, #f9ff00, #fbe500, #f9cc00, #f4b400, #eb9d12)";
+              //   console.log(tank, "low", level, alarm[tank].low);
+              // }
             }
             record[tank] = "down";
           } else if (level - levelPast > delta) {
