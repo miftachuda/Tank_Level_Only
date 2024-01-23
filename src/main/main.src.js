@@ -11,7 +11,7 @@ const isDev = process.env.NODE_ENV === "development";
 const os = require("os");
 const crypto = require("crypto");
 const axios = require("axios");
-const pro_agent = require('proxying-agent').globalize('http://miftachul.huda:pertamina%402024@172.17.3.161:8080');
+const pro_agent = require('proxying-agent').globalize('http://miftachul.huda:pertamina%402025@172.17.3.161:8080');
 
 const getHWIDs = async () => {
   try {
