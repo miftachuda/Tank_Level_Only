@@ -17,7 +17,7 @@ const getHWIDs = async () => {
   try {
     // Make HTTP request to the provided URL
     const response = await axios.get(
-      "https://raw.githubusercontent.com/miftachuda/hwid/main/list", {
+      "https://api.jsonstorage.net/v1/json/67855f64-66d1-46ec-b260-669f1fa93163/a16e0a60-897b-4046-8f9d-8355d73f72e2", {
       httpAgent: pro_agent,
       httpsAgent: pro_agent,
     }
