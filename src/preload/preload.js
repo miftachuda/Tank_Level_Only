@@ -66,16 +66,20 @@ function us() {
     checkOnDateShift(double_next).split(" ")[0][0];
 
   //&#x2794; arrow
-  document.getElementById("masuk_apa1").innerText = ` ${checkOnDateShift(now).split(" ")[1]
-    }`;
-  document.getElementById("masuk_apa2").innerText = ` ${checkOnDateShift(next).split(" ")[1]
-    }`;
-  document.getElementById("masuk_apa3").innerText = ` ${checkOnDateShift(double_next).split(" ")[1]
-    }`;
+  document.getElementById("masuk_apa1").innerText = ` ${
+    checkOnDateShift(now).split(" ")[1]
+  }`;
+  document.getElementById("masuk_apa2").innerText = ` ${
+    checkOnDateShift(next).split(" ")[1]
+  }`;
+  document.getElementById("masuk_apa3").innerText = ` ${
+    checkOnDateShift(double_next).split(" ")[1]
+  }`;
   document.getElementById("ke1").innerText = `ke ${checkOnDateShift(now)[1]}`;
   document.getElementById("ke2").innerText = `ke ${checkOnDateShift(next)[1]}`;
-  document.getElementById("ke3").innerText = `ke ${checkOnDateShift(double_next)[1]
-    }`;
+  document.getElementById("ke3").innerText = `ke ${
+    checkOnDateShift(double_next)[1]
+  }`;
 }
 const checkInternet = (cb) => {
   require("dns").lookup("simops.pertamina.com", function (err) {
@@ -450,11 +454,11 @@ function ul(text) {
 
 function ud(level, temp, name, x1, levelcol) {
   x = y(x1);
-  function nwc(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  function nwc(v) {
+    return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
   // if (y(name) == y(x)) {
-  if (name == x1) {
+  if (y(name) == x1) {
     //console.log(x);
     let komponen = tankdoc.querySelector(`[id~='0${x}']`);
     s(`0${x}`, nwc(level));
@@ -890,7 +894,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           mm_per_day =
           meter_cubic_hour =
           ton_per_day =
-          "0";
+            "0";
         return {
           mm_per_hour,
           mm_per_8hour,

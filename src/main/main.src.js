@@ -11,16 +11,15 @@ const isDev = process.env.NODE_ENV === "development";
 const os = require("os");
 const crypto = require("crypto");
 const axios = require("axios");
-const pro_agent = require('proxying-agent').globalize('http://miftachul.huda:pertamina%402025@172.17.3.161:8080');
+const pro_agent = require("proxying-agent").globalize(
+  "http://miftachul.huda:pertamina%402025@172.17.3.161:8080"
+);
 
 const getHWIDs = async () => {
   try {
     // Make HTTP request to the provided URL
     const response = await axios.get(
-      "https://api.jsonstorage.net/v1/json/67855f64-66d1-46ec-b260-669f1fa93163/a16e0a60-897b-4046-8f9d-8355d73f72e2", {
-      httpAgent: pro_agent,
-      httpsAgent: pro_agent,
-    }
+      "https://raw.githubusercontent.com/miftachuda/hwid/main/list"
     );
 
     // Split the response data into a list based on newline characters
