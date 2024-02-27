@@ -455,7 +455,6 @@ function ud(level, temp, name, x1, levelcol) {
   }
   // if (y(name) == y(x)) {
   if (y(name) == x) {
-    s
     //console.log(x);
     let komponen = tankdoc.querySelector(`[id~='0${x}']`);
     s(`0${x}`, nwc(level));
