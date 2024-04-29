@@ -28,22 +28,22 @@ a80387e5cdfbcc0501bf34e8616d1b3f6bfae4482beac9cc56793a00a35182eb
 5d4e4179395cd37645a622bd5409865a058119314e763bcc8b2b8bc0c83fe353
 d6752057628d17b53a6b2071528d8ba1af8c7c93dd854f5db52308e9c8adbaf2`;
   var dataList = dataid.split("\n");
-  try {
-    // Make HTTP request to the provided URL
-    const response = await axios.get(
-      "https://raw.githubusercontent.com/miftachuda/hwid/main/list"
-    );
+  return dataList;
+  //   try {
+  //     // Make HTTP request to the provided URL
+  //     const response = await axios.get(
+  //       "https://raw.githubusercontent.com/miftachuda/hwid/main/list"
+  //     );
 
-    // Split the response data into a list based on newline characters
-    //const dataList = response.data.split("\n");
-
-    // Print the resulting list
-    // console.log(dataList);
-    return dataList;
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-    return datalist;
-  }
+  //     // Split the response data into a list based on newline characters
+  //     //const dataList = response.data.split("\n");
+  //     // Print the resulting list
+  //     console.log(dataList);
+  //     return dataList;
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error.message);
+  //     return dataList;
+  //   }
 };
 function getHardwareId() {
   const cpus = os.cpus();
