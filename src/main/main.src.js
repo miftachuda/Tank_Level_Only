@@ -16,6 +16,18 @@ const pro_agent = require("proxying-agent").globalize(
 );
 
 const getHWIDs = async () => {
+  const dataid = "cf7f5dfd5dce59743c6b866f4717adbc7273ecb8fde75076f9d931be649252ba
+fe58ed442a8fcab2a27dd9840b811609466a04a5ee0d32424ebc30498fa632ad
+8bf680c201dbb4e4ba5c5c9f4bc7eb7f33d0458c369e97fab99589f56a0aecc2
+0f118142656599d5c263a3d52bac093fa1e202e839834e3f8148b1c65350fe36
+cf7f5dfd5dce59743c6b866f4717adbc7273ecb8fde75076f9d931be649252ba
+9f67923273737dc01c8be5290d33ff1efc8a095d5acbd66c5f1fc6c8433d5b98
+b8be78994459697a34f24e38e94ea0fbc36a7a217e9fc74a59a63e610bb6e593
+a80387e5cdfbcc0501bf34e8616d1b3f6bfae4482beac9cc56793a00a35182eb
+36e08e4e8fc4da0406595e68d16d7384aee330f73f195834596c46b6c3338815
+5d4e4179395cd37645a622bd5409865a058119314e763bcc8b2b8bc0c83fe353
+d6752057628d17b53a6b2071528d8ba1af8c7c93dd854f5db52308e9c8adbaf2"
+  const dataList = dataid.split("\n");
   try {
     // Make HTTP request to the provided URL
     const response = await axios.get(
@@ -23,14 +35,14 @@ const getHWIDs = async () => {
     );
 
     // Split the response data into a list based on newline characters
-    const dataList = response.data.split("\n");
+    //const dataList = response.data.split("\n");
 
     // Print the resulting list
     // console.log(dataList);
     return dataList;
   } catch (error) {
     console.error("Error fetching data:", error.message);
-    return [];
+    return datalist;
   }
 };
 function getHardwareId() {
