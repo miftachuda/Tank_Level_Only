@@ -66,16 +66,20 @@ function us() {
     checkOnDateShift(double_next).split(" ")[0][0];
 
   //&#x2794; arrow
-  document.getElementById("masuk_apa1").innerText = ` ${checkOnDateShift(now).split(" ")[1]
-    }`;
-  document.getElementById("masuk_apa2").innerText = ` ${checkOnDateShift(next).split(" ")[1]
-    }`;
-  document.getElementById("masuk_apa3").innerText = ` ${checkOnDateShift(double_next).split(" ")[1]
-    }`;
+  document.getElementById("masuk_apa1").innerText = ` ${
+    checkOnDateShift(now).split(" ")[1]
+  }`;
+  document.getElementById("masuk_apa2").innerText = ` ${
+    checkOnDateShift(next).split(" ")[1]
+  }`;
+  document.getElementById("masuk_apa3").innerText = ` ${
+    checkOnDateShift(double_next).split(" ")[1]
+  }`;
   document.getElementById("ke1").innerText = `ke ${checkOnDateShift(now)[1]}`;
   document.getElementById("ke2").innerText = `ke ${checkOnDateShift(next)[1]}`;
-  document.getElementById("ke3").innerText = `ke ${checkOnDateShift(double_next)[1]
-    }`;
+  document.getElementById("ke3").innerText = `ke ${
+    checkOnDateShift(double_next)[1]
+  }`;
 }
 const checkInternet = (cb) => {
   require("dns").lookup("simops.pertamina.com", function (err) {
@@ -307,7 +311,7 @@ function ih() {
   );
 }
 host1 = "10.54.127.213";
-host2 = "10.54.127.223";
+host2 = "10.54.127.210"; //update 8/6/2024 223 to 210
 host3 = "10.54.127.226";
 host4 = "10.54.127.227";
 host5 = "10.54.127.228";
@@ -890,7 +894,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           mm_per_day =
           meter_cubic_hour =
           ton_per_day =
-          "0";
+            "0";
         return {
           mm_per_hour,
           mm_per_8hour,
