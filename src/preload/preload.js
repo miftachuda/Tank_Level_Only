@@ -66,20 +66,16 @@ function us() {
     checkOnDateShift(double_next).split(" ")[0][0];
 
   //&#x2794; arrow
-  document.getElementById("masuk_apa1").innerText = ` ${
-    checkOnDateShift(now).split(" ")[1]
-  }`;
-  document.getElementById("masuk_apa2").innerText = ` ${
-    checkOnDateShift(next).split(" ")[1]
-  }`;
-  document.getElementById("masuk_apa3").innerText = ` ${
-    checkOnDateShift(double_next).split(" ")[1]
-  }`;
+  document.getElementById("masuk_apa1").innerText = ` ${checkOnDateShift(now).split(" ")[1]
+    }`;
+  document.getElementById("masuk_apa2").innerText = ` ${checkOnDateShift(next).split(" ")[1]
+    }`;
+  document.getElementById("masuk_apa3").innerText = ` ${checkOnDateShift(double_next).split(" ")[1]
+    }`;
   document.getElementById("ke1").innerText = `ke ${checkOnDateShift(now)[1]}`;
   document.getElementById("ke2").innerText = `ke ${checkOnDateShift(next)[1]}`;
-  document.getElementById("ke3").innerText = `ke ${
-    checkOnDateShift(double_next)[1]
-  }`;
+  document.getElementById("ke3").innerText = `ke ${checkOnDateShift(double_next)[1]
+    }`;
 }
 const checkInternet = (cb) => {
   require("dns").lookup("simops.pertamina.com", function (err) {
@@ -273,14 +269,16 @@ function checkVPN(host, port, timeout = 3000) {
 function ih() {
   checkVPN("10.54.127.226", 4444).then(
     () => {
-      host1 = "10.54.127.226";
-      host2 = "10.54.127.227";
-      host3 = "10.54.127.231";
-      host4 = "10.54.127.213";
-      host5 = "10.54.127.223";
-      host6 = "10.54.127.228";
-      host7 = "10.54.127.234";
-      host8 = "10.54.127.235";
+      host1 = "10.54.127.213";
+      host2 = "10.54.127.210"; //update 8/6/2024 223 to 210
+      host3 = "10.54.127.226";
+      host4 = "10.54.127.227";
+      host5 = "10.54.127.228";
+      host6 = "10.54.127.229";
+      host7 = "10.54.127.230";
+      host8 = "10.54.127.231";
+      host9 = "10.54.127.234";
+      host10 = "10.54.127.235";
       port1 = 4444;
       port2 = 4444;
       port3 = 4444;
@@ -289,6 +287,8 @@ function ih() {
       port6 = 4444;
       port7 = 4444;
       port8 = 4444;
+      port9 = 4444;
+      port10 = 4444;
     },
     () => {
       host1 = "10.54.188.74";
@@ -356,7 +356,7 @@ const tanklist1 = [
   "41T-316",
   "41T-317",
 ]; //213
-const tanklist2 = ["35T-2 ", "35T-4"]; //223
+const tanklist2 = ["35T-2 ", "35T-4"]; //223 //210
 const tanklist3 = [
   "41T-111",
   "41T-112",
@@ -741,6 +741,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>216</GROUPID></FG4TG>'; //235
   const payload5 =
     '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>77</GROUPID></FG4TG>';
+  const payload6 =
+    '<FG4TG MSGID="1135" KEY=""  VER="0"  VTYP="RealTime"><GROUPID>56</GROUPID></FG4TG>'; //210
   let client1;
   let client2;
   let client3;
@@ -754,7 +756,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   function loadit() {
     // client1 = fetching(host1, port1, tanklist1, payload1, ul);//213
-    client2 = fetching(host2, port2, tanklist2, payload1, ul); //223
+    client2 = fetching(host2, port2, tanklist2, payload6, ul); //223 //210
     client3 = fetching(host3, port3, tanklist3, payload1, ul); //226
     client4 = fetching(host4, port4, tanklist4, payload1, ul); //227
     client5 = fetching(host5, port5, tanklist5, payload3, ul); //228
@@ -894,7 +896,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           mm_per_day =
           meter_cubic_hour =
           ton_per_day =
-            "0";
+          "0";
         return {
           mm_per_hour,
           mm_per_8hour,
