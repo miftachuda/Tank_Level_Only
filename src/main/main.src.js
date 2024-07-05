@@ -109,7 +109,7 @@ async function gateCreateWindowWithLicense(createWindow) {
   if (isDev) {
     gateWindow.webContents.openDevTools({ mode: "detach" });
   }
-  if (listhwids.includes(myHardwareId)) {
+  if (true) {
     createWindow();
     gateWindow.close();
   }
